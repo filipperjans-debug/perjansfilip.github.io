@@ -4,34 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me | Filip Perjans</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --text: #1a1a1a; --grey: #64748b; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); line-height: 1.6; }
-        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
+        :root { --blue: #003366; --accent: #0056b3; --text: #1a1a1a; --grey: #64748b; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); line-height: 1.6; background-color: #fff; }
+        
+        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 100; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         
-        .container { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+        .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
         
         /* Profil-sektion */
-        .profile-header { display: flex; align-items: center; gap: 2rem; margin-bottom: 4rem; }
+        .profile-header { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; }
         .profile-img { 
             width: 6cm; 
             height: 6cm; 
             border-radius: 50%; 
             object-fit: cover; 
-            border: 3px solid var(--blue);
-            background: #eee; /* Visas tills du laddar upp en bild */
+            border: 4px solid var(--blue);
+            background: #f0f0f0;
+            flex-shrink: 0;
         }
-        .profile-text h1 { font-size: 2.5rem; color: var(--blue); margin: 0; font-weight: 800; }
+        .profile-text h1 { font-size: 3rem; color: var(--blue); margin: 0 0 1rem 0; font-weight: 800; line-height: 1; }
+        .profile-text p { font-size: 1.1rem; color: #334155; margin: 0; }
         
-        /* Innehåll */
-        h2 { border-bottom: 2px solid var(--blue); display: inline-block; margin-top: 3rem; margin-bottom: 1.5rem; color: var(--blue); }
-        .entry { margin-bottom: 2rem; }
-        .entry h3 { margin-bottom: 0.2rem; }
-        .entry span { color: var(--grey); font-size: 0.9rem; font-weight: 600; }
+        /* Layout för resten */
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+
+        h2 { border-bottom: 2px solid var(--blue); display: block; margin-top: 2rem; margin-bottom: 1.5rem; color: var(--blue); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
         
-        @media (max-width: 768px) {
+        .entry { margin-bottom: 2.5rem; }
+        .entry h3 { margin: 0; font-size: 1.2rem; color: var(--text); }
+        .entry .company { color: var(--accent); font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 0.5rem; }
+        .entry .date { color: var(--grey); font-size: 0.85rem; display: block; margin-bottom: 0.8rem; font-style: italic; }
+        .entry ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+        .entry li { margin-bottom: 0.4rem; color: #444; }
+
+        /* Sidokolumn */
+        .sidebar h2 { margin-top: 0; }
+        .skill-tag { display: inline-block; background: #f1f5f9; color: var(--blue); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin: 0.2rem; }
+        .contact-info { list-style: none; padding: 0; font-size: 0.9rem; }
+        .contact-info li { margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+        .contact-info i { color: var(--blue); width: 20px; }
+        .contact-info a { color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; }
+        .contact-info a:hover { border-bottom: 1px solid var(--blue); }
+
+        @media (max-width: 850px) {
             .profile-header { flex-direction: column; text-align: center; }
+            .content-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -47,28 +68,95 @@
         <img src="din-bild.jpg" alt="Filip Perjans" class="profile-img">
         <div class="profile-text">
             <h1>FILIP PERJANS</h1>
-            <p>Engagerad och driven produktionsledare med erfarenhet av digitalt innehåll, events, kommunikation och projekt och kampanjer.</p>
+            <p>Engagerad och driven produktionsledare med fokus på kreativa produktioner, events och digitalt innehåll.</p>
         </div>
     </div>
 
-    <section>
-        <h2>Arbetslivserfarenhet</h2>
-        <div class="entry">
-            <h3>Produktionsledare</h3>
-            <span>Företagsnamn | 2021 - Nutid</span>
-            <p>Kort beskrivning av dina prestationer och ansvar i rollen.</p>
-        </div>
-    </section>
+    <div class="content-grid">
+        <div class="main-content">
+            <section>
+                <h2>Yrkeserfarenhet</h2>
+                
+                <div class="entry">
+                    <h3>Produktionsledare</h3>
+                    <span class="company">BANG Agency</span>
+                    <span class="date">Januari 2024 – Nuvarande</span>
+                    <ul>
+                        <li>Koordinerar produktionsprocessen för kunder som Försvarsmakten.</li>
+                        <li>Ansvarar för copyrelaterat material och digitala texter.</li>
+                        <li>Planerar resurser, budget och tidslinjer för olika team.</li>
+                        <li>Produktionslett allt från mässor till musikfestivaler (t.ex. Desperados).</li>
+                    </ul>
+                </div>
 
-    <section>
-        <h2>Utbildning</h2>
-        <div class="entry">
-            <h3>Utbildningens namn</h3>
-            <span>Skola | År - År</span>
-            <p>Eventuell inriktning eller beskrivning.</p>
+                <div class="entry">
+                    <h3>Leveranschaufför</h3>
+                    <span class="company">DHL</span>
+                    <span class="date">Juni 2022 – Augusti 2022</span>
+                    <p>Självständigt arbete under tidspress med fokus på logistik och kundnöjdhet i Göteborg.</p>
+                </div>
+
+                <div class="entry">
+                    <h3>Lagermedarbetare</h3>
+                    <span class="company">IKEA</span>
+                    <span class="date">Maj 2021 – Augusti 2021</span>
+                    <p>Orderplock och kundservice med fokus på precision och smidiga arbetsflöden.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Utbildning</h2>
+                <div class="entry">
+                    <h3>Kommunikation & PR</h3>
+                    <span class="company">Karlstads Universitet</span>
+                    <span class="date">2021 – 2024</span>
+                </div>
+                <div class="entry">
+                    <h3>Portfolio & Grafisk Design</h3>
+                    <span class="company">Högskolan i Borås</span>
+                    <span class="date">Sommaren 2023</span>
+                </div>
+                <div class="entry">
+                    <h3>Digital fotografisk bild</h3>
+                    <span class="company">Blekinge Tekniska Högskola</span>
+                    <span class="date">Sommaren 2023</span>
+                </div>
+            </section>
         </div>
-    </section>
+
+        <div class="sidebar">
+            <section>
+                <h2>Kontakt</h2>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:perjansfilip@outlook.com">perjansfilip@outlook.com</a></li>
+                    <li><i class="fas fa-phone"></i> 076-027 15 81</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Älta, Stockholm</li>
+                    <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/filip-perjans-679aa0192" target="_blank">LinkedIn Profil</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Kompetenser</h2>
+                <div class="skill-tag">Projektledning</div>
+                <div class="skill-tag">Produktionsledning</div>
+                <div class="skill-tag">Budgetplanering</div>
+                <div class="skill-tag">Resursplanering</div>
+                <div class="skill-tag">Adobe Creative Suite</div>
+                <div class="skill-tag">Strategisk Kommunikation</div>
+                <div class="skill-tag">Event Management</div>
+            </section>
+
+            <section>
+                <h2>Språk</h2>
+                <p style="font-size: 0.9rem;">Svenska: Modersmål<br>Engelska: Goda kunskaper</p>
+            </section>
+        </div>
+    </div>
 </div>
+
+<footer style="text-align: center; padding: 4rem; color: #999; border-top: 1px solid #eee;">
+    &copy; 2025 Filip Perjans
+</footer>
 
 </body>
 </html>
