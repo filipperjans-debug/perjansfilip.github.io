@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
         
         .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
         
-        /* Profil-sektion */
+        /* Profile Section */
         .profile-header { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; }
         .profile-img { 
             width: 6cm; 
@@ -29,7 +29,7 @@
         .profile-text h1 { font-size: 3rem; color: var(--blue); margin: 0 0 1rem 0; font-weight: 800; line-height: 1; }
         .profile-text p { font-size: 1.1rem; color: #334155; margin: 0; }
         
-        /* Layout för resten */
+        /* Content Grid */
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
 
         h2 { border-bottom: 2px solid var(--blue); display: block; margin-top: 2rem; margin-bottom: 1.5rem; color: var(--blue); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
@@ -41,9 +41,11 @@
         .entry ul { padding-left: 1.2rem; margin-top: 0.5rem; }
         .entry li { margin-bottom: 0.4rem; color: #444; }
 
-        /* Sidokolumn */
+        /* Sidebar styling */
         .sidebar h2 { margin-top: 0; }
+        .skills-container { margin-bottom: 2rem; } /* Justerat mellanrum nedåt */
         .skill-tag { display: inline-block; background: #f1f5f9; color: var(--blue); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin: 0.2rem; }
+        
         .contact-info { list-style: none; padding: 0; font-size: 0.9rem; }
         .contact-info li { margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
         .contact-info i { color: var(--blue); width: 20px; }
@@ -65,90 +67,92 @@
 
 <div class="container">
     <div class="profile-header">
-        <img src="din-bild.jpg" alt="Filip Perjans" class="profile-img">
+        <img src="filip-bild.jpg" alt="Filip Perjans" class="profile-img">
         <div class="profile-text">
             <h1>FILIP PERJANS</h1>
-            <p>Engagerad och driven produktionsledare med fokus på kreativa produktioner, events och digitalt innehåll.</p>
+            <p>Dedicated and driven Production Manager with a focus on creative productions, events, and digital content.</p>
         </div>
     </div>
 
     <div class="content-grid">
         <div class="main-content">
             <section>
-                <h2>Yrkeserfarenhet</h2>
+                <h2>Work Experience</h2>
                 
                 <div class="entry">
-                    <h3>Produktionsledare</h3>
+                    <h3>Production Manager</h3>
                     <span class="company">BANG Agency</span>
-                    <span class="date">Januari 2024 – Nuvarande</span>
+                    <span class="date">January 2024 – Present</span>
                     <ul>
-                        <li>Koordinerar produktionsprocessen för kunder som Försvarsmakten.</li>
-                        <li>Ansvarar för copyrelaterat material och digitala texter.</li>
-                        <li>Planerar resurser, budget och tidslinjer för olika team.</li>
-                        <li>Produktionslett allt från mässor till musikfestivaler (t.ex. Desperados).</li>
+                        <li>Coordinating production processes for clients such as the Swedish Armed Forces.</li>
+                        <li>Responsible for copy-related materials and digital content.</li>
+                        <li>Planning resources, budgets, and timelines for various team constellations.</li>
+                        <li>Managed productions ranging from exhibitions to major music festivals (e.g., Desperados).</li>
                     </ul>
                 </div>
 
                 <div class="entry">
-                    <h3>Leveranschaufför</h3>
+                    <h3>Delivery Driver</h3>
                     <span class="company">DHL</span>
-                    <span class="date">Juni 2022 – Augusti 2022</span>
-                    <p>Självständigt arbete under tidspress med fokus på logistik och kundnöjdhet i Göteborg.</p>
+                    <span class="date">June 2022 – August 2022</span>
+                    <p>Worked independently under time pressure focusing on logistics and customer satisfaction in Gothenburg.</p>
                 </div>
 
                 <div class="entry">
-                    <h3>Lagermedarbetare</h3>
+                    <h3>Warehouse Associate</h3>
                     <span class="company">IKEA</span>
-                    <span class="date">Maj 2021 – Augusti 2021</span>
-                    <p>Orderplock och kundservice med fokus på precision och smidiga arbetsflöden.</p>
+                    <span class="date">May 2021 – August 2021</span>
+                    <p>Order picking and customer service with a focus on precision and efficient workflows.</p>
                 </div>
             </section>
 
             <section>
-                <h2>Utbildning</h2>
+                <h2>Education</h2>
                 <div class="entry">
-                    <h3>Kommunikation & PR</h3>
-                    <span class="company">Karlstads Universitet</span>
+                    <h3>Communication & PR</h3>
+                    <span class="company">Karlstad University</span>
                     <span class="date">2021 – 2024</span>
                 </div>
                 <div class="entry">
-                    <h3>Portfolio & Grafisk Design</h3>
-                    <span class="company">Högskolan i Borås</span>
-                    <span class="date">Sommaren 2023</span>
+                    <h3>Portfolio & Graphic Design</h3>
+                    <span class="company">University of Borås</span>
+                    <span class="date">Summer 2023</span>
                 </div>
                 <div class="entry">
-                    <h3>Digital fotografisk bild</h3>
-                    <span class="company">Blekinge Tekniska Högskola</span>
-                    <span class="date">Sommaren 2023</span>
+                    <h3>Digital Photographic Imagery</h3>
+                    <span class="company">Blekinge Institute of Technology</span>
+                    <span class="date">Summer 2023</span>
                 </div>
             </section>
         </div>
 
         <div class="sidebar">
             <section>
-                <h2>Kontakt</h2>
+                <h2>Contact</h2>
                 <ul class="contact-info">
                     <li><i class="fas fa-envelope"></i> <a href="mailto:perjansfilip@outlook.com">perjansfilip@outlook.com</a></li>
-                    <li><i class="fas fa-phone"></i> 076-027 15 81</li>
+                    <li><i class="fas fa-phone"></i> +46 76-027 15 81</li>
                     <li><i class="fas fa-map-marker-alt"></i> Älta, Stockholm</li>
-                    <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/filip-perjans-679aa0192" target="_blank">LinkedIn Profil</a></li>
+                    <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/filip-perjans-679aa0192" target="_blank">LinkedIn Profile</a></li>
                 </ul>
             </section>
 
             <section>
-                <h2>Kompetenser</h2>
-                <div class="skill-tag">Projektledning</div>
-                <div class="skill-tag">Produktionsledning</div>
-                <div class="skill-tag">Budgetplanering</div>
-                <div class="skill-tag">Resursplanering</div>
-                <div class="skill-tag">Adobe Creative Suite</div>
-                <div class="skill-tag">Strategisk Kommunikation</div>
-                <div class="skill-tag">Event Management</div>
+                <h2>Skills</h2>
+                <div class="skills-container">
+                    <div class="skill-tag">Project Management</div>
+                    <div class="skill-tag">Production Management</div>
+                    <div class="skill-tag">Budget Planning</div>
+                    <div class="skill-tag">Resource Planning</div>
+                    <div class="skill-tag">Adobe Creative Suite</div>
+                    <div class="skill-tag">Strategic Communication</div>
+                    <div class="skill-tag">Event Management</div>
+                </div>
             </section>
 
             <section>
-                <h2>Språk</h2>
-                <p style="font-size: 0.9rem;">Svenska: Modersmål<br>Engelska: Goda kunskaper</p>
+                <h2>Languages</h2>
+                <p style="font-size: 0.9rem;">Swedish: Native<br>English: Full Professional Proficiency</p>
             </section>
         </div>
     </div>
