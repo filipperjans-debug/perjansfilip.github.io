@@ -3,53 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ditt Namn | Portfolio</title>
+    <title>Filip Perjans | Produktionsledare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
-            --light: #f8fafc;
+            --primary-blue: #003366; /* Mörkblå */
+            --accent-blue: #0056b3;
+            --text-dark: #1a1a1a;
+            --bg-light: #ffffff;
+            --border-light: #eef2f6;
         }
-        body { font-family: sans-serif; margin: 0; background: var(--light); color: var(--dark); line-height: 1.6; }
-        header { background: white; padding: 2rem; text-align: center; border-bottom: 3px solid var(--primary); }
-        section { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        .card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 1rem; }
-        h1, h2 { color: var(--dark); }
-        .tag { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; }
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #64748b; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+        header { padding: 4rem 1rem; text-align: center; border-bottom: 1px solid var(--border-light); }
+        .nav-links { margin-top: 1.5rem; }
+        .nav-links a { margin: 0 15px; text-decoration: none; color: var(--primary-blue); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+
+        section { padding: 5rem 0; border-bottom: 1px solid var(--border-light); }
+        h2 { font-size: 2rem; color: var(--primary-blue); margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Erfarenhet & Utbildning Listor */
+        .entry { margin-bottom: 2.5rem; }
+        .entry h3 { font-size: 1.25rem; color: var(--text-dark); }
+        .entry .meta { color: var(--accent-blue); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .entry p { color: #555; max-width: 750px; }
+
+        /* Projekt Galleri */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 2rem; }
+        .project-item { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; height: 250px; background: #eee; }
+        .project-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .project-overlay { 
+            position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0, 51, 102, 0.9); 
+            color: white; padding: 1.5rem; transform: translateY(100%); transition: transform 0.3s; 
+        }
+        .project-item:hover .project-overlay { transform: translateY(0); }
+        .project-item:hover img { transform: scale(1.1); }
+
+        /* Kontakt */
+        .contact-box { text-align: center; background: #f9f9f9; padding: 3rem; border-radius: 12px; }
+        .social-icon { font-size: 2.5rem; color: var(--primary-blue); text-decoration: none; transition: 0.3s; }
+        .social-icon:hover { color: var(--accent-blue); }
+
+        footer { text-align: center; padding: 3rem; color: #999; font-size: 0.8rem; }
+
+        @media (max-width: 768px) { .gallery { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Ditt Namn</h1>
-    <p>Junior Utvecklare | Problemlösare | Kreatör</p>
+    <h1>FILIP PERJANS</h1>
+    <p style="font-weight: 300; letter-spacing: 2px;">PRODUKTIONSLEDARE</p>
+    <div class="nav-links">
+        <a href="#om-mig">Om mig</a>
+        <a href="#erfarenhet">Erfarenhet</a>
+        <a href="#projekt">Projekt</a>
+        <a href="#kontakt">Kontakt</a>
+    </div>
 </header>
 
-<section>
-    <h2>Om mig</h2>
-    <div class="card">
-        <p>Här skriver du en kort text om vem du är. Berätta om dina styrkor och vad du brinner för inom ditt yrkesområde.</p>
-    </div>
+<div class="container">
+    <section id="om-mig">
+        <h2>Om mig</h2>
+        <p>
+            Engagerad och driven produktionsledare med erfarenhet av digitalt innehåll, events, kommunikation samt komplexa projekt och kampanjer. 
+            Jag fokuserar på att leverera högsta kvalitet genom struktur, kreativitet och ett tydligt ledarskap.
+        </p>
+    </section>
 
-    <h2>Projekt</h2>
-    <div class="card">
-        <h3>Projektets Namn</h3>
-        <p>En kort beskrivning av vad du har byggt och vilket problem det löste.</p>
-        <div>
-            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+    <section id="erfarenhet">
+        <h2>Arbetslivserfarenhet</h2>
+        <div class="entry">
+            <h3>Produktionsledare / Projektledare</h3>
+            <div class="meta">Företagsnamn | År - Nutid</div>
+            <p>Beskrivning av dina huvudsakliga ansvarsområden och vad du åstadkommit. Nämn gärna specifika kampanjer eller budgetansvar.</p>
         </div>
-    </div>
+        <div class="entry">
+            <h3>Digital Innehållsproducent</h3>
+            <div class="meta">Företagsnamn | År - År</div>
+            <p>Arbete med strategi och produktion av innehåll för digitala kanaler och sociala medier.</p>
+        </div>
+    </section>
 
-    <h2>Kontakt</h2>
-    <div class="card">
-        <p>📧 E-post: din.mail@example.com</p>
-        <p>🔗 <a href="https://linkedin.com/in/dittnamn" target="_blank">LinkedIn</a></p>
-    </div>
-</section>
+    <section id="utbildning">
+        <h2>Utbildning</h2>
+        <div class="entry">
+            <h3>Utbildningens Namn</h3>
+            <div class="meta">Skola/Universitet | Examen År</div>
+            <p>Eventuell inriktning eller relevanta kurser du läst.</p>
+        </div>
+    </section>
+
+    <section id="projekt">
+        <h2>Mina projekt</h2>
+        <div class="gallery">
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=800&q=80" alt="Event produktion">
+                <div class="project-overlay">
+                    <h4>Stort Event 2024</h4>
+                    <p>Produktionsledning för nationell lansering.</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Digital kampanj">
+                <div class="project-overlay">
+                    <h4>Digital Kampanj</h4>
+                    <p>Innehållsproduktion för sociala medier.</p>
+                </div>
+            </div>
+            <div class="project-item">
+                <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&q=80" alt="Kommunikation">
+                <div class="project-overlay">
+                    <h4>Kommunikationsstrategi</h4>
+                    <p>Framtagning av visuell identitet för projekt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="contact-box">
+        <h2>Kontakt</h2>
+        <p>Hör gärna av dig om du vill veta mer om hur jag jobbar.</p>
+        <p style="margin: 1.5rem 0; font-weight: 600;">filip.perjans@email.com</p>
+        <a href="https://linkedin.com/in/dittnamn" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </section>
+</div>
 
 <footer>
-    &copy; 2025 Ditt Namn - Skapad med GitHub Pages
+    &copy; 2025 Filip Perjans - Portfolio
 </footer>
 
 </body>
