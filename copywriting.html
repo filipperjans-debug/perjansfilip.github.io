@@ -3,20 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copywriting | Filip Perjans</title>
+    <title>Copywriting Portfolio | Filip Perjans</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --text: #1a1a1a; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); line-height: 1.8; }
+        :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; --accent: #0056b3; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; }
         
         nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
 
-        .container { max-width: 800px; margin: 4rem auto; padding: 0 2rem; }
-        h1 { font-size: 3rem; color: var(--blue); margin-bottom: 1rem; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
+        .container { max-width: 1100px; margin: 4rem auto; padding: 0 2rem; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+        .back-link:hover { transform: translateX(-5px); }
         
-        .content { font-size: 1.2rem; color: #444; border-top: 1px solid #eee; padding-top: 2rem; }
+        h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 0.5rem; font-weight: 800; }
+        .subtitle { color: #64748b; margin-bottom: 3rem; font-size: 1.1rem; }
+
+        /* Grid för de 6 rutorna */
+        .copy-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .copy-item { 
+            background: var(--grey); 
+            min-height: 250px;
+            border-radius: 12px; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .copy-item:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,51,102,0.1); 
+            border-color: var(--blue);
+            background: #fff;
+        }
+
+        .copy-item i { font-size: 2rem; color: var(--blue); margin-bottom: 1rem; }
+        .copy-item h3 { margin: 0 0 10px 0; color: var(--blue); font-size: 1.3rem; }
+        .copy-item p { margin: 0; font-size: 0.9rem; color: #64748b; }
+
+        /* Modal (Popup) Styling */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 16px;
+            position: relative;
+            animation: modalSlide 0.4s ease;
+            overflow: hidden;
+        }
+
+        @keyframes modalSlide { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        .close {
+            position: absolute;
+            right: 25px; top: 20px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #fff;
+            z-index: 1010;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .modal-header-img { width: 100%; height: 250px; object-fit: cover; background: var(--blue); }
+        
+        .modal-text-content { padding: 3rem; }
+        .modal-text-content h2 { color: var(--blue); font-size: 2rem; margin-top: 0; }
+        .modal-text-content p { font-size: 1.1rem; color: #334155; line-height: 1.8; white-space: pre-line; }
+
+        @media (max-width: 768px) {
+            .modal-content { width: 95%; margin: 10% auto; }
+            .modal-text-content { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -27,14 +108,109 @@
 </nav>
 
 <div class="container">
-    <a href="index.html" class="back-link">← Back to Work</a>
-    <h1>Copywriting</h1>
-    <p><strong>Articles, Cases, Printed Media, etc.</strong></p>
+    <a href="index.html" class="back-link">← Back to Projects</a>
+    <h1>Copywriting Portfolio</h1>
+    <p class="subtitle">A collection of articles, brand stories, and strategic communication.</p>
     
-    <div class="content">
-        Testing testing
+    <div class="copy-grid">
+        <div class="copy-item" onclick="openModal('case1')">
+            <h3>Editorial Articles</h3>
+            <p>In-depth storytelling and journalistic pieces.</p>
+        </div>
+        <div class="copy-item" onclick="openModal('case2')">
+            <h3>Strategic Case Studies</h3>
+            <p>Analyzing results and project workflows.</p>
+        </div>
+        <div class="copy-item" onclick="openModal('case3')">
+            <h3>Print & Collateral</h3>
+            <p>Brochures, posters, and physical branding.</p>
+        </div>
+        <div class="copy-item" onclick="openModal('case4')">
+            <h3>Digital Content</h3>
+            <p>Social media, newsletters, and web copy.</p>
+        </div>
+        <div class="copy-item" onclick="openModal('case5')">
+            <h3>Brand Identity</h3>
+            <p>Tone of voice and brand messaging guides.</p>
+        </div>
+        <div class="copy-item" onclick="openModal('case6')">
+            <h3>Event Communication</h3>
+            <p>Copy for large-scale productions and festivals.</p>
+        </div>
     </div>
 </div>
+
+<div id="projectModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <div id="modalBody">
+            </div>
+    </div>
+</div>
+
+<script>
+    const projectData = {
+        'case1': {
+            title: 'Editorial Articles',
+            text: 'I specialize in creating engaging editorial content that captures the reader\'s attention from the first sentence. \n\nWhether it’s interviewing industry experts or writing deep-dives into cultural trends, my focus is always on clear storytelling and maintaining a consistent brand voice. Examples include feature articles for lifestyle magazines and internal communication reports.',
+            image: 'copywriting.jpg' 
+        },
+        'case2': {
+            title: 'Strategic Case Studies',
+            text: 'Communication is about results. In my case studies, I break down complex projects into digestible stories. \n\nI focus on the "Why", the "How", and the "Outcome", showing how strategic copy can move the needle for clients like the Swedish Armed Forces and local startups.',
+            image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800' 
+        },
+        'case3': {
+            title: 'Print & Physical Media',
+            text: 'There is a unique challenge in writing for print—every word must earn its place. \n\nI have experience producing copy for high-quality brochures, large-scale event posters, and exhibition materials where the interaction between text and design is crucial for the physical experience.',
+            image: 'https://images.unsplash.com/photo-1586075010633-2470fd9131ad?auto=format&fit=crop&q=80&w=800'
+        },
+        'case4': {
+            title: 'Digital & Social Content',
+            text: 'In the digital space, attention is a currency. \n\nI craft short-form copy for social media, SEO-optimized web content, and newsletters that drive conversions. My approach is data-informed but creatively led, ensuring that the brand feels human in a digital world.',
+            image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=800'
+        },
+        'case5': {
+            title: 'Brand Identity & Messaging',
+            text: 'Building a brand starts with finding its voice. \n\nI help companies define their Tone of Voice and create messaging frameworks that resonate with their core audience. This includes taglines, mission statements, and brand manifestos that inspire both employees and customers.',
+            image: 'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&q=80&w=800'
+        },
+        'case6': {
+            title: 'Event & Production Copy',
+            text: 'From music festivals like Desperados to military exhibitions. \n\nEvent copy requires a mix of informational clarity and atmospheric excitement. I manage the full spectrum of text needed for live events: from invitations and signage to stage scripts and program guides.',
+            image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=800'
+        }
+    };
+
+    function openModal(projectId) {
+        const modal = document.getElementById('projectModal');
+        const body = document.getElementById('modalBody');
+        const data = projectData[projectId];
+
+        body.innerHTML = `
+            ${data.image ? `<img src="${data.image}" class="modal-header-img" alt="${data.title}">` : '<div class="modal-header-img"></div>'}
+            <div class="modal-text-content">
+                <h2>${data.title}</h2>
+                <p>${data.text}</p>
+            </div>
+        `;
+        
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('projectModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
 
 </body>
 </html>
