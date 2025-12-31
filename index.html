@@ -1,52 +1,63 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filip Perjans | Work</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Work | Filip Perjans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --light: #f8fafc; --text: #1a1a1a; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); }
-        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
+        :root { --blue: #003366; --text: #1a1a1a; --grey: #f8f9fa; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; }
+        
+        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 100; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-        .active { border-bottom: 2px solid var(--blue); }
+
+        .hero { padding: 4rem 2rem; text-align: center; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--blue); margin: 0; letter-spacing: -1px; }
+        .hero p { font-size: 1.2rem; color: #64748b; margin-top: 1rem; }
+
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; padding: 0 2rem 4rem 2rem; max-width: 1200px; margin: 0 auto; }
         
-        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
-        h1 { color: var(--blue); text-align: center; margin-bottom: 3rem; }
+        .project-card { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 16 / 9; background: #eee; cursor: pointer; text-decoration: none; display: block; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .project-card:hover img { transform: scale(1.05); }
         
-        /* Galleri */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .project-card { position: relative; border-radius: 12px; overflow: hidden; height: 300px; background: #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .overlay { position: absolute; inset: 0; background: rgba(0,51,102,0.85); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; padding: 20px; text-align: center; }
-        .project-card:hover .overlay { opacity: 1; }
-        .project-card:hover img { transform: scale(1.1); }
-        
-        footer { text-align: center; padding: 4rem; color: #999; }
+        .project-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
+        .project-info h2 { margin: 0; font-size: 1.8rem; font-weight: 700; }
+        .project-info p { margin: 5px 0 0; opacity: 0.9; font-size: 1rem; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .work-grid { grid-template-columns: 1fr; padding: 1rem; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html" class="active">Work</a>
+    <a href="index.html" style="border-bottom: 2px solid var(--blue);">Work</a>
     <a href="about.html">About Me</a>
 </nav>
 
-<div class="container">
-    <h1>Mina Projekt</h1>
-    <div class="gallery">
-        <div class="project-card">
-            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Projekt 1">
-            <div class="overlay"><h3>Digital Kampanj</h3><p>Produktionsledning & Strategi</p></div>
-        </div>
-        <div class="project-card">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="Projekt 2">
-            <div class="overlay"><h3>Event 2024</h3><p>Operativt ansvar för genomförande</p></div>
-        </div>
-    </div>
+<div class="hero">
+    <h1>Creative Production & Communication</h1>
+    <p>Explore a selection of my work within copywriting, project management, and brand development.</p>
 </div>
 
-<footer>&copy; 2025 Filip Perjans</footer>
+<div class="work-grid">
+    <a href="copywriting.html" class="project-card">
+        <img src="copywriting.jpg" alt="Copywriting Projects">
+        <div class="project-info">
+            <h2>Copywriting</h2>
+            <p>Articles, Cases, Printed Media, etc.</p>
+        </div>
+    </a>
+
+    </div>
+
+<footer style="text-align: center; padding: 4rem; color: #999;">
+    &copy; 2025 Filip Perjans
+</footer>
+
 </body>
 </html>
