@@ -27,7 +27,7 @@
             flex-shrink: 0;
         }
         .profile-text h1 { font-size: 3rem; color: var(--blue); margin: 0 0 1rem 0; font-weight: 800; line-height: 1; }
-        .profile-text p { font-size: 1.1rem; color: #334155; margin: 0; }
+        .profile-text p { font-size: 1.1rem; color: #334155; margin: 0; white-space: pre-line; }
         
         /* Content Grid */
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
@@ -36,14 +36,14 @@
         
         .entry { margin-bottom: 2.5rem; }
         .entry h3 { margin: 0; font-size: 1.2rem; color: var(--text); }
-        .entry .company { color: var(--accent); font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 0.5rem; }
+        .entry .institution { color: var(--accent); font-weight: 700; font-size: 0.95rem; display: block; margin-top: 2px; }
         .entry .date { color: var(--grey); font-size: 0.85rem; display: block; margin-bottom: 0.8rem; font-style: italic; }
         .entry ul { padding-left: 1.2rem; margin-top: 0.5rem; }
         .entry li { margin-bottom: 0.4rem; color: #444; }
 
         /* Sidebar styling */
         .sidebar h2 { margin-top: 0; }
-        .skills-container { margin-bottom: 2rem; } /* Justerat mellanrum nedåt */
+        .skills-container { margin-bottom: 3rem; } /* Justerat avstånd ner till Languages */
         .skill-tag { display: inline-block; background: #f1f5f9; color: var(--blue); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin: 0.2rem; }
         
         .contact-info { list-style: none; padding: 0; font-size: 0.9rem; }
@@ -70,7 +70,11 @@
         <img src="din-bild.jpg" alt="Filip Perjans" class="profile-img">
         <div class="profile-text">
             <h1>FILIP PERJANS</h1>
-            <p>Dedicated and driven Production Manager with a focus on creative productions, events, and digital content.</p>
+            <p>With a background in Communication and PR, I serve as the bridge between creative vision and final delivery. I thrive where creativity meets structure – ensuring that campaigns, events, and content are not just produced, but actually drive results.
+
+I don't believe in producing content just to fill a feed. I want to make an impact.
+
+With a particular passion for the written word, I am now seeking a role where I can refine my expertise in communication, marketing, and brand development. I am an experienced project manager who takes full ownership from initial idea to final finish, whether navigating independently or collaborating with a team.</p>
         </div>
     </div>
 
@@ -81,47 +85,65 @@
                 
                 <div class="entry">
                     <h3>Production Manager</h3>
-                    <span class="company">BANG Agency</span>
-                    <span class="date">January 2024 – Present</span>
+                    <span class="institution">BANG Agency</span>
+                    <span class="date">Jan 2024 – Present</span>
                     <ul>
-                        <li>Coordinating production processes for clients such as the Swedish Armed Forces.</li>
-                        <li>Responsible for copy-related materials and digital content.</li>
-                        <li>Planning resources, budgets, and timelines for various team constellations.</li>
-                        <li>Managed productions ranging from exhibitions to major music festivals (e.g., Desperados).</li>
+                        <li>Coordinate and manage the production process for various projects, from initial idea to execution, for clients such as the Swedish Armed Forces.</li>
+                        <li>Responsible for parts of copy-related material, including texts for digital channels and printed media.</li>
+                        <li>Involved in the planning and execution of events, providing experience across the entire production chain.</li>
+                        <li>Managed various types of productions, ranging from exhibitions for the Swedish Armed Forces to major music festivals for Desperados.</li>
+                        <li>Plan resources, budgets, and timelines for teams in different constellations, ensuring punctual delivery in all projects.</li>
                     </ul>
                 </div>
 
                 <div class="entry">
                     <h3>Delivery Driver</h3>
-                    <span class="company">DHL</span>
-                    <span class="date">June 2022 – August 2022</span>
-                    <p>Worked independently under time pressure focusing on logistics and customer satisfaction in Gothenburg.</p>
+                    <span class="institution">DHL</span>
+                    <span class="date">Jun 2022 – Aug 2022</span>
+                    <ul>
+                        <li>Delivered and collected packages daily within Gothenburg according to planned routes, ensuring punctual deliveries.</li>
+                        <li>Planned and structured own routes to optimize time and efficiency.</li>
+                        <li>Worked independently under time pressure and solved problems quickly, contributing to high customer satisfaction and efficient logistics.</li>
+                    </ul>
                 </div>
 
                 <div class="entry">
                     <h3>Warehouse Associate</h3>
-                    <span class="company">IKEA</span>
-                    <span class="date">May 2021 – August 2021</span>
-                    <p>Order picking and customer service with a focus on precision and efficient workflows.</p>
+                    <span class="institution">IKEA</span>
+                    <span class="date">May 2021 – Aug 2021</span>
+                    <ul>
+                        <li>Unpacked goods and picked customer orders to ensure accurate delivery.</li>
+                        <li>Inspected and delivered customer orders with a focus on precision and punctuality.</li>
+                        <li>Provided excellent customer service and supported colleagues to maintain a smooth workflow.</li>
+                    </ul>
                 </div>
             </section>
 
             <section>
                 <h2>Education</h2>
+                
                 <div class="entry">
                     <h3>Communication & PR</h3>
-                    <span class="company">Karlstad University</span>
-                    <span class="date">2021 – 2024</span>
+                    <span class="institution">Karlstad University</span>
+                    <span class="date">Aug 2021 – 2024</span>
                 </div>
+
                 <div class="entry">
                     <h3>Portfolio & Graphic Design</h3>
-                    <span class="company">University of Borås</span>
-                    <span class="date">Summer 2023</span>
+                    <span class="institution">University of Borås</span>
+                    <span class="date">Jun 2023 – Aug 2023</span>
                 </div>
+
                 <div class="entry">
                     <h3>Digital Photographic Imagery</h3>
-                    <span class="company">Blekinge Institute of Technology</span>
-                    <span class="date">Summer 2023</span>
+                    <span class="institution">Blekinge Institute of Technology</span>
+                    <span class="date">Jun 2023 – Aug 2023</span>
+                </div>
+
+                <div class="entry">
+                    <h3>Social Science, specializing in Behavioral Science</h3>
+                    <span class="institution">Hulebäcksgymnasiet</span>
+                    <span class="date">Aug 2016 – May 2019</span>
                 </div>
             </section>
         </div>
