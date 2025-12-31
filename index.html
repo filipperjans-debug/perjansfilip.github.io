@@ -16,19 +16,68 @@
         .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--blue); margin: 0; letter-spacing: -1px; }
         .hero p { font-size: 1.2rem; color: #64748b; margin-top: 1rem; }
 
-        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; padding: 0 2rem 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        /* Grid-inställningar för 4 rutor i en fyrkant */
+        .work-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* Skapar två kolumner */
+            gap: 4rem; /* Mellanrummet mellan rutorna (ca 5cm visuellt på desktop) */
+            padding: 2rem; 
+            max-width: 1000px; 
+            margin: 0 auto; /* Centrerar hela rutnätet */
+        }
         
-        .project-card { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 16 / 9; background: #eee; cursor: pointer; text-decoration: none; display: block; }
-        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .project-card { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 12px; 
+            aspect-ratio: 1 / 1; /* Gör rutorna helt kvadratiska */
+            background: #f0f0f0; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+        }
+        
+        .project-card img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease; 
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         .project-card:hover img { transform: scale(1.05); }
         
-        .project-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; }
-        .project-info h2 { margin: 0; font-size: 1.8rem; font-weight: 700; }
-        .project-info p { margin: 5px 0 0; opacity: 0.9; font-size: 1rem; }
+        /* Text-overlay */
+        .project-info { 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            padding: 2rem; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.7)); 
+            color: white; 
+            z-index: 2;
+        }
+        
+        .project-info h2 { margin: 0; font-size: 1.5rem; font-weight: 700; }
+        .project-info p { margin: 5px 0 0; opacity: 0.9; font-size: 0.9rem; }
 
-        @media (max-width: 600px) {
+        /* För de tomma rutorna utan bild än så länge */
+        .placeholder-text {
+            color: var(--blue);
+            font-size: 2rem;
+            font-weight: 800;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .work-grid { grid-template-columns: 1fr; gap: 2rem; }
             .hero h1 { font-size: 2.5rem; }
-            .work-grid { grid-template-columns: 1fr; padding: 1rem; }
         }
     </style>
 </head>
@@ -41,7 +90,7 @@
 
 <div class="hero">
     <h1>Creative Production & Communication</h1>
-    <p>Explore a selection of my work within copywriting, project management, and brand development.</p>
+    <p>Selected projects and creative work.</p>
 </div>
 
 <div class="work-grid">
@@ -53,7 +102,30 @@
         </div>
     </a>
 
-    </div>
+    <a href="#" class="project-card">
+        <span class="placeholder-text">X</span>
+        <div class="project-info">
+            <h2>Project X</h2>
+            <p>Description coming soon</p>
+        </div>
+    </a>
+
+    <a href="#" class="project-card">
+        <span class="placeholder-text">Y</span>
+        <div class="project-info">
+            <h2>Project Y</h2>
+            <p>Description coming soon</p>
+        </div>
+    </a>
+
+    <a href="#" class="project-card">
+        <span class="placeholder-text">Z</span>
+        <div class="project-info">
+            <h2>Project Z</h2>
+            <p>Description coming soon</p>
+        </div>
+    </a>
+</div>
 
 <footer style="text-align: center; padding: 4rem; color: #999;">
     &copy; 2025 Filip Perjans
