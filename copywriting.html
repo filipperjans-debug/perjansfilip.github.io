@@ -16,14 +16,12 @@
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
         h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2rem; font-weight: 800; }
 
-        /* Grid Setup */
         .copy-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             gap: 2rem; 
         }
 
-        /* Projekt-rutan */
         .copy-item { 
             position: relative;
             background: var(--grey); 
@@ -38,7 +36,7 @@
             border: 1px solid #e0e0e0;
         }
 
-        .copy-item img.bg-image {
+        .copy-item .bg-content {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
@@ -47,7 +45,7 @@
             transition: transform 0.5s ease;
         }
 
-        .copy-item:hover img.bg-image { transform: scale(1.05); }
+        .copy-item:hover .bg-content { transform: scale(1.05); }
 
         .overlay {
             position: absolute;
@@ -67,15 +65,18 @@
         .content-label h3 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
         .content-label p { margin: 5px 0 0; font-weight: 300; font-size: 1rem; opacity: 0.9; }
 
-        /* Modal (Popup) */
+        .copy-item.no-image .content-label { color: var(--blue); }
+        .copy-item.no-image .overlay { display: none; }
+
+        /* Modal Setup */
         .modal {
             display: none; 
             position: fixed; 
             z-index: 1000; 
             left: 0; top: 0; 
             width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
             overflow-y: auto;
         }
 
@@ -101,18 +102,13 @@
             z-index: 1010;
         }
 
-        .modal-header-img { width: 100%; height: 400px; object-fit: cover; }
+        .modal-header-media { width: 100%; height: auto; max-height: 500px; object-fit: contain; background-color: #000; display: block; }
         .modal-body { padding: 3rem; }
         .modal-body h2 { color: var(--blue); font-size: 2.2rem; margin-top: 0; font-weight: 800; }
         .modal-body p { font-size: 1.15rem; color: #334155; line-height: 1.8; white-space: pre-line; }
 
-        /* Styling för tomma rutor */
-        .copy-item.placeholder .content-label { color: var(--blue); }
-        .copy-item.placeholder .overlay { background: transparent; }
-
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
-            .modal-header-img { height: 250px; }
         }
     </style>
 </head>
@@ -129,7 +125,7 @@
     
     <div class="copy-grid">
         <div class="copy-item" onclick="openModal('adidas')">
-            <img src="adidas.jpg" alt="Adidas" class="bg-image">
+            <img src="adidas.jpg" alt="Adidas" class="bg-content">
             <div class="overlay"></div>
             <div class="content-label">
                 <h3>Adidas</h3>
@@ -137,37 +133,37 @@
             </div>
         </div>
 
-        <div class="copy-item placeholder" onclick="openModal('x')">
-            <div class="content-label"><h3>X</h3><p>Coming Soon</p></div>
+        <div class="copy-item" onclick="openModal('direkto')">
+            <video preload="metadata" class="bg-content">
+                <source src="direkto.mp4#t=0.1" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content-label">
+                <h3>Direkto</h3>
+                <p>Case</p>
+            </div>
         </div>
-        <div class="copy-item placeholder" onclick="openModal('y')">
-            <div class="content-label"><h3>Y</h3><p>Coming Soon</p></div>
-        </div>
-        <div class="copy-item placeholder" onclick="openModal('z')">
-            <div class="content-label"><h3>Z</h3><p>Coming Soon</p></div>
-        </div>
-        <div class="copy-item placeholder" onclick="openModal('empty')">
-            <div class="content-label"><h3>5</h3><p>Coming Soon</p></div>
-        </div>
-        <div class="copy-item placeholder" onclick="openModal('empty')">
-            <div class="content-label"><h3>6</h3><p>Coming Soon</p></div>
-        </div>
+
+        <div class="copy-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Y</h3><p>Coming Soon</p></div></div>
+        <div class="copy-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Z</h3><p>Coming Soon</p></div></div>
+        <div class="copy-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>5</h3><p>Coming Soon</p></div></div>
+        <div class="copy-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>6</h3><p>Coming Soon</p></div></div>
     </div>
 </div>
 
 <div id="projectModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
     <div class="modal-content">
-        <div id="modalContentArea">
-            </div>
+        <div id="modalContentArea"></div>
     </div>
 </div>
 
 <script>
     const projectData = {
         'adidas': {
-            title: 'Adidas - Craft for Goals',
-            image: 'adidas.jpg',
+            title: 'Adidas - Crafted for Goals',
+            type: 'image',
+            src: 'adidas.jpg',
             text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience. 
 
             We took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. 
@@ -176,20 +172,41 @@
 
             The response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. 
 
-            Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.`
+            Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.
+
+            Copywriting: Filip Perjans`
         },
-        'x': { title: 'Project X', image: '', text: 'Content coming soon...' },
-        'y': { title: 'Project Y', image: '', text: 'Content coming soon...' },
-        'z': { title: 'Project Z', image: '', text: 'Content coming soon...' }
+        'direkto': {
+            title: 'Direkto - Think about the percentage',
+            type: 'video',
+            src: 'direkto.mp4',
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor with a focus on honesty and transparency, Direkto wants to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed. 
+
+            In a world where competition is fierce and loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game? 
+
+            Cue the drumroll for “Gubbrap” - our brainchild that’s changing the loan game. We created the tagline “think about the percentage” and infused music and humor into Direkto’s DNA to make it the talk of the town, the life of the financial party.
+
+            Copywriting: Filip Perjans`
+        }
     };
 
     function openModal(id) {
         const modal = document.getElementById('projectModal');
         const area = document.getElementById('modalContentArea');
-        const data = projectData[id] || { title: 'TBA', text: 'Coming soon...', image: '' };
+        const data = projectData[id];
+
+        if (!data) return;
+
+        let mediaHtml = '';
+        if (data.type === 'video') {
+            // Här lägger vi till autoplay och loop för modalen
+            mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
+        } else {
+            mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
+        }
 
         area.innerHTML = `
-            ${data.image ? `<img src="${data.image}" class="modal-header-img" alt="${data.title}">` : ''}
+            ${mediaHtml}
             <div class="modal-body">
                 <h2>${data.title}</h2>
                 <p>${data.text}</p>
@@ -201,7 +218,12 @@
     }
 
     function closeModal() {
-        document.getElementById('projectModal').style.display = "none";
+        const modal = document.getElementById('projectModal');
+        const area = document.getElementById('modalContentArea');
+        
+        // Vi tömmer innehållet vid stängning för att stoppa videon helt
+        area.innerHTML = '';
+        modal.style.display = "none";
         document.body.style.overflow = "auto";
     }
 
