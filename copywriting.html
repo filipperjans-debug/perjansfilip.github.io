@@ -40,8 +40,6 @@
             padding-bottom: 5px;
         }
 
-        .nav-link.active { border-bottom: 2px solid var(--brand-blue); }
-
         .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
         
         h2 { 
@@ -81,7 +79,8 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        .card-bg {
+        /* Media (Både bild och video) */
+        .card-media {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -91,7 +90,7 @@
             z-index: 1;
         }
 
-        /* Texten i rutan - Ingen toning, text med skugga för läsbarhet */
+        /* Texten i rutan */
         .item-info {
             position: absolute;
             bottom: 0;
@@ -144,34 +143,27 @@
     <h2>Work Content</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('adidas')">
-            <img src="adidas.jpg" class="card-bg">
+            <img src="adidas.jpg" class="card-media">
             <div class="item-info"><h3>Adidas</h3><span>Website casetext</span></div>
         </div>
         <div class="project-item" onclick="openModal('direkto')">
-            <img src="direkto_thumb.jpg" class="card-bg">
+            <video src="direkto.mp4" class="card-media" muted loop playsinline autoplay></video>
             <div class="item-info"><h3>Direkto</h3><span>Website casetext</span></div>
         </div>
         <div class="project-item" onclick="openModal('bang1')">
-            <img src="bang.jpg" class="card-bg">
+            <img src="bang.jpg" class="card-media">
             <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
         <div class="project-item" onclick="openModal('bang2')">
-            <img src="bang.jpg" class="card-bg">
+            <img src="bang.jpg" class="card-media">
             <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
-        
-        <div class="project-item"><div class="item-info"><h3>5</h3><span>X</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>6</h3><span>X</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>7</h3><span>X</span></div></div>
     </div>
 
     <h2>University Content</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('uni1')">
             <div class="item-info"><h3>Content 1</h3><span>X</span></div>
-        </div>
-        <div class="project-item" onclick="openModal('uni2')">
-            <div class="item-info"><h3>Content 2</h3><span>X</span></div>
         </div>
     </div>
 </div>
