@@ -91,29 +91,38 @@
             z-index: 1;
         }
 
-        .item-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            z-index: 2;
-            text-align: center;
-            color: #fff;
-        }
+        /* Texten i rutan utan toning */
+.item-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px; /* Lite extra luft i botten */
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+}
 
-        .item-info h3 { margin: 0; font-size: 1.1rem; font-weight: 800; }
-        
-        .item-info span { 
-            display: block;
-            margin-top: 5px; 
-            font-size: 0.8rem; 
-            font-weight: 400; 
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .project-item:hover .item-info span { opacity: 1; }
+.item-info h3 { 
+    margin: 0; 
+    font-size: 1.1rem; 
+    font-weight: 800; 
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.5); /* Gör texten läsbar på ljusa bilder */
+}
+
+.item-info span { 
+    display: block;
+    margin-top: 5px; 
+    font-size: 0.8rem; 
+    font-weight: 400; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.project-item:hover .item-info span { 
+    opacity: 1; 
+}
 
         /* Modal-styling */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
