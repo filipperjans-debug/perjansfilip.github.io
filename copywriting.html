@@ -17,6 +17,7 @@
             background-color: var(--bg-color); 
             color: var(--brand-blue); 
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Navigering */
@@ -41,9 +42,14 @@
 
         .nav-link.active { border-bottom: 2px solid var(--brand-blue); }
 
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
         
-        h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; }
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
+            text-transform: uppercase;
+        }
 
         /* Slider */
         .project-slider { 
@@ -51,7 +57,7 @@
             gap: 2rem; 
             overflow-x: auto; 
             padding: 2rem 1rem; 
-            margin-bottom: 4rem;
+            margin: 0 -1rem 4rem -1rem;
             scrollbar-width: thin;
             scrollbar-color: var(--brand-blue) transparent;
         }
@@ -64,13 +70,18 @@
             border-radius: 12px; 
             overflow: hidden;
             cursor: pointer; 
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            background-color: #ccc; /* Grå placeholder-färg */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+            border: 1px solid rgba(27, 60, 83, 0.1);
+            background-color: #fff;
         }
 
-        .project-item:hover { transform: scale(1.05); z-index: 10; }
+        .project-item:hover { 
+            transform: scale(1.05); 
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
 
-        .card-img {
+        .card-bg {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -93,19 +104,29 @@
         }
 
         .item-info h3 { margin: 0; font-size: 1.1rem; font-weight: 800; }
-        .item-info span { display: block; margin-top: 5px; font-size: 0.8rem; opacity: 0; transition: 0.3s; }
+        
+        .item-info span { 
+            display: block;
+            margin-top: 5px; 
+            font-size: 0.8rem; 
+            font-weight: 400; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
         .project-item:hover .item-info span { opacity: 1; }
 
-        /* Modal styling */
+        /* Modal-styling */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
         .modal-content { background-color: #fff; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; max-height: 85vh; overflow-y: auto; }
         .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
         .modal-body { padding: 3rem; }
         .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; }
+        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; }
 
     </style>
 </head>
-<body>
+<body onkeydown="if(event.key==='Escape') closeModal()">
 
 <nav>
     <a href="index.html" class="nav-link">Work</a>
@@ -116,33 +137,31 @@
     <h2>Work Content</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('adidas')">
-            <img src="adidas.jpg" class="card-img">
+            <img src="adidas.jpg" class="card-bg">
             <div class="item-info"><h3>Adidas</h3><span>Website casetext</span></div>
         </div>
-
         <div class="project-item" onclick="openModal('direkto')">
-            <img src="direkto_thumb.jpg" class="card-img">
+            <img src="direkto_thumb.jpg" class="card-bg">
             <div class="item-info"><h3>Direkto</h3><span>Website casetext</span></div>
         </div>
-
         <div class="project-item" onclick="openModal('bang1')">
-            <img src="bang.jpg" class="card-img">
+            <img src="bang.jpg" class="card-bg">
             <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
-
         <div class="project-item" onclick="openModal('bang2')">
-            <img src="bang.jpg" class="card-img">
+            <img src="bang.jpg" class="card-bg">
             <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
-
-        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>5</h3><span>X</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>6</h3><span>X</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>7</h3><span>X</span></div></div>
     </div>
 
     <h2>University Content</h2>
     <div class="project-slider">
-        <div class="project-item"><div class="item-info"><h3>University Project</h3><span>X</span></div></div>
+        <div class="project-item" onclick="openModal('uni1')"><div class="item-info"><h3>Content 1</h3><span>X</span></div></div>
+        <div class="project-item" onclick="openModal('uni2')"><div class="item-info"><h3>Content 2</h3><span>X</span></div></div>
+        <div class="project-item" onclick="openModal('uni3')"><div class="item-info"><h3>Content 3</h3><span>X</span></div></div>
     </div>
 </div>
 
@@ -154,12 +173,50 @@
 </div>
 
 <script>
-    // Din modal-logik och projectData här (samma som tidigare)
+    const projectData = {
+        'adidas': {
+            title: "Crafted for Goals.",
+            image: "adidas.jpg",
+            type: "image",
+            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.\n\nFilip Perjans - website casetext for BANG`
+        },
+        'direkto': {
+            title: "Think about the percentage.",
+            video: "direkto.mp4",
+            type: "video",
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.\n\nFilip Perjans - website casetext for BANG`
+        },
+        'bang1': {
+            title: "Nominated. 'Agency of the Year 2024.'",
+            image: "bang.jpg",
+            type: "image",
+            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.\n\n“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!” – Patrick Walldén, founder and CEO, BANG Agency\n\nFilip Perjans - website article for BANG`
+        },
+        'bang2': {
+            title: "'AI. Don't fear it, embrace it.'",
+            image: "bang.jpg",
+            type: "image",
+            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.\n\nI can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions.\n\nFilip Perjans - website article for BANG`
+        },
+        'uni1': { title: "University Content 1", text: "Text kommer här...", image: "uni_placeholder.jpg", type: "image" }
+    };
+
     function openModal(id) {
         const modal = document.getElementById('projectModal');
         const body = document.getElementById('modalBody');
-        // ... logik för att hämta data och visa media ...
+        const data = projectData[id];
+        if(!data) return;
+
+        let mediaHtml = '';
+        if(data.type === 'image') {
+            mediaHtml = `<img src="${data.image}" class="modal-img">`;
+        } else if(data.type === 'video') {
+            mediaHtml = `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
+        }
+
+        body.innerHTML = `${mediaHtml}<h2>${data.title}</h2><p>${data.text}</p>`;
         modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
@@ -167,6 +224,5 @@
         document.body.style.overflow = 'auto';
     }
 </script>
-
 </body>
 </html>
