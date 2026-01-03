@@ -12,19 +12,48 @@
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
+        
         h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2.5rem; font-weight: 800; }
-        .section-divider { font-size: 2.5rem; color: var(--blue); margin: 5rem 0 2.5rem 0; font-weight: 800; }
+        .section-divider { font-size: 2.5rem; color: var(--blue); margin: 6rem 0 2.5rem 0; font-weight: 800; }
 
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .project-item { position: relative; background: var(--grey); aspect-ratio: 1 / 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; border: 1px solid #e0e0e0; }
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+        }
+        
+        .project-item { 
+            position: relative; 
+            background: var(--grey); 
+            aspect-ratio: 1 / 1; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            overflow: hidden; 
+            border: 1px solid #e0e0e0; 
+        }
+
+        .project-item.empty {
+            cursor: default;
+            border: 1px dashed #ccc;
+            background: #fafafa;
+        }
+
         .project-item img, .project-item video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
         .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); z-index: 2; transition: background 0.3s ease; }
-        .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
+        .project-item:not(.empty):hover .overlay { background: rgba(0, 0, 0, 0.6); }
+        
         .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1.5rem; }
         .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
         .content-label span { display: block; font-size: 0.85rem; margin-top: 5px; opacity: 0; transform: translateY(5px); transition: all 0.3s ease; }
-        .project-item:hover .content-label span { opacity: 1; transform: translateY(0); }
+        .project-item:not(.empty):hover .content-label span { opacity: 1; transform: translateY(0); }
 
+        .empty-label { color: #ccc; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
+
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); overflow-y: auto; cursor: pointer; }
         .modal-content { background-color: white; margin: 2% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; overflow: hidden; animation: slideUp 0.4s ease; cursor: default; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -37,62 +66,72 @@
     </style>
 </head>
 <body onkeydown="if(event.key==='Escape') closeModal()">
-    <nav><a href="index.html">Work</a><a href="about.html">About Me</a></nav>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to Work</a>
-        <h1>Work Content</h1>
-        <div class="project-grid">
-            <div class="project-item" onclick="openModal('adidas')">
-                <img src="adidas.jpg" alt="Adidas">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>Adidas</h3><span>Website casetext</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('direkto')">
-                <video muted playsinline onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"><source src="direkto.mp4" type="video/mp4"></video>
-                <div class="overlay"></div>
-                <div class="content-label"><h3>Direkto</h3><span>Website casetext</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('bang')">
-                <img src="bang.jpg" alt="BANG">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('bang_ai')">
-                <img src="bang.jpg" alt="BANG AI">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
-            </div>
+
+<nav><a href="index.html">Work</a><a href="about.html">About Me</a></nav>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Back to Work</a>
+    <h1>Work Content</h1>
+    
+    <div class="project-grid">
+        <div class="project-item" onclick="openModal('adidas')">
+            <img src="adidas.jpg" alt="Adidas">
+            <div class="overlay"></div>
+            <div class="content-label"><h3>Adidas</h3><span>Website casetext</span></div>
         </div>
-        <h2 class="section-divider">University Content</h2>
-        <p style="color: #64748b;">University projects and cases will be presented here.</p>
+        <div class="project-item" onclick="openModal('direkto')">
+            <video muted playsinline onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"><source src="direkto.mp4" type="video/mp4"></video>
+            <div class="overlay"></div>
+            <div class="content-label"><h3>Direkto</h3><span>Website casetext</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('bang')">
+            <img src="bang.jpg" alt="BANG">
+            <div class="overlay"></div>
+            <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('bang_ai')">
+            <img src="bang.jpg" alt="BANG AI">
+            <div class="overlay"></div>
+            <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
+        </div>
     </div>
 
-    <div id="copyModal" class="modal" onclick="closeModal()">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div id="modalContentArea"></div>
+    <h2 class="section-divider">University Content</h2>
+    
+    <div class="project-grid">
+        <div class="project-item empty"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item empty"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item empty"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item empty"><span class="empty-label">Coming Soon</span></div>
     </div>
+</div>
 
-    <script>
-        const copyData = {
-            'adidas': { title: 'Crafted for Goals.', src: 'adidas.jpg', type: 'image', text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
-            'direkto': { title: 'Think about the percentage.', src: 'direkto.mp4', type: 'video', text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
-            'bang': { title: 'Nominated. Agency of the Year 2024.', src: 'bang.jpg', type: 'image', text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.\n\n<div style="border-left: 4px solid var(--blue); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text);">“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”<br><br><strong>– Patrick Walldén, founder and CEO, BANG Agency</strong></div>\n\nWe at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` },
-            'bang_ai': { title: "AI. Don't fear it, embrace it.", src: 'bang.jpg', type: 'image', text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.\n\nI can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions.\n\nAt BANG Agency, we're all in on the AI revolution. We strive to be part of the race by understanding and seizing every opportunity it presents. Here's to another year of pushing the boundaries and reshaping the future of advertising with AI.\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` }
-        };
+<div id="copyModal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modalContentArea"></div>
+</div>
 
-        function openModal(id) {
-            const modal = document.getElementById('copyModal');
-            const area = document.getElementById('modalContentArea');
-            const data = copyData[id];
-            let media = data.type === 'video' ? `<video autoplay loop muted playsinline class="modal-media"><source src="${data.src}"></video>` : `<img src="${data.src}" class="modal-media">`;
-            area.innerHTML = `<div class="modal-content" onclick="event.stopPropagation()">${media}<div class="modal-body"><h2>${data.title}</h2><p>${data.text}</p></div></div>`;
-            modal.style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-        function closeModal() {
-            document.getElementById('copyModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-    </script>
+<script>
+    const copyData = {
+        'adidas': { title: 'Crafted for Goals.', src: 'adidas.jpg', type: 'image', text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
+        'direkto': { title: 'Think about the percentage.', src: 'direkto.mp4', type: 'video', text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
+        'bang': { title: 'Nominated. Agency of the Year 2024.', src: 'bang.jpg', type: 'image', text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.\n\n<div style="border-left: 4px solid var(--blue); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text);">“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”<br><br><strong>– Patrick Walldén, founder and CEO, BANG Agency</strong></div>\n\nWe at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` },
+        'bang_ai': { title: "AI. Don't fear it, embrace it.", src: 'bang.jpg', type: 'image', text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just när Photoshop dök upp, så kan AI revolutionera vårt sätt att skapa reklam.\n\nJag kan nu enkelt och snabbt skapa utkast till mina kunder, vilket gör att jag kan fokusera mer på kreativa idéer. AI har gjort det möjligt för mig att öka min effektivitet och förverkliga mina konstnärliga visioner.\n\nPå BANG Agency är vi helt med på AI-revolutionen. Vi strävar efter att vara en del av racet genom att förstå och gripa varje möjlighet det ger. AI kanske fortfarande inte kan generera innovativa koncept, men det banar väg för oss att dyka djupare in i det vi älskar mest – att vara kreativa.\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('copyModal');
+        const area = document.getElementById('modalContentArea');
+        const data = copyData[id];
+        let media = data.type === 'video' ? `<video autoplay loop muted playsinline class="modal-media"><source src="${data.src}"></video>` : `<img src="${data.src}" class="modal-media">`;
+        area.innerHTML = `<div class="modal-content" onclick="event.stopPropagation()">${media}<div class="modal-body"><h2>${data.title}</h2><p>${data.text}</p></div></div>`;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+    function closeModal() {
+        document.getElementById('copyModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+</script>
 </body>
 </html>
