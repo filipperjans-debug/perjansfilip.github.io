@@ -40,7 +40,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Ser till att videon fyller rutan i gridet */
             z-index: 1;
         }
 
@@ -61,7 +61,7 @@
 
         .content-label h3 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Modal */
+        /* Modal / Popup */
         .modal {
             display: none; 
             position: fixed; 
@@ -81,7 +81,10 @@
             border-radius: 16px;
             position: relative;
             overflow: hidden;
+            animation: slideUp 0.4s ease;
         }
+
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .close {
             position: absolute;
@@ -92,13 +95,22 @@
             z-index: 1010;
         }
 
-        .modal-header-media { width: 100%; height: auto; max-height: 550px; object-fit: contain; background-color: #000; display: block; }
+        .modal-header-media { 
+            width: 100%; 
+            height: auto; 
+            max-height: 550px; 
+            object-fit: cover; /* Tar bort svarta kanter i modalen */
+            background-color: #000; 
+            display: block; 
+        }
+
         .modal-body { padding: 3rem; }
         .modal-body h2 { color: var(--blue); font-size: 2.2rem; margin-top: 0; font-weight: 800; }
         .modal-body p { font-size: 1.15rem; color: #334155; line-height: 1.8; white-space: pre-line; }
 
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
+            .modal-header-media { max-height: 250px; }
         }
     </style>
 </head>
@@ -116,7 +128,7 @@
     <div class="project-grid">
         <div class="project-item" onclick="openModal('forsvara')">
             <video preload="metadata" class="bg-content" playsinline>
-                <source src="forsvaranatet.mp4#t=0.1" type="video/mp4">
+                <source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4">
             </video>
             <div class="overlay"></div>
             <div class="content-label">
@@ -144,7 +156,7 @@
         'forsvara': {
             title: 'Försvara Nätet',
             type: 'video',
-            src: 'forsvaranatet.mp4',
+            src: 'forsvaranatet.mp4?v=2', 
             text: `Här beskriver du projektet "Försvara Nätet".
 
             Detta är din template-brödtext. Här kan du skriva om vad kampanjen gick ut på, ditt ansvar och resultatet. 
