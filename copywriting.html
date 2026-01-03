@@ -16,14 +16,12 @@
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
         h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2rem; font-weight: 800; }
 
-        /* Rutnät för rutorna */
         .project-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 2rem; 
         }
 
-        /* Fyrkantiga rutor */
         .project-item { 
             position: relative;
             background: var(--grey); 
@@ -67,7 +65,6 @@
 
         .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Modal styling */
         .modal {
             display: none; 
             position: fixed; 
@@ -101,7 +98,7 @@
             z-index: 1010;
         }
 
-        .modal-image { width: 100%; height: auto; display: block; object-fit: cover; max-height: 400px; }
+        .modal-image { width: 100%; height: auto; display: block; object-fit: cover; max-height: 450px; }
         .modal-body { padding: 3rem; }
         .modal-body h2 { color: var(--blue); font-size: 2rem; margin-top: 0; margin-bottom: 0.2rem; font-weight: 800; }
         .modal-body .sub-header { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; display: block; font-weight: 400; }
@@ -134,20 +131,22 @@
     <h1>Copywriting</h1>
     
     <div class="project-grid">
-        <div class="project-item" onclick="openModal('bang')">
-            <img src="bang.jpg" alt="BANG">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>BANG Agency</h3></div>
-        </div>
-
         <div class="project-item" onclick="openModal('adidas')">
+            <img src="adidas.jpg" alt="Adidas">
             <div class="overlay"></div>
             <div class="content-label"><h3>Adidas</h3></div>
         </div>
 
         <div class="project-item" onclick="openModal('direkto')">
+            <img src="direkto.jpg" alt="Direkto">
             <div class="overlay"></div>
             <div class="content-label"><h3>Direkto</h3></div>
+        </div>
+
+        <div class="project-item" onclick="openModal('bang')">
+            <img src="bang.jpg" alt="BANG">
+            <div class="overlay"></div>
+            <div class="content-label"><h3>BANG Agency</h3></div>
         </div>
     </div>
 </div>
@@ -159,6 +158,22 @@
 
 <script>
     const copyData = {
+        'adidas': {
+            title: 'Speed and Precision',
+            sub: 'Crafted for Goals.',
+            image: 'adidas.jpg',
+            text: `Adidas is one of the world's most iconic sports brands. This case focuses on the development of communication materials that match their high standards of performance and style.
+
+            <strong>Filip Perjans - Copywriting for casetext</strong>`
+        },
+        'direkto': {
+            title: 'The Smarter Choice',
+            sub: 'Think about the percentage.',
+            image: 'direkto.jpg',
+            text: `Direkto helps people save money on their loans. The communication focuses on clarity, trust, and the tangible benefit of lowering your interest rate.
+
+            <strong>Filip Perjans - Copywriting for casetext</strong>`
+        },
         'bang': {
             title: 'Agency of the Year 2024',
             sub: 'Nominated. Agency of the Year.',
@@ -172,22 +187,6 @@
             We at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!
 
             <span class="signature"><strong>Filip Perjans - Copywriting for casetext</strong></span>`
-        },
-        'adidas': {
-            title: 'Speed and Precision',
-            sub: 'Crafted for Goals.',
-            image: '', 
-            text: `Här fyller du i din text om Adidas.
-
-            <span class="signature"><strong>Filip Perjans - Copywriting for casetext</strong></span>`
-        },
-        'direkto': {
-            title: 'The Smarter Choice',
-            sub: 'Think about the percentage.',
-            image: '',
-            text: `Här fyller du i din text om Direkto.
-
-            <span class="signature"><strong>Filip Perjans - Copywriting for casetext</strong></span>`
         }
     };
 
@@ -197,11 +196,9 @@
         const data = copyData[id];
         if (!data) return;
 
-        let imageHtml = data.image ? `<img src="${data.image}" class="modal-image">` : '';
-
         area.innerHTML = `
             <div class="modal-content">
-                ${imageHtml}
+                <img src="${data.image}" class="modal-image">
                 <div class="modal-body">
                     <h2>${data.title}</h2>
                     <span class="sub-header">${data.sub}</span>
