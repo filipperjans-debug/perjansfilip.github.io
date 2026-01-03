@@ -96,6 +96,10 @@
             font-size: 0.9rem; 
             font-weight: 300; 
         }
+        .line {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+        }
     </style>
 </head>
 <body>
@@ -134,17 +138,21 @@
     &copy; 2025 FILIP PERJANS
 </footer>
 
-<script type="module">
-    import { animate, svg, stagger } from 'https://cdn.jsdelivr.net/npm/animejs@4.0.0-beta.0/lib/anime.esm.js';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-    animate(svg.createDrawable('.line'), {
-        draw: ['0 0', '0 1', '1 1'],
-        ease: 'inOutQuad',
-        duration: 2000,
-        delay: stagger(100),
-        loop: true
+<script>
+  window.onload = function() {
+    anime({
+      targets: '.line',
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutQuad',
+      duration: 2000,
+      delay: function(el, i) { return i * 150 },
+      loop: true,
+      direction: 'alternate'
     });
+  };
 </script>
-
+    
 </body>
 </html>
