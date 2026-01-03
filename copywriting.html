@@ -1,192 +1,142 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Copywriting | Filip Perjans</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg-color: #E3E3E3; 
-            --text-color: #1a1a1a; 
-            --modal-overlay: rgba(26, 26, 26, 0.9);
-            --card-bg: #D9D9D9; /* En subtil nyansskillnad för rutan */
+            --brand-blue: #1B3C53; 
         }
 
         body { 
-            font-family: 'Outfit', sans-serif; 
+            font-family: 'Inter', sans-serif; 
             margin: 0; 
             background-color: var(--bg-color); 
-            color: var(--text-color); 
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            color: var(--brand-blue); 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navigering - Identisk med index/about */
+        /* Navigering */
         nav {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 3rem;
             padding: 2rem 0;
+            background-color: var(--bg-color);
         }
 
         .nav-link {
-            color: var(--text-color);
+            color: var(--brand-blue);
             text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15rem;
-            transition: opacity 0.3s;
-        }
-
-        .nav-link:hover { opacity: 0.6; }
-
-        .container { 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            padding: 2rem; 
-        }
-
-        h1 { 
-            font-size: 2.5rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-bottom: 4rem; 
-            text-align: center;
-        }
-
-        .section-title {
+            font-weight: 600;
             font-size: 1.1rem;
-            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
-            padding-bottom: 0.5rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        /* Projektgrid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
 
-        /* Projektkortet (Rutan) */
-        .project-card {
-            background-color: var(--card-bg);
-            padding: 4rem 2rem;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 150px;
-        }
-
-        .project-card:hover {
-            background-color: #D1D1D1;
-            transform: translateY(-3px);
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 0;
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
+        
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
             text-transform: uppercase;
-            letter-spacing: 0.05rem;
         }
 
-        .project-year {
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin-top: 0.7rem;
-            opacity: 0; /* Dold som standard */
-            transition: opacity 0.3s ease;
+        /* Slider */
+        .project-slider { 
+            display: flex; 
+            gap: 2rem; 
+            overflow-x: auto; 
+            padding: 2rem 1rem; 
+            margin: 0 -1rem 4rem -1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-blue) transparent;
         }
 
-        .project-card:hover .project-year {
-            opacity: 0.6; /* Synlig vid hovring */
+        /* Rutorna */
+        .project-item { 
+            flex: 0 0 300px; 
+            position: relative; 
+            aspect-ratio: 1 / 1; 
+            border-radius: 12px; 
+            overflow: hidden;
+            cursor: pointer; 
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+            background-color: #fff;
+            border: 1px solid rgba(27, 60, 83, 0.1);
         }
 
-        /* MODAL (Pop-up) */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
+        .project-item:hover { 
+            transform: scale(1.05); 
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .card-media {
             width: 100%;
             height: 100%;
-            background-color: var(--modal-overlay);
-            overflow-y: auto;
-            justify-content: center;
-            align-items: flex-start; /* Starta från toppen vid scroll */
-            padding: 4rem 1rem;
-        }
-
-        .modal-content {
-            background-color: var(--bg-color);
-            padding: 4rem 3rem;
-            max-width: 800px;
-            width: 100%;
-            position: relative;
-            margin-bottom: 4rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 2rem;
-            top: 1.5rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: opacity 0.2s;
-        }
-
-        .close-modal:hover { opacity: 0.5; }
-
-        .modal-header-text {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 2.5rem;
-            text-transform: none;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            margin-bottom: 2.5rem;
             object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
-        .modal-body-text {
-            font-weight: 300;
-            font-size: 1.1rem;
-            color: var(--text-color);
-            white-space: pre-line; /* Bevarar radbrytningar */
+        /* Texten i rutan */
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
         }
 
-        .spacer {
-            height: 1.5rem;
+        .item-info h3 { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            text-shadow: 0px 2px 8px rgba(0,0,0,0.8);
+        }
+        
+        .item-info span { 
             display: block;
+            margin-top: 5px; 
+            font-size: 0.8rem; 
+            font-weight: 400; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* Lås scroll på body när modal är öppen */
-        body.modal-open {
-            overflow: hidden;
-        }
+        .project-item:hover .item-info span { opacity: 1; }
+
+        /* Modal-styling */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fff; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
+        .modal-body { padding: 3rem; }
+        .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; }
+        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; }
+        
+        /* Stil för roll-texten i modalen */
+        .role-text { font-weight: 800; display: block; margin-top: 1.5rem; }
 
     </style>
 </head>
-<body>
+<body onkeydown="if(event.key==='Escape') closeModal()">
 
 <nav>
     <a href="index.html" class="nav-link">Work</a>
@@ -194,55 +144,105 @@
 </nav>
 
 <div class="container">
-    <h1>Copywriting</h1>
+    <h2>Work Content</h2>
+    <div class="project-slider">
+        <div class="project-item" onclick="openModal('adidas')">
+            <img src="adidas.jpg" class="card-media">
+            <div class="item-info"><h3>Adidas</h3><span>Website casetext</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('direkto')">
+            <video src="direkto.mp4" class="card-media" muted loop playsinline autoplay></video>
+            <div class="item-info"><h3>Direkto</h3><span>Website casetext</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('bang1')">
+            <img src="bang.jpg" class="card-media">
+            <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('bang2')">
+            <img src="bang.jpg" class="card-media">
+            <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
+        </div>
+    </div>
 
-    <h2 class="section-title">University Projects</h2>
-    
-    <div class="project-grid">
-        <div class="project-card" onclick="openModal('rekorobenModal')">
-            <h3>Rekoroben</h3>
-            <div class="project-year">2023</div>
+    <h2>University Content</h2>
+    <div class="project-slider">
+        <div class="project-item" onclick="openModal('uni1')">
+            <div class="item-info"><h3>Content 1</h3><span>X</span></div>
         </div>
     </div>
 </div>
 
-<div id="rekorobenModal" class="modal" onclick="closeOutside(event, 'rekorobenModal')">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('rekorobenModal')">&times;</span>
-        
-        <div class="modal-header-text">Reuse like<br>there’s a tomorrow.</div>
-        
-        <img src="rekoroben.jpg" alt="Rekoroben Project" class="modal-image">
-
-        <div class="modal-body-text">
-            Rekoroben, an exclusive second-hand store in Karlstad, aimed to increase its brand awareness and reach a wider customer base. With a limited presence in the market, they needed strategies to convey their unique offering and sustainable message to a larger audience. As part of an educational assignment, our goal was to help Rekoroben fulfill their goals.
-            <div class="spacer"></div>
-            We developed a concise yet comprehensive document, outlining tailored marketing strategies, audience insights and media tactics. This informed Rekoroben on effective methods to elevate their presence and engage in their target market.
-            <div class="spacer"></div>
-            We crafted a captivating quote, “Reuse like there’s a tomorrow”, reflecting Rekoroben’s commitment to sustainability. Designed in their signature font and colors, the quote adorned tote bags, blending aesthetics with eco-awareness, serving as mobile billboard for the brand.
-            <div class="spacer"></div>
-            Last but not least we planned an engaging event centered around sustainability. Combining champagne with a sustainability quiz, the participants could learn during a pleasant experience while Rekoroben promoted their ethos.
-        </div>
+<div id="projectModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalBody" class="modal-body"></div>
     </div>
 </div>
 
 <script>
-    function openModal(id) {
-        document.getElementById(id).style.display = "flex";
-        document.body.classList.add('modal-open');
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).style.display = "none";
-        document.body.classList.remove('modal-open');
-    }
-
-    function closeOutside(event, id) {
-        if (event.target === document.getElementById(id)) {
-            closeModal(id);
+    const projectData = {
+        'adidas': {
+            title: "Crafted for Goals.",
+            image: "adidas.jpg",
+            type: "image",
+            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.`,
+            role: "Filip Perjans - website casetext for BANG"
+        },
+        'direkto': {
+            title: "Think about the percentage.",
+            video: "direkto.mp4",
+            type: "video",
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.`,
+            role: "Filip Perjans - website casetext for BANG"
+        },
+        'bang1': {
+            title: "Nominated. Agency of the Year 2024.",
+            image: "bang.jpg",
+            type: "image",
+            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.`,
+            role: "Filip Perjans - website article for BANG"
+        },
+        'bang2': {
+            title: "AI. Don't fear it, embrace it.",
+            image: "bang.jpg",
+            type: "image",
+            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.`,
+            role: "Filip Perjans - website article for BANG"
+        },
+        'uni1': {
+            title: "University Project 1",
+            text: "Text för ditt första universitetsprojekt läggs här.",
+            type: "image",
+            image: "uni_placeholder.jpg",
+            role: "Filip Perjans"
         }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('projectModal');
+        const body = document.getElementById('modalBody');
+        const data = projectData[id];
+        if(!data) return;
+
+        let mediaHtml = (data.type === 'image') 
+            ? `<img src="${data.image}" class="modal-img">` 
+            : `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
+
+        body.innerHTML = `
+            ${mediaHtml}
+            <h2>${data.title}</h2>
+            <p>${data.text}</p>
+            <span class="role-text">${data.role || ''}</span>
+        `;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 </script>
-
 </body>
 </html>
