@@ -17,11 +17,37 @@
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .project-item { position: relative; background: var(--grey); aspect-ratio: 1 / 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; border: 1px solid #e0e0e0; }
         .project-item img, .project-item video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2; transition: background 0.3s ease; }
+        
+        /* Overlay som alltid är lite mörk för att texten ska synas, blir mörkare vid hover */
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); z-index: 2; transition: background 0.3s ease; }
         .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
-        .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1rem; }
-        .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1.5rem; }
+        
+        /* Huvudrubriken är alltid synlig */
+        .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; transition: transform 0.3s ease; }
+        
+        /* Underrubriken är osynlig som standard */
+        .content-label span { 
+            display: block; 
+            font-size: 0.9rem; 
+            margin-top: 5px; 
+            font-weight: 400; 
+            opacity: 0; 
+            transform: translateY(5px); 
+            transition: all 0.3s ease; 
+        }
 
+        /* Vid hover: visa underrubriken och lyft upp huvudrubriken lite för balans */
+        .project-item:hover .content-label span { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        .project-item:hover .content-label h3 {
+            transform: translateY(-5px);
+        }
+
+        /* Modal styling */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(8px); overflow-y: auto; }
         .modal-content { background-color: white; margin: 2% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; overflow: hidden; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -48,19 +74,30 @@
         <div class="project-item" onclick="openModal('adidas')">
             <img src="adidas.jpg" alt="Adidas">
             <div class="overlay"></div>
-            <div class="content-label"><h3>Adidas</h3></div>
+            <div class="content-label">
+                <h3>Adidas</h3>
+                <span>Website casetext</span>
+            </div>
         </div>
 
         <div class="project-item" onclick="openModal('direkto')">
-            <video muted loop playsinline><source src="direkto.mp4" type="video/mp4"></video>
+            <video muted playsinline onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;">
+                <source src="direkto.mp4" type="video/mp4">
+            </video>
             <div class="overlay"></div>
-            <div class="content-label"><h3>Direkto</h3></div>
+            <div class="content-label">
+                <h3>Direkto</h3>
+                <span>Website casetext</span>
+            </div>
         </div>
 
         <div class="project-item" onclick="openModal('bang')">
             <img src="bang.jpg" alt="BANG">
             <div class="overlay"></div>
-            <div class="content-label"><h3>BANG Agency</h3></div>
+            <div class="content-label">
+                <h3>BANG Agency</h3>
+                <span>Website article</span>
+            </div>
         </div>
     </div>
 </div>
@@ -74,6 +111,7 @@
     const copyData = {
         'adidas': {
             title: 'Crafted for Goals.',
+            sub: '', 
             type: 'image',
             src: 'adidas.jpg',
             text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.
@@ -85,6 +123,7 @@ The response was massive — over 5,000 visitors and 286 players in the Predator
         },
         'direkto': {
             title: 'Think about the percentage.',
+            sub: '',
             type: 'video',
             src: 'direkto.mp4',
             text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed. In a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?
@@ -94,6 +133,7 @@ Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We c
         },
         'bang': {
             title: 'Nominated. Agency of the Year 2024.',
+            sub: '',
             type: 'image',
             src: 'bang.jpg',
             text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition. Once again, proof that we’re still rocking the communication game …
@@ -115,7 +155,7 @@ Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We c
         if (!data) return;
 
         let mediaHtml = data.type === 'video' 
-            ? `<video controls autoplay class="modal-media"><source src="${data.src}" type="video/mp4"></video>`
+            ? `<video controls autoplay loop class="modal-media"><source src="${data.src}" type="video/mp4"></video>`
             : `<img src="${data.src}" class="modal-media">`;
 
         area.innerHTML = `
@@ -135,6 +175,12 @@ Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We c
     function closeModal() {
         document.getElementById('copyModal').style.display = "none";
         document.body.style.overflow = "auto";
+        const video = document.querySelector('.modal-media');
+        if (video && video.tagName === 'VIDEO') {
+            video.pause();
+            video.src = "";
+            video.load();
+        }
     }
 
     window.onclick = function(event) {
