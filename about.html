@@ -21,12 +21,12 @@
             line-height: 1.6;
         }
 
-        /* Navigering - Understrykning borttagen */
+        /* Navigering - Minimalistisk utan understrykning */
         nav {
             display: flex;
             justify-content: center;
             gap: 3rem;
-            padding: 2rem 0;
+            padding: 3rem 0;
         }
 
         .nav-link {
@@ -36,59 +36,77 @@
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Ingen padding-bottom eller border här längre */
         }
 
-        /* Vi har tagit bort .nav-link.active helt */
-
         .container { 
-            max-width: 900px; 
+            max-width: 1000px; 
             margin: 0 auto; 
-            padding: 2rem; 
+            padding: 0 2rem 5rem 2rem; 
         }
 
         /* Profilsektion */
         .profile-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 1.5rem;
-            border: 3px solid var(--brand-blue);
+            border: 2px solid var(--brand-blue);
         }
 
-        h1 { font-size: 3rem; font-weight: 800; margin: 0; text-transform: uppercase; }
-        .subtitle { font-size: 1.2rem; font-weight: 400; opacity: 0.8; }
+        h1 { font-size: 2.5rem; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { font-size: 1.1rem; font-weight: 400; opacity: 0.8; margin-top: 0.5rem; }
 
-        /* Sektioner */
+        /* Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Rubriker och Linjer */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(27, 60, 83, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-header.right {
+            justify-content: flex-end;
+            text-align: right;
+        }
+
         h2 { 
-            font-size: 1.5rem; 
+            font-size: 1.3rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            margin-top: 3rem;
-            border-bottom: 1px solid rgba(27, 60, 83, 0.1);
-            padding-bottom: 0.5rem;
+            margin: 0;
+            letter-spacing: 1px;
         }
 
         /* Tidslinje Styling */
         .timeline {
             position: relative;
-            padding-left: 2rem;
-            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            margin-bottom: 4rem;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
+            top: 5px;
+            bottom: 5px;
+            width: 1px;
             background-color: var(--timeline-grey);
         }
 
@@ -100,43 +118,45 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -2.35rem;
-            top: 0.5rem;
-            width: 10px;
-            height: 10px;
+            left: -1.85rem;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
             background-color: var(--timeline-grey);
             border-radius: 50%;
         }
 
         .timeline-date {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             display: block;
             margin-bottom: 0.2rem;
+            opacity: 0.7;
         }
 
-        .company-name {
+        .name-highlight {
             color: var(--highlight-blue);
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             display: block;
         }
 
-        .job-title {
+        .role-title {
             font-weight: 400;
-            font-style: italic;
+            font-size: 1rem;
         }
 
-        /* Grid för Skills/Languages/Contact */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        /* Högerkolumn text-justering */
+        .right-col {
+            text-align: right;
+        }
+
+        .info-block {
             margin-bottom: 4rem;
         }
 
         ul { list-style: none; padding: 0; margin: 0; }
-        ul li { margin-bottom: 0.5rem; }
+        ul li { margin-bottom: 0.4rem; font-weight: 400; }
 
         .contact-link {
             color: var(--brand-blue);
@@ -144,7 +164,12 @@
             font-weight: 600;
         }
 
-        .contact-link:hover { text-decoration: underline; }
+        /* Responsivitet */
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .section-header.right { justify-content: flex-start; text-align: left; }
+            .right-col { text-align: left; }
+        }
 
     </style>
 </head>
@@ -162,73 +187,89 @@
         <p class="subtitle">Junior Copywriter & Creative</p>
     </div>
 
-    <h2>Work Experience</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <span class="timeline-date">Jan 2024 - Present</span>
-            <span class="company-name">BANG Agency</span>
-            <span class="job-title">Copywriter</span>
-        </div>
-        <div class="timeline-item">
-            <span class="timeline-date">Jun 2022 - Aug 2022</span>
-            <span class="company-name">DHL</span>
-            <span class="job-title">Logistics Assistant</span>
-        </div>
-        <div class="timeline-item">
-            <span class="timeline-date">May 2021 - Aug 2021</span>
-            <span class="company-name">IKEA</span>
-            <span class="job-title">Customer Service</span>
-        </div>
-    </div>
+    <div class="main-grid">
+        <div class="left-col">
+            <div class="section-header">
+                <h2>Work Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">Jan 2024 - Present</span>
+                    <span class="name-highlight">BANG Agency</span>
+                    <span class="role-title">Copywriter</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Jun 2022 - Aug 2022</span>
+                    <span class="name-highlight">DHL</span>
+                    <span class="role-title">Logistics Assistant</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">May 2021 - Aug 2021</span>
+                    <span class="name-highlight">IKEA</span>
+                    <span class="role-title">Customer Service</span>
+                </div>
+            </div>
 
-    <h2>Education</h2>
-    <div class="timeline">
-        <div class="timeline-item">
-            <span class="timeline-date">Aug 2021 - Jun 2024</span>
-            <span class="company-name">Karlstad University</span>
-            <span class="job-title">Communication & PR</span>
+            <div class="section-header">
+                <h2>Education</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">Aug 2021 - Jun 2024</span>
+                    <span class="name-highlight">Karlstad University</span>
+                    <span class="role-title">Communication & PR</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Jun 2023 - Aug 2023</span>
+                    <span class="name-highlight">University of Borås</span>
+                    <span class="role-title">Digital Marketing</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Jun 2023 - Aug 2023</span>
+                    <span class="name-highlight">Blekinge Institute of Technology</span>
+                    <span class="role-title">UX Design Course</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Aug 2016 - May 2019</span>
+                    <span class="name-highlight">Hulebäcksgymnasiet</span>
+                    <span class="role-title">Social Sciences</span>
+                </div>
+            </div>
         </div>
-        <div class="timeline-item">
-            <span class="timeline-date">Jun 2023 - Aug 2023</span>
-            <span class="company-name">University of Borås</span>
-            <span class="job-title">Digital Marketing</span>
-        </div>
-        <div class="timeline-item">
-            <span class="timeline-date">Jun 2023 - Aug 2023</span>
-            <span class="company-name">Blekinge Institute of Technology</span>
-            <span class="job-title">UX Design Course</span>
-        </div>
-        <div class="timeline-item">
-            <span class="timeline-date">Aug 2016 - May 2019</span>
-            <span class="company-name">Hulebäcksgymnasiet</span>
-            <span class="job-title">Social Sciences</span>
-        </div>
-    </div>
 
-    <div class="info-grid">
-        <div>
-            <h2>Skills</h2>
-            <ul>
-                <li>Copywriting & Content Writing</li>
-                <li>Adobe Creative Cloud</li>
-                <li>Digital Strategy</li>
-                <li>Social Media Management</li>
-            </ul>
-        </div>
-        <div>
-            <h2>Languages</h2>
-            <ul>
-                <li>Swedish (Native)</li>
-                <li>English (Fluent)</li>
-            </ul>
-        </div>
-        <div>
-            <h2>Contact</h2>
-            <p>
-                Email: <a href="mailto:filip.perjans@gmail.com" class="contact-link">filip.perjans@gmail.com</a><br>
-                LinkedIn: <a href="#" class="contact-link">Filip Perjans</a><br>
-                Location: Stockholm, Sweden
-            </p>
+        <div class="right-col">
+            <div class="info-block">
+                <div class="section-header right">
+                    <h2>Contact</h2>
+                </div>
+                <p>
+                    <a href="mailto:filip.perjans@gmail.com" class="contact-link">filip.perjans@gmail.com</a><br>
+                    <a href="#" class="contact-link">LinkedIn</a><br>
+                    Stockholm, Sweden
+                </p>
+            </div>
+
+            <div class="info-block">
+                <div class="section-header right">
+                    <h2>Skills</h2>
+                </div>
+                <ul>
+                    <li>Copywriting</li>
+                    <li>Content Strategy</li>
+                    <li>Adobe Creative Cloud</li>
+                    <li>Digital Marketing</li>
+                </ul>
+            </div>
+
+            <div class="info-block">
+                <div class="section-header right">
+                    <h2>Languages</h2>
+                </div>
+                <ul>
+                    <li>Swedish (Native)</li>
+                    <li>English (Fluent)</li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
