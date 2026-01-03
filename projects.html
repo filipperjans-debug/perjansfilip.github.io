@@ -7,140 +7,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; overflow-x: hidden; }
         
         nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-
+        
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
-        h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2rem; font-weight: 800; }
+        
+        h1 { font-size: 3rem; color: var(--blue); font-weight: 800; margin-bottom: 1rem; }
+        h2 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4rem; margin-bottom: 1rem; color: #666; font-weight: 600; }
 
-        /* Rutnätet konfigurerat för 4 kolumner på stora skärmar */
-        .project-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+        /* HORISONTELL SCROLL CONTAINER */
+        .project-slider { 
+            display: flex; 
             gap: 2rem; 
+            overflow-x: auto; 
+            padding: 2rem 1rem; 
+            margin: 0 -1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--blue) transparent;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Tvingar rutan att vara en perfekt fyrkant */
+        .project-slider::-webkit-scrollbar { height: 6px; }
+        .project-slider::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+        /* RUTORNA - Alla lika stora */
         .project-item { 
-            position: relative;
+            flex: 0 0 300px; 
+            position: relative; 
             background: var(--grey); 
-            width: 100%;
             aspect-ratio: 1 / 1; 
             border-radius: 12px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             cursor: pointer; 
-            transition: all 0.3s ease;
-            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
             border: 1px solid #e0e0e0;
-        }
-
-        .project-item .bg-content {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-            transition: background 0.3s ease;
-        }
-
-        .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
-
-        .content-label {
-            position: relative;
-            z-index: 3;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .content-label h3 { margin: 0; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 1px; }
-        .content-label span { 
-            display: block; 
-            font-size: 0.85rem; 
-            margin-top: 8px; 
-            opacity: 0; 
-            transform: translateY(10px); 
-            transition: all 0.3s ease;
-        }
-
-        .project-item:hover .content-label span { opacity: 1; transform: translateY(0); }
-
-        /* Modal inställningar */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(8px);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 2% auto;
-            width: 90%;
-            max-width: 900px;
-            border-radius: 16px;
-            position: relative;
             overflow: hidden;
-            animation: slideUp 0.4s ease;
+            opacity: 0; /* För Anime.js */
         }
 
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .close {
-            position: absolute;
-            right: 20px; top: 15px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: white;
-            z-index: 1010;
+        /* FÖRSTORINGSEFFEKT */
+        .project-item:hover { 
+            transform: scale(1.08); 
+            border-color: var(--blue);
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .modal-media-container { 
-            background: #111; 
-            width: 100%; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .content-label { text-align: center; padding: 1.5rem; }
+        .content-label h3 { margin: 0; font-size: 1.2rem; color: var(--blue); text-transform: uppercase; font-weight: 800; }
+        .empty-label { color: #bbb; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
 
-        .modal-header-media { 
-            width: 100%; 
-            height: auto; 
-            max-height: 65vh; 
-            object-fit: contain; 
-            display: block; 
-        }
-
-        .modal-body { padding: 3rem; }
-        .modal-body h2 { color: var(--blue); font-size: 2.2rem; margin-top: 0; font-weight: 800; }
-        .modal-body p { font-size: 1.15rem; color: #334155; line-height: 1.8; white-space: pre-line; }
-
-        @media (max-width: 768px) {
-            .modal-body { padding: 1.5rem; }
-            .modal-header-media { max-height: 40vh; }
-            .content-label span { opacity: 0.8; transform: none; }
-            .project-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-        }
+        /* Modal styling */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 90%; max-width: 600px; border-radius: 16px; padding: 3rem; position: relative; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 2rem; cursor: pointer; }
     </style>
 </head>
-<body>
+<body onkeydown="if(event.key==='Escape') closeModal()">
 
 <nav>
     <a href="index.html">Work</a>
@@ -150,128 +78,53 @@
 <div class="container">
     <a href="index.html" class="back-link">← Back to Work</a>
     <h1>Projects</h1>
-    
-    <div class="project-grid">
-        <div class="project-item" onclick="openModal('forsvara')">
-            <video preload="metadata" class="bg-content" playsinline><source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4"></video>
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Försvara Nätet</h3><span>2025</span></div>
-        </div>
 
-        <div class="project-item" onclick="openModal('veterandagen')">
-            <img src="veterandagen1.jpg" class="bg-content">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Veterandagen</h3><span>2024, 2025</span></div>
-        </div>
+    <h2>Work Content</h2>
+    <div class="project-slider">
+        <div class="project-item" onclick="openModal('natet')"><div class="content-label"><h3>Försvara Nätet</h3></div></div>
+        <div class="project-item" onclick="openModal('veteran')"><div class="content-label"><h3>Veterandagen</h3></div></div>
+        <div class="project-item" onclick="openModal('flyg')"><div class="content-label"><h3>Flygdagen</h3></div></div>
+        <div class="project-item" onclick="openModal('desperados')"><div class="content-label"><h3>Desperados</h3></div></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+    </div>
 
-        <div class="project-item" onclick="openModal('flygdagen')">
-            <img src="flygdagen3.jpg" class="bg-content">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Flygdagen</h3><span>2024</span></div>
-        </div>
-
-        <div class="project-item" onclick="openModal('desperados')">
-            <img src="desperados.jpg" class="bg-content">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Desperados Summer Tour</h3><span>2024</span></div>
-        </div>
+    <h2>University Content</h2>
+    <div class="project-slider">
+        <div class="project-item"><div class="content-label"><h3>Project 1</h3></div></div>
+        <div class="project-item"><div class="content-label"><h3>Project 2</h3></div></div>
+        <div class="project-item"><div class="content-label"><h3>Project 3</h3></div></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
     </div>
 </div>
 
-<div id="projectModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-        <div id="modalContentArea"></div>
+<div id="projectModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modalBody"></div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 <script>
     const projectData = {
-        'forsvara': {
-            title: 'Försvara Nätet',
-            type: 'video',
-            src: 'forsvaranatet.mp4?v=2', 
-            text: `The Swedish Armed Forces has an increased recruitment need within IT. A market where competition is fierce.
-
-            We developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity. 
-
-            The design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.
-
-            <strong>Team BANG</strong>
-            Filip Perjans: Project and Production Manager, Creative and Copywriter
-            Lisa Evenås: Art Director and Creative`
-        },
-        'veterandagen': {
-            title: 'Veterandagen',
-            type: 'image',
-            src: 'veterandagen1.jpg',
-            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on Veterans Day — a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.
-
-            The day is marked by ceremony and solemnity, with an extensive program at Gärdet in Stockholm. The highlight is the ceremony at the Restare Veterans Monument, followed by dinner and entertainment. The day ends with the traditional flag-lowering ceremony at 9 p.m. 
-
-            BANG has overall production responsibility for Veterans Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.
-
-            The assignment covered the entire production chain, from planning to implementation. This included full-scale infrastructure – tents, electricity, security, and medical care – as well as hospitality, VIP catering, printed materials, and ceremonial decorations.
-
-            BANG also manages the high-quality livestream and ensures smooth digital broadcasting. Given the formal nature of the state ceremony, the project requires absolute logistical precision and reliability. Every detail must be flawless.
-
-            <strong>Team BANG</strong>
-            Stina Andersson – Project Manager
-            Fanny Holck Clausen – Project and Production Manager
-            Filip Perjans – Production Manager
-            Natalie Rosenberg – Production Manager
-            Lisa Evenås – Art Director`
-        },
-        'flygdagen': {
-            title: 'Flygdagen',
-            type: 'image',
-            src: 'flygdagen1.jpeg', 
-            text: `On August 24, 2024, the Swedish Air Force opened its gates for its largest event of the year: Flygdagen. More than just an air show, this was an immersive dive into the world of total defense, designed to give the public a front-row seat to the Armed Forces' mission in a rapidly changing world.
-
-            Our mission, alongside the Blekinge Wing (F 17), was to transform a visual spectacle into an interactive journey. We created a space where visitors didn't just watch from the sidelines—they engaged with defense ambassadors, tested hands-on activities, and followed a high-octane live broadcast of the flight displays in real-time.
-
-            <strong>Team BANG</strong>
-            Jenny Green - Project Manager
-            Natalie Rosenberg - Project Manager
-            Filip Perjans - Production Manager
-            Lisa Evenås - Art Director`
-        },
-        'desperados': {
-            title: 'Desperados Summer Tour',
-            type: 'image',
-            src: 'desperados.jpg',
-            text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy. 
-
-            A vibrant festival footprint featuring colorful, multi-sensory environment. By blending interactive zones with functional infrastructure and chill-out lounges, we ensured the brand stayed at the center of the festival experience.
-
-            <strong>Team BANG:</strong>
-            Amelie Lagerstedt - Project Manager
-            Filip Perjans - Production Manager
-            Lisa Evenås - Art Director and Creative`
-        }
+        'natet': { title: 'Försvara Nätet', text: 'I en värld där hoten mot vår digitala infrastruktur växer, krävs mer än bara teknik – det krävs medvetenhet. Försvara Nätet var en integrerad kampanj framtagen för att belysa vikten av cybersäkerhet.' },
+        'veteran': { title: 'Veterandagen', text: 'Veterandagen är en nationell hyllning till de som tjänstgjort för Sverige. Fokuset låg på att genom stark storytelling lyfta de personliga berättelserna bakom uniformen.' },
+        'flyg': { title: 'Flygdagen', text: 'Flygdagen är ett av de mest välbesökta publika evenemangen. Projektet innebar att ta fram ett integrerat kampanjkoncept som kunde attrahera en bred målgrupp.' },
+        'desperados': { title: 'Desperados Summer Tour', text: 'Desperados Summer Tour handlade om att maximera varumärkets närvaro i sommarens puls genom konceptuell inramning och copy för event.' }
     };
 
     function openModal(id) {
         const modal = document.getElementById('projectModal');
-        const area = document.getElementById('modalContentArea');
+        const body = document.getElementById('modalBody');
         const data = projectData[id];
-        if (!data) return;
-
-        let mediaHtml = '';
-        if (data.type === 'video') {
-            mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
-        } else {
-            mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
-        }
-
-        area.innerHTML = `
-            <div class="modal-media-container">${mediaHtml}</div>
-            <div class="modal-body">
-                <h2>${data.title}</h2>
-                <p>${data.text}</p>
-            </div>
-        `;
-        
+        if(!data) return;
+        body.innerHTML = `<h2 style="color:#003366; margin-top:0; font-weight:800;">${data.title}</h2><p style="white-space:pre-line; line-height:1.7;">${data.text}</p>`;
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
     }
@@ -281,9 +134,18 @@
         document.body.style.overflow = "auto";
     }
 
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('projectModal')) closeModal();
-    }
+    // Anime.js animation för att rutorna ska poppa fram
+    window.onload = () => {
+        anime({
+            targets: '.project-item',
+            opacity: [0, 1],
+            translateY: [40, 0],
+            scale: [0.9, 1],
+            delay: anime.stagger(100),
+            duration: 1000,
+            easing: 'easeOutElastic(1, .8)'
+        });
+    };
 </script>
 
 </body>
