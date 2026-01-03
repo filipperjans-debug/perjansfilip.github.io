@@ -109,13 +109,30 @@
             z-index: 1010;
         }
 
+        /* Standard container för en bild/video */
         .modal-media-container { background: #000; width: 100%; }
+        
+        /* Standard media-stil */
         .modal-header-media { 
             width: 100%; 
             height: auto; 
             max-height: 550px; 
             object-fit: cover; 
             display: block; 
+        }
+
+        /* NY STIL: För rader med flera bilder */
+        .multi-image-row {
+            display: flex;
+            width: 100%;
+            background: #000;
+        }
+
+        /* När bilder ligger i en multi-image-row */
+        .multi-image-row .modal-header-media {
+            width: 50%; /* Hälften av bredden var */
+            height: 550px; /* Fast höjd för att täcka headern snyggt */
+            object-fit: cover; /* Beskär bilden så den fyller ytan utan att sträckas */
         }
 
         .modal-body { padding: 3rem; }
@@ -125,6 +142,10 @@
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
             .content-label span { opacity: 0.8; transform: none; }
+            .modal-header-media { max-height: 300px; }
+            /* På små mobiler staplar vi dem igen så de inte blir för små */
+             .multi-image-row { flex-direction: column; }
+             .multi-image-row .modal-header-media { width: 100%; height: 250px; }
         }
     </style>
 </head>
@@ -161,7 +182,7 @@
         <div class="project-item" onclick="openModal('flygdagen')">
             <img src="flygdagen1.jpeg" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label"><h3>Flygdagen</h3><span>2024, 2025</span></div>
+            <div class="content-label"><h3>Flygdagen</h3><span>2024</span></div>
         </div>
     </div>
 </div>
@@ -207,7 +228,7 @@
             title: 'Flygdagen',
             type: 'multi-image',
             images: ['flygdagen1.jpeg', 'flygdagen2.jpg'],
-            text: `Här kan du skriva texten om Flygdagen. Eftersom jag la till två bilder kommer de nu visas efter varandra i popupen.
+            text: `Här kan du skriva texten om Flygdagen. Nu visas bilderna bredvid varandra i toppen av denna ruta.
             
             <strong>Team BANG</strong>
             Filip Perjans – Production Manager`
@@ -221,16 +242,21 @@
         if (!data) return;
 
         let mediaHtml = '';
+        // Standardcontainer om det inte är multi-image
+        let containerClass = 'modal-media-container';
+
         if (data.type === 'video') {
             mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
         } else if (data.type === 'image') {
             mediaHtml = `<img src="${data.src}" class="modal-header-media">`;
         } else if (data.type === 'multi-image') {
-            mediaHtml = data.images.map(img => `<img src="${img}" class="modal-header-media" style="margin-bottom:10px;">`).join('');
+            // Byt till side-by-side container
+            containerClass = 'modal-media-container multi-image-row';
+            mediaHtml = data.images.map(img => `<img src="${img}" class="modal-header-media">`).join('');
         }
 
         area.innerHTML = `
-            <div class="modal-media-container">${mediaHtml}</div>
+            <div class="${containerClass}">${mediaHtml}</div>
             <div class="modal-body">
                 <h2>${data.title}</h2>
                 <p>${data.text}</p>
