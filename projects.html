@@ -57,9 +57,10 @@
             z-index: 3;
             color: white;
             text-align: center;
+            padding: 1rem;
         }
 
-        .content-label h3 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* Modal / Popup */
         .modal {
@@ -136,7 +137,14 @@
             </div>
         </div>
 
-        <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 2</h3></div></div>
+        <div class="project-item" onclick="openModal('desperados')">
+            <img src="desperados.jpg" alt="Desperados" class="bg-content">
+            <div class="overlay"></div>
+            <div class="content-label">
+                <h3>Desperados Summer Tour</h3>
+            </div>
+        </div>
+
         <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 3</h3></div></div>
         <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 4</h3></div></div>
         <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 5</h3></div></div>
@@ -166,6 +174,17 @@
             <strong>Team BANG</strong>
             Filip Perjans: Project and Production Manager, Creative and Copywriter
             Lisa Evenås: Art Director and Creative`
+        },
+        'desperados': {
+            title: 'Desperados Summer Tour',
+            type: 'image',
+            src: 'desperados.jpg',
+            text: `Här är din example rubrik för Desperados Summer Tour.
+
+            Detta är din template-brödtext. Här kan du beskriva sommarens turné, aktiveringarna på festivaler eller hur ni lyfte varumärket genom upplevelser. Texten anpassar sig efter hur du skriver här.
+
+            <strong>Team BANG</strong>
+            Filip Perjans: Creative & Copywriter`
         }
     };
 
@@ -179,6 +198,8 @@
         let mediaHtml = '';
         if (data.type === 'video') {
             mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
+        } else if (data.type === 'image') {
+            mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
         }
 
         area.innerHTML = `
