@@ -62,7 +62,6 @@
             scrollbar-color: var(--brand-blue) transparent;
         }
 
-        /* Rutorna */
         .project-item { 
             flex: 0 0 300px; 
             position: relative; 
@@ -90,7 +89,6 @@
             z-index: 1;
         }
 
-        /* Texten i rutan - Ingen toning, bara text med skugga */
         .item-info {
             position: absolute;
             bottom: 0;
@@ -127,10 +125,13 @@
         .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
         .modal-body { padding: 3rem; }
         .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
-        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; }
-        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; }
-        .team-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; }
-        .team-title { font-weight: 800; display: block; margin-bottom: 0.5rem; }
+        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; margin: 0;}
+        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; margin-bottom: 1rem; }
+        
+        /* Team Section - Inget mellanrum mellan rubrik och namn */
+        .team-section { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee; }
+        .team-title { font-weight: 800; display: block; margin: 0; padding: 0; line-height: 1.2; }
+        .team-section p { margin-top: 0; padding-top: 0; line-height: 1.4; }
 
     </style>
 </head>
@@ -160,9 +161,6 @@
             <img src="desperados.jpg" class="card-media">
             <div class="item-info"><h3>Desperados Summer Tour</h3><span>2024</span></div>
         </div>
-        <div class="project-item"><div class="item-info"><h3>5</h3><span>Underrubrik</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>6</h3><span>Underrubrik</span></div></div>
-        <div class="project-item"><div class="item-info"><h3>7</h3><span>Underrubrik</span></div></div>
     </div>
 
     <h2>University Projects</h2>
@@ -227,9 +225,18 @@
             ? `<img src="${data.image}" class="modal-img">` 
             : `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
 
+        // Formaterar om Team-texten så att Team-rubriken får klassen .team-title
         const formattedTeam = data.team.replace(/\*\*(.*?)\*\*/g, '<span class="team-title">$1</span>');
 
-        body.innerHTML = `${mediaHtml}<h2>${data.title}</h2><p>${data.text}</p><div class="team-section"><p>${formattedTeam}</p></div>`;
+        body.innerHTML = `
+            ${mediaHtml}
+            <h2>${data.title}</h2>
+            <p style="margin-bottom: 2rem;">${data.text}</p>
+            <div class="team-section">
+                <p>${formattedTeam}</p>
+            </div>
+        `;
+        
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
