@@ -6,165 +6,227 @@
     <title>Copywriting | Filip Perjans</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; overflow-x: hidden; }
-        
-        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
-        nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+        :root { 
+            --bg-color: #E3E3E3; 
+            --brand-blue: #1B3C53; 
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-color); 
+            color: var(--brand-blue); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, p { color: var(--brand-blue); }
 
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
-        h1 { font-size: 3rem; color: var(--blue); font-weight: 800; margin-bottom: 1rem; }
-        h2 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4rem; margin-bottom: 1rem; color: #666; font-weight: 600; }
+        
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
+            text-transform: uppercase;
+        }
 
-        /* Horisontell Scroll Container */
+        /* Slider och Scroll */
         .project-slider { 
             display: flex; 
             gap: 2rem; 
             overflow-x: auto; 
             padding: 2rem 1rem; 
-            margin: 0 -1rem;
+            margin: 0 -1rem 4rem -1rem;
             scrollbar-width: thin;
-            scrollbar-color: var(--blue) transparent;
+            scrollbar-color: var(--brand-blue) transparent;
             -webkit-overflow-scrolling: touch;
         }
 
         .project-slider::-webkit-scrollbar { height: 6px; }
-        .project-slider::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        .project-slider::-webkit-scrollbar-thumb { background: var(--brand-blue); border-radius: 10px; }
 
-        /* Projekt-rutorna */
+        /* Rutorna */
         .project-item { 
             flex: 0 0 300px; 
             position: relative; 
-            background: var(--grey); 
+            background: #fff; 
             aspect-ratio: 1 / 1; 
             border-radius: 12px; 
             display: flex; 
+            flex-direction: column;
             align-items: center; 
             justify-content: center; 
             cursor: pointer; 
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            border: 1px solid #e0e0e0;
-            overflow: hidden;
-            opacity: 0; /* För Anime.js */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+            border: 1px solid rgba(27, 60, 83, 0.1);
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .project-item:hover { 
-            transform: scale(1.05); 
-            border-color: var(--blue);
+            transform: scale(1.1); 
             z-index: 10;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .bg-content {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
+        .project-item h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+        
+        /* Underrubrik - visas endast vid hover */
+        .project-item span { 
+            margin-top: 10px; 
+            font-size: 0.9rem; 
+            font-weight: 400; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .project-item:hover span { opacity: 1; }
+
+        /* Modal-styling */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(5px);
         }
 
-        .overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            z-index: 2;
+        .modal-content { 
+            background-color: #fff; 
+            margin: 5% auto; 
+            width: 90%; 
+            max-width: 800px; 
+            border-radius: 16px; 
+            position: relative; 
+            max-height: 85vh; 
+            overflow-y: auto;
+            animation: slideIn 0.3s ease-out;
         }
 
-        .content-label {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            padding: 1rem;
+        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .close-btn { 
+            position: absolute; 
+            right: 25px; 
+            top: 20px; 
+            font-size: 2rem; 
+            cursor: pointer; 
+            color: var(--brand-blue);
+            z-index: 10;
         }
 
-        .content-label h3 { margin: 0; font-size: 1.1rem; color: var(--blue); text-transform: uppercase; font-weight: 800; }
-        .empty-label { color: #bbb; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; }
-
-        /* Modal styling */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(8px); overflow-y: auto; }
-        .modal-content { background-color: white; margin: 5% auto; width: 90%; max-width: 700px; border-radius: 16px; position: relative; overflow: hidden; animation: slideUp 0.4s ease; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close { position: absolute; right: 20px; top: 15px; font-size: 2.5rem; cursor: pointer; color: #333; z-index: 1010; }
         .modal-body { padding: 3rem; }
-        .modal-body h2 { color: var(--blue); font-size: 2.2rem; margin-top: 0; font-weight: 800; }
-        .modal-body p { font-size: 1.15rem; color: #334155; line-height: 1.8; white-space: pre-line; }
+        .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+
+        .modal-body h2 { margin-top: 0; }
+        .modal-body p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
+
     </style>
 </head>
 <body onkeydown="if(event.key==='Escape') closeModal()">
 
-<nav>
-    <a href="index.html">Work</a>
-    <a href="about.html">About Me</a>
-</nav>
-
 <div class="container">
-    <a href="index.html" class="back-link">← Tillbaka</a>
-    <h1>Copywriting</h1>
-
     <h2>Work Content</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('adidas')">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Adidas</h3></div>
+            <h3>Adidas</h3><span>Website casetext</span>
         </div>
         <div class="project-item" onclick="openModal('direkto')">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>Direkto</h3></div>
+            <h3>Direkto</h3><span>Website casetext</span>
         </div>
         <div class="project-item" onclick="openModal('bang1')">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>BANG Agency Case 1</h3></div>
+            <h3>BANG Agency</h3><span>Website article</span>
         </div>
         <div class="project-item" onclick="openModal('bang2')">
-            <div class="overlay"></div>
-            <div class="content-label"><h3>BANG Agency Case 2</h3></div>
+            <h3>BANG Agency</h3><span>Website article</span>
         </div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><h3>5</h3><span>X</span></div>
+        <div class="project-item"><h3>6</h3><span>X</span></div>
+        <div class="project-item"><h3>7</h3><span>X</span></div>
     </div>
 
     <h2>University Content</h2>
     <div class="project-slider">
-        <div class="project-item"><div class="content-label"><h3>Projekt 1</h3></div></div>
-        <div class="project-item"><div class="content-label"><h3>Projekt 2</h3></div></div>
-        <div class="project-item"><div class="content-label"><h3>Projekt 3</h3></div></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
-        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item" onclick="openModal('uni1')"><h3>Content 1</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni2')"><h3>Content 2</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni3')"><h3>Content 3</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni4')"><h3>Content 4</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni5')"><h3>Content 5</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni6')"><h3>Content 6</h3><span>X</span></div>
+        <div class="project-item" onclick="openModal('uni7')"><h3>Content 7</h3><span>X</span></div>
     </div>
 </div>
 
 <div id="projectModal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close-btn" onclick="closeModal()">&times;</span>
         <div id="modalBody" class="modal-body"></div>
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
 <script>
     const projectData = {
-        'adidas': { 
-            title: 'Adidas', 
-            text: 'Arbetet för Adidas fokuserade på att anpassa varumärkets globala tonläge till den lokala marknaden. Fokus låg på att skapa engagerande produktbeskrivningar och kampanjcopy som talar till både atleter och livsstilskonsumenter.' 
+        'adidas': {
+            title: "Crafted for Goals.",
+            image: "adidas.jpg",
+            type: "image",
+            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.
+
+            We took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.
+
+            To crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.
+
+            The response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.
+            Filip Perjans - website casetext for BANG`
         },
-        'direkto': { 
-            title: 'Direkto', 
-            text: 'För Direkto handlade uppdraget om att förenkla komplexa finansiella tjänster genom tydlig och förtroendeingivande copywriting. Målet var att göra låneförmedling begriplig och personlig.' 
+        'direkto': {
+            title: "Think about the percentage.",
+            video: "direkto.mp4",
+            type: "video",
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.
+
+            In a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?
+
+            Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.
+            Filip Perjans - website casetext for BANG`
         },
-        'bang1': { 
-            title: 'BANG Agency - Case 1', 
-            text: 'Copywriting för strategiska eventkoncept. Här låg fokus på att skapa en röd tråd genom hela besöksresan, från inbjudan till upplevelse på plats.' 
+        'bang1': {
+            title: 'Nominated. "Agency of the Year 2024."',
+            image: "bang.jpg",
+            type: "image",
+            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.
+
+            The winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.
+            “We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”
+
+            – Patrick Walldén, founder and CEO, BANG Agency
+            We at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!
+            Filip Perjans - website article for BANG`
         },
-        'bang2': { 
-            title: 'BANG Agency - Case 2', 
-            text: 'Digital kampanjcopy och innehållsskapande för sociala medier. Ett arbete som krävde hög kreativitet och förmåga att snabbt fånga målgruppens intresse.' 
-        }
+        'bang2': {
+            title: '"AI. Don\'t fear it, embrace it."',
+            image: "bang.jpg",
+            type: "image",
+            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.
+
+            It's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.
+
+            I can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions.
+
+            At BANG Agency, we're all in on the AI revolution. We strive to be part of the race by understanding and seizing every opportunity it presents. Here's to another year of pushing the boundaries and reshaping the future of advertising with AI.
+            Filip Perjans - website article for BANG`
+        },
+        // University Content (Endast text)
+        'uni1': { title: "Content 1", text: "Brödtext för University Content 1." },
+        'uni2': { title: "Content 2", text: "Brödtext för University Content 2." },
+        'uni3': { title: "Content 3", text: "Brödtext för University Content 3." },
+        'uni4': { title: "Content 4", text: "Brödtext för University Content 4." },
+        'uni5': { title: "Content 5", text: "Brödtext för University Content 5." },
+        'uni6': { title: "Content 6", text: "Brödtext för University Content 6." },
+        'uni7': { title: "Content 7", text: "Brödtext för University Content 7." }
     };
 
     function openModal(id) {
@@ -172,28 +234,29 @@
         const body = document.getElementById('modalBody');
         const data = projectData[id];
         if(!data) return;
+
+        let mediaHtml = '';
+        if(data.type === 'image') {
+            mediaHtml = `<img src="${data.image}" class="modal-img">`;
+        } else if(data.type === 'video') {
+            mediaHtml = `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
+        }
+
+        body.innerHTML = `
+            ${mediaHtml}
+            <h2>${data.title}</h2>
+            <p>${data.text}</p>
+        `;
         
-        body.innerHTML = `<h2>${data.title}</h2><p>${data.text}</p>`;
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-        document.getElementById('projectModal').style.display = "none";
-        document.body.style.overflow = "auto";
+        document.getElementById('projectModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
-
-    window.onload = () => {
-        anime({
-            targets: '.project-item',
-            opacity: [0, 1],
-            translateY: [40, 0],
-            scale: [0.95, 1],
-            delay: anime.stagger(100),
-            duration: 800,
-            easing: 'easeOutQuart'
-        });
-    };
 </script>
+
 </body>
 </html>
