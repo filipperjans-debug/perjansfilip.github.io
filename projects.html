@@ -53,7 +53,9 @@
             transition: background 0.3s ease;
         }
 
-        .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
+        .project-item:hover .overlay {
+            background: rgba(0, 0, 0, 0.6);
+        }
 
         .content-label {
             position: relative;
@@ -64,16 +66,21 @@
         }
 
         .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
+        
         .content-label span { 
             display: block; 
             font-size: 0.9rem; 
             margin-top: 8px; 
+            font-weight: 400;
             opacity: 0; 
             transform: translateY(10px); 
             transition: all 0.3s ease;
         }
 
-        .project-item:hover .content-label span { opacity: 1; transform: translateY(0); }
+        .project-item:hover .content-label span { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
 
         /* Modal / Popup */
         .modal {
@@ -109,30 +116,13 @@
             z-index: 1010;
         }
 
-        /* Standard container för en bild/video */
-        .modal-media-container { background: #000; width: 100%; }
-        
-        /* Standard media-stil */
         .modal-header-media { 
             width: 100%; 
             height: auto; 
             max-height: 550px; 
             object-fit: cover; 
+            background-color: #000; 
             display: block; 
-        }
-
-        /* NY STIL: För rader med flera bilder */
-        .multi-image-row {
-            display: flex;
-            width: 100%;
-            background: #000;
-        }
-
-        /* När bilder ligger i en multi-image-row */
-        .multi-image-row .modal-header-media {
-            width: 50%; /* Hälften av bredden var */
-            height: 550px; /* Fast höjd för att täcka headern snyggt */
-            object-fit: cover; /* Beskär bilden så den fyller ytan utan att sträckas */
         }
 
         .modal-body { padding: 3rem; }
@@ -141,11 +131,8 @@
 
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
+            .modal-header-media { max-height: 250px; }
             .content-label span { opacity: 0.8; transform: none; }
-            .modal-header-media { max-height: 300px; }
-            /* På små mobiler staplar vi dem igen så de inte blir för små */
-             .multi-image-row { flex-direction: column; }
-             .multi-image-row .modal-header-media { width: 100%; height: 250px; }
         }
     </style>
 </head>
@@ -162,27 +149,41 @@
     
     <div class="project-grid">
         <div class="project-item" onclick="openModal('forsvara')">
-            <video preload="metadata" class="bg-content" playsinline><source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4"></video>
+            <video preload="metadata" class="bg-content" playsinline>
+                <source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4">
+            </video>
             <div class="overlay"></div>
-            <div class="content-label"><h3>Försvara Nätet</h3><span>2025</span></div>
+            <div class="content-label">
+                <h3>Försvara Nätet</h3>
+                <span>2025</span>
+            </div>
         </div>
 
         <div class="project-item" onclick="openModal('desperados')">
-            <img src="desperados.jpg" class="bg-content">
+            <img src="desperados.jpg" alt="Desperados Summer Tour" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label"><h3>Desperados Summer Tour</h3><span>2024</span></div>
+            <div class="content-label">
+                <h3>Desperados Summer Tour</h3>
+                <span>2024</span>
+            </div>
         </div>
 
         <div class="project-item" onclick="openModal('veterandagen')">
-            <img src="veterandagen.jpg" class="bg-content">
+            <img src="veterandagen.jpg" alt="Veterandagen" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label"><h3>Veterandagen</h3><span>2024, 2025</span></div>
+            <div class="content-label">
+                <h3>Veterandagen</h3>
+                <span>2024, 2025</span>
+            </div>
         </div>
 
         <div class="project-item" onclick="openModal('flygdagen')">
-            <img src="flygdagen1.jpeg" class="bg-content">
+            <img src="flygdagen3.jpg" alt="Flygdagen" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label"><h3>Flygdagen</h3><span>2024</span></div>
+            <div class="content-label">
+                <h3>Flygdagen</h3>
+                <span>2024</span>
+            </div>
         </div>
     </div>
 </div>
@@ -199,9 +200,13 @@
         'forsvara': {
             title: 'Försvara Nätet',
             type: 'video',
-            src: 'forsvaranatet.mp4?v=2',
-            text: `The Swedish Armed Forces has an increased recruitment need within IT. 
-            
+            src: 'forsvaranatet.mp4?v=2', 
+            text: `The Swedish Armed Forces has an increased recruitment need within IT. A market where competition is fierce.
+
+            We developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity. 
+
+            The design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.
+
             <strong>Team BANG</strong>
             Filip Perjans: Project and Production Manager, Creative and Copywriter
             Lisa Evenås: Art Director and Creative`
@@ -210,26 +215,42 @@
             title: 'Desperados Summer Tour',
             type: 'image',
             src: 'desperados.jpg',
-            text: `Vibrant festival footprint featuring colorful, multi-sensory environment.
-            
+            text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy. 
+
+            A vibrant festival footprint featuring colorful, multi-sensory environment. By blending interactive zones with functional infrastructure and chill-out lounges, we ensured the brand stayed at the center of the festival experience.
+
             <strong>Team BANG:</strong>
-            Filip Perjans - Production Manager`
+            Amelie Lagerstedt - Project Manager
+            Filip Perjans - Production Manager
+            Lisa Evenås - Art Director and Creative`
         },
         'veterandagen': {
             title: 'Veterandagen',
             type: 'image',
             src: 'veterandagen.jpg',
-            text: `Every year on May 29, Sweden's veterans are honored. 
-            
+            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on Veterans Day—a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.
+
+            The day is marked by ceremony and solemnity, with an extensive program at Gärdet in Stockholm. The highlight is the ceremony at the Restare Veterans Monument, followed by dinner and entertainment. The day ends with the traditional flag-lowering ceremony at 9 p.m. 
+
+            BANG has overall production responsibility for Veterans Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.
+
+            The assignment covered the entire production chain, from planning to implementation. This included full-scale infrastructure – tents, electricity, security, and medical care – as well as hospitality, VIP catering, printed materials, and ceremonial decorations.
+
+            BANG also manages the high-quality livestream and ensures smooth digital broadcasting. Given the formal nature of the state ceremony, the project requires absolute logistical precision and reliability. Every detail must be flawless.
+
             <strong>Team BANG</strong>
-            Filip Perjans – Production Manager`
+            Stina Andersson – Project Manager
+            Fanny Holck Clausen – Project and Production Manager
+            Filip Perjans – Production Manager
+            Natalie Rosenberg – Production Manager
+            Lisa Evenås – Art Director`
         },
         'flygdagen': {
             title: 'Flygdagen',
-            type: 'multi-image',
-            images: ['flygdagen1.jpeg', 'flygdagen2.jpg'],
-            text: `Här kan du skriva texten om Flygdagen. Nu visas bilderna bredvid varandra i toppen av denna ruta.
-            
+            type: 'image',
+            src: 'flygdagen3.jpg',
+            text: `Här skriver du din text om Flygdagen.
+
             <strong>Team BANG</strong>
             Filip Perjans – Production Manager`
         }
@@ -239,24 +260,18 @@
         const modal = document.getElementById('projectModal');
         const area = document.getElementById('modalContentArea');
         const data = projectData[id];
+
         if (!data) return;
 
         let mediaHtml = '';
-        // Standardcontainer om det inte är multi-image
-        let containerClass = 'modal-media-container';
-
         if (data.type === 'video') {
             mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
         } else if (data.type === 'image') {
-            mediaHtml = `<img src="${data.src}" class="modal-header-media">`;
-        } else if (data.type === 'multi-image') {
-            // Byt till side-by-side container
-            containerClass = 'modal-media-container multi-image-row';
-            mediaHtml = data.images.map(img => `<img src="${img}" class="modal-header-media">`).join('');
+            mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
         }
 
         area.innerHTML = `
-            <div class="${containerClass}">${mediaHtml}</div>
+            ${mediaHtml}
             <div class="modal-body">
                 <h2>${data.title}</h2>
                 <p>${data.text}</p>
@@ -268,7 +283,10 @@
     }
 
     function closeModal() {
-        document.getElementById('projectModal').style.display = "none";
+        const modal = document.getElementById('projectModal');
+        const area = document.getElementById('modalContentArea');
+        area.innerHTML = '';
+        modal.style.display = "none";
         document.body.style.overflow = "auto";
     }
 
