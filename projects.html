@@ -53,9 +53,7 @@
             transition: background 0.3s ease;
         }
 
-        .project-item:hover .overlay {
-            background: rgba(0, 0, 0, 0.6);
-        }
+        .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
 
         .content-label {
             position: relative;
@@ -66,21 +64,16 @@
         }
 
         .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
-        
         .content-label span { 
             display: block; 
             font-size: 0.9rem; 
             margin-top: 8px; 
-            font-weight: 400;
             opacity: 0; 
             transform: translateY(10px); 
             transition: all 0.3s ease;
         }
 
-        .project-item:hover .content-label span { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .project-item:hover .content-label span { opacity: 1; transform: translateY(0); }
 
         /* Modal / Popup */
         .modal {
@@ -89,7 +82,7 @@
             z-index: 1000; 
             left: 0; top: 0; 
             width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.95);
+            background-color: rgba(0,0,0,0.9);
             backdrop-filter: blur(8px);
             overflow-y: auto;
         }
@@ -114,14 +107,23 @@
             cursor: pointer;
             color: white;
             z-index: 1010;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Container för bild/video i modalen */
+        .modal-media-container { 
+            background: #111; /* Mörk bakgrund om bilden inte fyller hela bredden */
+            width: 100%; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-header-media { 
             width: 100%; 
             height: auto; 
-            max-height: 550px; 
-            object-fit: cover; 
-            background-color: #000; 
+            max-height: 65vh; /* Använder viewport-height för att inte bli för stor på skärmen */
+            object-fit: contain; /* ÄNDRAT: Nu visas hela bilden utan att zoomas/klippas */
             display: block; 
         }
 
@@ -131,7 +133,7 @@
 
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
-            .modal-header-media { max-height: 250px; }
+            .modal-header-media { max-height: 40vh; }
             .content-label span { opacity: 0.8; transform: none; }
         }
     </style>
@@ -149,41 +151,27 @@
     
     <div class="project-grid">
         <div class="project-item" onclick="openModal('forsvara')">
-            <video preload="metadata" class="bg-content" playsinline>
-                <source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4">
-            </video>
+            <video preload="metadata" class="bg-content" playsinline><source src="forsvaranatet.mp4?v=2#t=0.1" type="video/mp4"></video>
             <div class="overlay"></div>
-            <div class="content-label">
-                <h3>Försvara Nätet</h3>
-                <span>2025</span>
-            </div>
+            <div class="content-label"><h3>Försvara Nätet</h3><span>2025</span></div>
         </div>
 
         <div class="project-item" onclick="openModal('desperados')">
-            <img src="desperados.jpg" alt="Desperados Summer Tour" class="bg-content">
+            <img src="desperados.jpg" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label">
-                <h3>Desperados Summer Tour</h3>
-                <span>2024</span>
-            </div>
+            <div class="content-label"><h3>Desperados Summer Tour</h3><span>2024</span></div>
         </div>
 
         <div class="project-item" onclick="openModal('veterandagen')">
-            <img src="veterandagen.jpg" alt="Veterandagen" class="bg-content">
+            <img src="veterandagen1.jpg" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label">
-                <h3>Veterandagen</h3>
-                <span>2024, 2025</span>
-            </div>
+            <div class="content-label"><h3>Veterandagen</h3><span>2024, 2025</span></div>
         </div>
 
         <div class="project-item" onclick="openModal('flygdagen')">
-            <img src="flygdagen3.jpg" alt="Flygdagen" class="bg-content">
+            <img src="flygdagen3.jpg" class="bg-content">
             <div class="overlay"></div>
-            <div class="content-label">
-                <h3>Flygdagen</h3>
-                <span>2024</span>
-            </div>
+            <div class="content-label"><h3>Flygdagen</h3><span>2024</span></div>
         </div>
     </div>
 </div>
@@ -205,8 +193,6 @@
 
             We developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity. 
 
-            The design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.
-
             <strong>Team BANG</strong>
             Filip Perjans: Project and Production Manager, Creative and Copywriter
             Lisa Evenås: Art Director and Creative`
@@ -217,8 +203,6 @@
             src: 'desperados.jpg',
             text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy. 
 
-            A vibrant festival footprint featuring colorful, multi-sensory environment. By blending interactive zones with functional infrastructure and chill-out lounges, we ensured the brand stayed at the center of the festival experience.
-
             <strong>Team BANG:</strong>
             Amelie Lagerstedt - Project Manager
             Filip Perjans - Production Manager
@@ -227,16 +211,10 @@
         'veterandagen': {
             title: 'Veterandagen',
             type: 'image',
-            src: 'veterandagen.jpg',
-            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on Veterans Day—a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.
-
-            The day is marked by ceremony and solemnity, with an extensive program at Gärdet in Stockholm. The highlight is the ceremony at the Restare Veterans Monument, followed by dinner and entertainment. The day ends with the traditional flag-lowering ceremony at 9 p.m. 
+            src: 'veterandagen1.jpg',
+            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on Veterans Day—a state ceremony organized by the Swedish Armed Forces together with other authorities. 
 
             BANG has overall production responsibility for Veterans Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.
-
-            The assignment covered the entire production chain, from planning to implementation. This included full-scale infrastructure – tents, electricity, security, and medical care – as well as hospitality, VIP catering, printed materials, and ceremonial decorations.
-
-            BANG also manages the high-quality livestream and ensures smooth digital broadcasting. Given the formal nature of the state ceremony, the project requires absolute logistical precision and reliability. Every detail must be flawless.
 
             <strong>Team BANG</strong>
             Stina Andersson – Project Manager
@@ -260,18 +238,17 @@
         const modal = document.getElementById('projectModal');
         const area = document.getElementById('modalContentArea');
         const data = projectData[id];
-
         if (!data) return;
 
         let mediaHtml = '';
         if (data.type === 'video') {
             mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
-        } else if (data.type === 'image') {
+        } else {
             mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
         }
 
         area.innerHTML = `
-            ${mediaHtml}
+            <div class="modal-media-container">${mediaHtml}</div>
             <div class="modal-body">
                 <h2>${data.title}</h2>
                 <p>${data.text}</p>
@@ -283,10 +260,7 @@
     }
 
     function closeModal() {
-        const modal = document.getElementById('projectModal');
-        const area = document.getElementById('modalContentArea');
-        area.innerHTML = '';
-        modal.style.display = "none";
+        document.getElementById('projectModal').style.display = "none";
         document.body.style.overflow = "auto";
     }
 
