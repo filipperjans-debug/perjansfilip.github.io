@@ -1,98 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Content | Filip Perjans</title>
+    <title>Copywriting | Filip Perjans</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; overflow-x: hidden; }
+        
         nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+        
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
-        h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2.5rem; font-weight: 800; }
-        .section-divider { font-size: 2.5rem; color: var(--blue); margin: 5rem 0 2.5rem 0; font-weight: 800; }
+        
+        h1 { font-size: 3rem; color: var(--blue); font-weight: 800; margin-bottom: 1rem; }
+        h2 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4rem; margin-bottom: 1rem; color: #666; font-weight: 600; }
 
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .project-item { position: relative; background: var(--grey); aspect-ratio: 1 / 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; border: 1px solid #e0e0e0; }
-        .project-item img, .project-item video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); z-index: 2; transition: background 0.3s ease; }
-        .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
-        .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1.5rem; }
-        .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
-        .content-label span { display: block; font-size: 0.85rem; margin-top: 5px; opacity: 0; transform: translateY(5px); transition: all 0.3s ease; }
-        .project-item:hover .content-label span { opacity: 1; transform: translateY(0); }
+        .project-slider { 
+            display: flex; 
+            gap: 2rem; 
+            overflow-x: auto; 
+            padding: 2rem 1rem; 
+            margin: 0 -1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--blue) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
 
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); overflow-y: auto; cursor: pointer; }
-        .modal-content { background-color: white; margin: 2% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; overflow: hidden; animation: slideUp 0.4s ease; cursor: default; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close { position: absolute; right: 20px; top: 15px; font-size: 2.5rem; cursor: pointer; color: white; z-index: 1010; }
-        .modal-media { width: 100%; height: auto; display: block; object-fit: cover; max-height: 450px; background: #000; }
-        .modal-body { padding: 3rem; }
-        .modal-body h2 { color: var(--blue); font-size: 2rem; margin-top: 0; margin-bottom: 1.5rem; font-weight: 800; }
-        .modal-body p { font-size: 1.1rem; color: #334155; line-height: 1.7; white-space: pre-line; }
-        .signature { display: block; margin-top: 2.5rem; color: var(--blue); font-size: 1.1rem; }
+        .project-slider::-webkit-scrollbar { height: 6px; }
+        .project-slider::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+        .project-item { 
+            flex: 0 0 300px; 
+            position: relative; 
+            background: var(--grey); 
+            aspect-ratio: 1 / 1; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+        }
+
+        .project-item:hover { 
+            transform: scale(1.08); 
+            border-color: var(--blue);
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            text-align: center;
+        }
+        .overlay h3 { margin: 0; font-size: 1rem; color: var(--blue); text-transform: uppercase; font-weight: 800; }
+        
+        .empty-label { color: #bbb; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: white; margin: 5% auto; width: 90%; max-width: 600px; border-radius: 16px; padding: 3rem; position: relative; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 2rem; cursor: pointer; }
     </style>
 </head>
 <body onkeydown="if(event.key==='Escape') closeModal()">
-    <nav><a href="index.html">Work</a><a href="about.html">About Me</a></nav>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to Work</a>
-        <h1>Work Content</h1>
-        <div class="project-grid">
-            <div class="project-item" onclick="openModal('adidas')">
-                <img src="adidas.jpg" alt="Adidas">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>Adidas</h3><span>Website casetext</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('direkto')">
-                <video muted playsinline onmouseover="this.play()" onmouseout="this.pause(); this.currentTime=0;"><source src="direkto.mp4" type="video/mp4"></video>
-                <div class="overlay"></div>
-                <div class="content-label"><h3>Direkto</h3><span>Website casetext</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('bang')">
-                <img src="bang.jpg" alt="BANG">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
-            </div>
-            <div class="project-item" onclick="openModal('bang_ai')">
-                <img src="bang.jpg" alt="BANG AI">
-                <div class="overlay"></div>
-                <div class="content-label"><h3>BANG Agency</h3><span>Website article</span></div>
-            </div>
+
+<nav>
+    <a href="index.html">Work</a>
+    <a href="about.html">About Me</a>
+</nav>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Back to Work</a>
+    <h1>Copywriting</h1>
+
+    <h2>Work Content</h2>
+    <div class="project-slider">
+        <div class="project-item" style="background-image: url('adidas.jpg');" onclick="openModal('adidas')">
+            <div class="overlay"><h3>Adidas</h3></div>
         </div>
-        <h2 class="section-divider">University Content</h2>
-        <p style="color: #64748b;">University projects and cases will be presented here.</p>
+        <div class="project-item" style="background-image: url('direkto.jpg');" onclick="openModal('direkto')">
+            <div class="overlay"><h3>Direkto</h3></div>
+        </div>
+        <div class="project-item" style="background-image: url('bang1.jpg');" onclick="openModal('bang1')">
+            <div class="overlay"><h3>BANG Agency</h3></div>
+        </div>
+        <div class="project-item" style="background-image: url('bang2.jpg');" onclick="openModal('bang2')">
+            <div class="overlay"><h3>BANG Agency</h3></div>
+        </div>
+        
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
     </div>
 
-    <div id="copyModal" class="modal" onclick="closeModal()">
+    <h2>University Content</h2>
+    <div class="project-slider">
+        <div class="project-item"><div class="overlay"><h3>University Case 1</h3></div></div>
+        <div class="project-item"><div class="overlay"><h3>University Case 2</h3></div></div>
+        <div class="project-item"><div class="overlay"><h3>University Case 3</h3></div></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+        <div class="project-item"><span class="empty-label">Coming Soon</span></div>
+    </div>
+</div>
+
+<div id="projectModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div id="modalContentArea"></div>
+        <div id="modalBody"></div>
     </div>
+</div>
 
-    <script>
-        const copyData = {
-            'adidas': { title: 'Crafted for Goals.', src: 'adidas.jpg', type: 'image', text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
-            'direkto': { title: 'Think about the percentage.', src: 'direkto.mp4', type: 'video', text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.\n\n<span class="signature"><strong>Filip Perjans - website casetext for BANG</strong></span>` },
-            'bang': { title: 'Nominated. Agency of the Year 2024.', src: 'bang.jpg', type: 'image', text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.\n\n<div style="border-left: 4px solid var(--blue); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text);">“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”<br><br><strong>– Patrick Walldén, founder and CEO, BANG Agency</strong></div>\n\nWe at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` },
-            'bang_ai': { title: "AI. Don't fear it, embrace it.", src: 'bang.jpg', type: 'image', text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.\n\nI can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions.\n\nAt BANG Agency, we're all in on the AI revolution. We strive to be part of the race by understanding and seizing every opportunity it presents. Here's to another year of pushing the boundaries and reshaping the future of advertising with AI.\n\n<span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>` }
-        };
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
-        function openModal(id) {
-            const modal = document.getElementById('copyModal');
-            const area = document.getElementById('modalContentArea');
-            const data = copyData[id];
-            let media = data.type === 'video' ? `<video autoplay loop muted playsinline class="modal-media"><source src="${data.src}"></video>` : `<img src="${data.src}" class="modal-media">`;
-            area.innerHTML = `<div class="modal-content" onclick="event.stopPropagation()">${media}<div class="modal-body"><h2>${data.title}</h2><p>${data.text}</p></div></div>`;
-            modal.style.display = "block";
-            document.body.style.overflow = "hidden";
+<script>
+    const projectData = {
+        'adidas': { 
+            title: 'Adidas', 
+            text: 'Arbetet för Adidas fokuserade på att anpassa varumärkets globala tonläge till den lokala marknaden. Fokus låg på att skapa engagerande produktbeskrivningar och kampanjcopy som talar till både atleter och livsstilskonsumenter.' 
+        },
+        'direkto': { 
+            title: 'Direkto', 
+            text: 'För Direkto handlade uppdraget om att förenkla komplexa finansiella tjänster genom tydlig och förtroendeingivande copywriting. Målet var att göra låneförmedling begriplig och personlig.' 
+        },
+        'bang1': { 
+            title: 'BANG Agency - Case 1', 
+            text: 'Copywriting för strategiska eventkoncept. Här låg fokus på att skapa en röd tråd genom hela besöksresan, från inbjudan till upplevelse på plats.' 
+        },
+        'bang2': { 
+            title: 'BANG Agency - Case 2', 
+            text: 'Digital kampanjcopy och innehållsskapande för sociala medier. Ett arbete som krävde hög kreativitet och förmåga att snabbt fånga målgruppens intresse.' 
         }
-        function closeModal() {
-            document.getElementById('copyModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-    </script>
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('projectModal');
+        const body = document.getElementById('modalBody');
+        const data = projectData[id];
+        if(!data) return;
+        body.innerHTML = `<h2 style="color:#003366; margin-top:0; font-weight:800;">${data.title}</h2><p style="white-space:pre-line; line-height:1.7;">${data.text}</p>`;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onload = () => {
+        anime({
+            targets: '.project-item',
+            opacity: [0, 1],
+            translateY: [40, 0],
+            scale: [0.95, 1],
+            delay: anime.stagger(100),
+            duration: 800,
+            easing: 'easeOutQuart'
+        });
+    };
+</script>
+
 </body>
 </html>
