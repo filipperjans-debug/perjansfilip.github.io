@@ -53,7 +53,6 @@
             transition: background 0.3s ease;
         }
 
-        /* Gör bakgrunden lite mörkare vid hover för att texten ska synas extra bra */
         .project-item:hover .overlay {
             background: rgba(0, 0, 0, 0.6);
         }
@@ -68,18 +67,16 @@
 
         .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Årtalet är dolt från början */
         .content-label span { 
             display: block; 
             font-size: 0.9rem; 
             margin-top: 8px; 
             font-weight: 400;
-            opacity: 0; /* Osynligt */
-            transform: translateY(10px); /* Lätt förskjutet nedåt för en mjuk animation */
+            opacity: 0; 
+            transform: translateY(10px); 
             transition: all 0.3s ease;
         }
 
-        /* Årtalet visas vid hover på rutan */
         .project-item:hover .content-label span { 
             opacity: 1; 
             transform: translateY(0); 
@@ -135,7 +132,6 @@
         @media (max-width: 768px) {
             .modal-body { padding: 1.5rem; }
             .modal-header-media { max-height: 250px; }
-            /* På mobiler (där man inte har mus) kan det vara bra att låta årtalet synas svagt hela tiden eller vid tryck */
             .content-label span { opacity: 0.8; transform: none; }
         }
     </style>
@@ -172,7 +168,15 @@
             </div>
         </div>
 
-        <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 3</h3></div></div>
+        <div class="project-item" onclick="openModal('veterandagen')">
+            <img src="veterandagen.jpg" alt="Veterandagen" class="bg-content">
+            <div class="overlay"></div>
+            <div class="content-label">
+                <h3>Veterandagen</h3>
+                <span>2024, 2025</span>
+            </div>
+        </div>
+
         <div class="project-item" style="background:#eee;"><div class="content-label" style="color:#003366;"><h3>Project 4</h3></div></div>
     </div>
 </div>
@@ -194,8 +198,6 @@
 
             We developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity. 
 
-            The design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.
-
             <strong>Team BANG</strong>
             Filip Perjans: Project and Production Manager, Creative and Copywriter
             Lisa Evenås: Art Director and Creative`
@@ -206,12 +208,19 @@
             src: 'desperados.jpg',
             text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy. 
 
-            A vibrant festival footprint featuring colorful, multi-sensory environment. By blending interactive zones with functional infrastructure and chill-out lounges, we ensured the brand stayed at the center of the festival experience.
-
             <strong>Team BANG:</strong>
             Amelie Lagerstedt - Project Manager
             Filip Perjans - Production Manager
             Lisa Evenås - Art Director and Creative`
+        },
+        'veterandagen': {
+            title: 'Veterandagen',
+            type: 'image',
+            src: 'veterandagen.jpg',
+            text: `Här skriver du din text om Veterandagen. Berätta om projektet, utmaningen och resultatet.
+
+            <strong>Team BANG:</strong>
+            Filip Perjans - Production Manager`
         }
     };
 
