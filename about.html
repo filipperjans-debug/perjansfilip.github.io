@@ -4,185 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me | Filip Perjans</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --accent: #0056b3; --text: #1a1a1a; --grey: #64748b; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); line-height: 1.6; background-color: #fff; }
-        
-        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; background: white; position: sticky; top: 0; z-index: 100; }
-        nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-        
-        .container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
-        
-        /* Profile Section */
-        .profile-header { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; }
-        .profile-img { 
-            width: 6cm; 
-            height: 6cm; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 4px solid var(--blue);
-            background: #f0f0f0;
-            flex-shrink: 0;
+        :root { 
+            --bg-color: #E3E3E3; 
+            --text-color: #1B3C53; 
+            --accent-blue: #234C6A; 
         }
-        .profile-text h1 { font-size: 3rem; color: var(--blue); margin: 0 0 1rem 0; font-weight: 800; line-height: 1; }
-        .profile-text p { font-size: 1.1rem; color: #334155; margin: 0; white-space: pre-line; }
-        
-        /* Content Grid */
-        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            color: var(--text-color); 
+            background: var(--bg-color); 
+            line-height: 1.8; 
+        }
+        nav { 
+            padding: 2rem; 
+            text-align: center; 
+            border-bottom: 1px solid rgba(27, 60, 83, 0.1); 
+        }
+        nav a { 
+            margin: 0 20px; 
+            text-decoration: none; 
+            color: var(--text-color); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 0.9rem; 
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 4rem auto; 
+            padding: 0 2rem; 
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
 
-        h2 { border-bottom: 2px solid var(--blue); display: block; margin-top: 2rem; margin-bottom: 1.5rem; color: var(--blue); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .entry { margin-bottom: 2.5rem; }
-        .entry h3 { margin: 0; font-size: 1.2rem; color: var(--text); }
-        .entry .institution { color: var(--accent); font-weight: 700; font-size: 0.95rem; display: block; margin-top: 2px; }
-        .entry .date { color: var(--grey); font-size: 0.85rem; display: block; margin-bottom: 0.8rem; font-style: italic; }
-        .entry ul { padding-left: 1.2rem; margin-top: 0.5rem; }
-        .entry li { margin-bottom: 0.4rem; color: #444; }
+        .profile-image-container {
+            position: sticky;
+            top: 2rem;
+        }
 
-        /* Sidebar styling */
-        .sidebar h2 { margin-top: 0; }
-        .skills-container { margin-bottom: 3rem; } /* Justerat avstånd ner till Languages */
-        .skill-tag { display: inline-block; background: #f1f5f9; color: var(--blue); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin: 0.2rem; }
-        
-        .contact-info { list-style: none; padding: 0; font-size: 0.9rem; }
-        .contact-info li { margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
-        .contact-info i { color: var(--blue); width: 20px; }
-        .contact-info a { color: var(--text); text-decoration: none; border-bottom: 1px solid transparent; }
-        .contact-info a:hover { border-bottom: 1px solid var(--blue); }
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-color: var(--accent-blue);
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(27, 60, 83, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        h1 { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .bio-text {
+            font-size: 1.15rem;
+        }
+
+        .bio-text p {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(27, 60, 83, 0.1);
+        }
+
+        .contact-info h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            border-color: var(--accent-blue);
+        }
 
         @media (max-width: 850px) {
-            .profile-header { flex-direction: column; text-align: center; }
-            .content-grid { grid-template-columns: 1fr; }
+            .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            .profile-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Work</a>
+        <a href="about.html">About Me</a>
+    </nav>
 
-<nav>
-    <a href="index.html">Work</a>
-    <a href="about.html" style="border-bottom: 2px solid var(--blue);">About Me</a>
-</nav>
+    <div class="container">
+        <div class="profile-image-container">
+            <img src="filip-perjans.jpg" alt="Filip Perjans" class="profile-image">
+        </div>
 
-<div class="container">
-    <div class="profile-header">
-        <img src="din-bild.jpg" alt="Filip Perjans" class="profile-img">
-        <div class="profile-text">
-            <h1>FILIP PERJANS</h1>
-            <p>With a background in Communication and PR, I serve as the bridge between creative vision and final delivery. I thrive where creativity meets structure – ensuring that campaigns, events, and content are not just produced, but actually drive results.
+        <div class="bio-section">
+            <h1>Hi, I'm Filip Perjans</h1>
+            <div class="bio-text">
+                <p>
+                    I am a creative professional with a focus on copywriting, content strategy, and digital storytelling. 
+                    My background spans from working with established brands like Adidas and BANG Agency to 
+                    developing fictional cases that push the boundaries of traditional communication.
+                </p>
+                <p>
+                    Whether it's crafting compelling web copy, developing brand identities, or exploring 
+                    new ways to use AI in the creative process, I am driven by the intersection of 
+                    strategic thinking and creative execution.
+                </p>
+            </div>
 
-I don't believe in producing content just to fill a feed. I want to make an impact.
-
-With a particular passion for the written word, I am now seeking a role where I can refine my expertise in communication, marketing, and brand development. I am an experienced project manager who takes full ownership from initial idea to final finish, whether navigating independently or collaborating with a team.</p>
+            <div class="contact-info">
+                <h2>Let's connect</h2>
+                <p>Email: <a href="mailto:your.email@example.com">filip.perjans@example.com</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/filipperjans" target="_blank">Filip Perjans</a></p>
+            </div>
         </div>
     </div>
-
-    <div class="content-grid">
-        <div class="main-content">
-            <section>
-                <h2>Work Experience</h2>
-                
-                <div class="entry">
-                    <h3>Production Manager</h3>
-                    <span class="institution">BANG Agency</span>
-                    <span class="date">Jan 2024 – Present</span>
-                    <ul>
-                        <li>Coordinate and manage the production process for various projects, from initial idea to execution, for clients such as the Swedish Armed Forces.</li>
-                        <li>Responsible for parts of copy-related material, including texts for digital channels and printed media.</li>
-                        <li>Involved in the planning and execution of events, providing experience across the entire production chain.</li>
-                        <li>Managed various types of productions, ranging from exhibitions for the Swedish Armed Forces to major music festivals for Desperados.</li>
-                        <li>Plan resources, budgets, and timelines for teams in different constellations, ensuring punctual delivery in all projects.</li>
-                    </ul>
-                </div>
-
-                <div class="entry">
-                    <h3>Delivery Driver</h3>
-                    <span class="institution">DHL</span>
-                    <span class="date">Jun 2022 – Aug 2022</span>
-                    <ul>
-                        <li>Delivered and collected packages daily within Gothenburg according to planned routes, ensuring punctual deliveries.</li>
-                        <li>Planned and structured own routes to optimize time and efficiency.</li>
-                        <li>Worked independently under time pressure and solved problems quickly, contributing to high customer satisfaction and efficient logistics.</li>
-                    </ul>
-                </div>
-
-                <div class="entry">
-                    <h3>Warehouse Associate</h3>
-                    <span class="institution">IKEA</span>
-                    <span class="date">May 2021 – Aug 2021</span>
-                    <ul>
-                        <li>Unpacked goods and picked customer orders to ensure accurate delivery.</li>
-                        <li>Inspected and delivered customer orders with a focus on precision and punctuality.</li>
-                        <li>Provided excellent customer service and supported colleagues to maintain a smooth workflow.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section>
-                <h2>Education</h2>
-                
-                <div class="entry">
-                    <h3>Communication & PR</h3>
-                    <span class="institution">Karlstad University</span>
-                    <span class="date">Aug 2021 – 2024</span>
-                </div>
-
-                <div class="entry">
-                    <h3>Portfolio & Graphic Design</h3>
-                    <span class="institution">University of Borås</span>
-                    <span class="date">Jun 2023 – Aug 2023</span>
-                </div>
-
-                <div class="entry">
-                    <h3>Digital Photographic Imagery</h3>
-                    <span class="institution">Blekinge Institute of Technology</span>
-                    <span class="date">Jun 2023 – Aug 2023</span>
-                </div>
-
-                <div class="entry">
-                    <h3>Social Science, specializing in Behavioral Science</h3>
-                    <span class="institution">Hulebäcksgymnasiet</span>
-                    <span class="date">Aug 2016 – May 2019</span>
-                </div>
-            </section>
-        </div>
-
-        <div class="sidebar">
-            <section>
-                <h2>Contact</h2>
-                <ul class="contact-info">
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:perjansfilip@outlook.com">perjansfilip@outlook.com</a></li>
-                    <li><i class="fas fa-phone"></i> +46 76-027 15 81</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Älta, Stockholm</li>
-                    <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/filip-perjans-679aa0192" target="_blank">LinkedIn Profile</a></li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-tag">Project Management</div>
-                    <div class="skill-tag">Production Management</div>
-                    <div class="skill-tag">Budget Planning</div>
-                    <div class="skill-tag">Resource Planning</div>
-                    <div class="skill-tag">Adobe Creative Suite</div>
-                    <div class="skill-tag">Strategic Communication</div>
-                    <div class="skill-tag">Event Management</div>
-                </div>
-            </section>
-
-            <section>
-                <h2>Languages</h2>
-                <p style="font-size: 0.9rem;">Swedish: Native<br>English: Full Professional Proficiency</p>
-            </section>
-        </div>
-    </div>
-</div>
-
-<footer style="text-align: center; padding: 4rem; color: #999; border-top: 1px solid #eee;">
-    &copy; 2025 Filip Perjans
-</footer>
-
 </body>
 </html>
