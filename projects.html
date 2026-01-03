@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Filip Perjans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; }
+        
+        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
+        nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+
+        .container { max-width: 1100px; margin: 4rem auto; padding: 0 2rem; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
+        h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2rem; font-weight: 800; }
+
+        .project-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .project-item { 
+            position: relative;
+            background: var(--grey); 
+            aspect-ratio: 1 / 1; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .project-item .bg-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .project-item:hover .bg-content { transform: scale(1.05); }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .content-label {
+            position: relative;
+            z-index: 3;
+            color: white;
+            text-align: center;
+        }
+
+        .content-label h3 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Styling för tomma rutor */
+        .project-item.no-image .content-label { color: var(--blue); }
+        .project-item.no-image .overlay { display: none; }
+
+        /* Modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .close {
+            position: absolute;
+            right: 20px; top: 15px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: white;
+            z-index: 1010;
+        }
+
+        .modal-header-media { width: 100%; height: auto; max-height: 500px; object-fit: contain; background-color: #000; display: block; }
+        .modal-body { padding: 3rem; }
+        .modal-body h2 { color: var(--blue); font-size: 2.2rem; margin-top: 0; font-weight: 800; }
+        .modal-body p { font-size: 1.15rem; color: #334155; line-height: 1.8; white-space: pre-line; }
+
+        @media (max-width: 768px) {
+            .modal-body { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Work</a>
+    <a href="about.html">About Me</a>
+</nav>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Back to Work</a>
+    <h1>Projects</h1>
+    
+    <div class="project-grid">
+        <div class="project-item" onclick="openModal('forsvara')">
+            <video preload="metadata" class="bg-content">
+                <source src="försvaranätet.mp4#t=0.1" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content-label">
+                <h3>Försvara Nätet</h3>
+            </div>
+        </div>
+
+        <div class="project-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Project 2</h3></div></div>
+        <div class="project-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Project 3</h3></div></div>
+        <div class="project-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Project 4</h3></div></div>
+        <div class="project-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Project 5</h3></div></div>
+        <div class="project-item no-image" onclick="openModal('empty')"><div class="content-label"><h3>Project 6</h3></div></div>
+    </div>
+</div>
+
+<div id="projectModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <div id="modalContentArea"></div>
+    </div>
+</div>
+
+<script>
+    const projectData = {
+        'forsvara': {
+            title: 'Försvara Nätet',
+            type: 'video',
+            src: 'försvaranätet.mp4',
+            text: `Här är din template-rubrik för Försvara Nätet.
+
+            Detta är din template-brödtext. Här kan du beskriva projektet, din roll och vilket resultat ni uppnådde. Texten behåller radbrytningar automatiskt så det är lätt att formatera.
+
+            Copywriting: Filip Perjans`
+        },
+        'empty': {
+            title: 'Template Project',
+            type: 'image',
+            src: '',
+            text: 'Här kommer beskrivningen av projektet visas. \n\nTemplate brödtext som väntar på ditt kreativa innehåll.'
+        }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('projectModal');
+        const area = document.getElementById('modalContentArea');
+        const data = projectData[id];
+
+        if (!data) return;
+
+        let mediaHtml = '';
+        if (data.type === 'video') {
+            mediaHtml = `<video autoplay loop muted playsinline class="modal-header-media"><source src="${data.src}" type="video/mp4"></video>`;
+        } else if (data.src) {
+            mediaHtml = `<img src="${data.src}" class="modal-header-media" alt="${data.title}">`;
+        }
+
+        area.innerHTML = `
+            ${mediaHtml}
+            <div class="modal-body">
+                <h2>${data.title}</h2>
+                <p>${data.text}</p>
+            </div>
+        `;
+        
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('projectModal');
+        const area = document.getElementById('modalContentArea');
+        area.innerHTML = '';
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('projectModal')) closeModal();
+    }
+</script>
+
+</body>
+</html>
