@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Filip Perjans</title>
+    <title>Work Projects | Filip Perjans</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -20,9 +20,29 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, p { color: var(--brand-blue); }
+        /* Navigering */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem 0;
+            background-color: var(--bg-color);
+        }
 
-        .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+        .nav-link {
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link.active { border-bottom: 2px solid var(--brand-blue); }
+
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
         
         h2 { 
             font-size: 1.8rem; 
@@ -31,7 +51,7 @@
             text-transform: uppercase;
         }
 
-        /* Slider och Scroll */
+        /* Slider */
         .project-slider { 
             display: flex; 
             gap: 2rem; 
@@ -40,90 +60,75 @@
             margin: 0 -1rem 4rem -1rem;
             scrollbar-width: thin;
             scrollbar-color: var(--brand-blue) transparent;
-            -webkit-overflow-scrolling: touch;
         }
-
-        .project-slider::-webkit-scrollbar { height: 6px; }
-        .project-slider::-webkit-scrollbar-thumb { background: var(--brand-blue); border-radius: 10px; }
 
         /* Rutorna */
         .project-item { 
             flex: 0 0 300px; 
             position: relative; 
-            background: #fff; 
             aspect-ratio: 1 / 1; 
             border-radius: 12px; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
+            overflow: hidden;
             cursor: pointer; 
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
-            border: 1px solid rgba(27, 60, 83, 0.1);
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+            background-color: #fff;
         }
 
         .project-item:hover { 
-            transform: scale(1.1); 
+            transform: scale(1.05); 
             z-index: 10;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        .project-item h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+        .card-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Texten i rutan - Ingen toning, bara text med skugga */
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+        }
+
+        .item-info h3 { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            text-shadow: 0px 2px 8px rgba(0,0,0,0.8);
+        }
         
-        /* Underrubrik - visas endast vid hover */
-        .project-item span { 
-            margin-top: 10px; 
-            font-size: 0.9rem; 
+        .item-info span { 
+            display: block;
+            margin-top: 5px; 
+            font-size: 0.8rem; 
             font-weight: 400; 
             opacity: 0;
             transition: opacity 0.3s ease;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
         }
-        .project-item:hover span { opacity: 1; }
+
+        .project-item:hover .item-info span { opacity: 1; }
 
         /* Modal-styling */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.7); 
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content { 
-            background-color: #fff; 
-            margin: 5% auto; 
-            width: 90%; 
-            max-width: 800px; 
-            border-radius: 16px; 
-            position: relative; 
-            max-height: 85vh; 
-            overflow-y: auto;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .close-btn { 
-            position: absolute; 
-            right: 25px; 
-            top: 20px; 
-            font-size: 2rem; 
-            cursor: pointer; 
-            color: var(--brand-blue);
-            z-index: 10;
-        }
-
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fff; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
         .modal-body { padding: 3rem; }
         .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
-
-        .modal-body h2 { margin-top: 0; font-weight: 800; }
-        .modal-body p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
-        
+        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; }
+        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; }
         .team-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; }
         .team-title { font-weight: 800; display: block; margin-bottom: 0.5rem; }
 
@@ -131,30 +136,39 @@
 </head>
 <body onkeydown="if(event.key==='Escape') closeModal()">
 
+<nav>
+    <a href="index.html" class="nav-link active">Work</a>
+    <a href="about.html" class="nav-link">About me</a>
+</nav>
+
 <div class="container">
     <h2>Work Projects</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('defend')">
-            <h3>Defend the Internet</h3><span>2025</span>
+            <video src="forsvaranatet.mp4" class="card-media" muted loop playsinline autoplay></video>
+            <div class="item-info"><h3>Defend the Internet</h3><span>2025</span></div>
         </div>
         <div class="project-item" onclick="openModal('veteran')">
-            <h3>The Veteran's Day</h3><span>2024, 2025</span>
+            <img src="veterandagen.jpg" class="card-media">
+            <div class="item-info"><h3>The Veteran's Day</h3><span>2024, 2025</span></div>
         </div>
         <div class="project-item" onclick="openModal('airshow')">
-            <h3>Airshow Day</h3><span>2024</span>
+            <img src="flygdagen3.jpg" class="card-media">
+            <div class="item-info"><h3>Airshow Day</h3><span>2024</span></div>
         </div>
         <div class="project-item" onclick="openModal('desperados')">
-            <h3>Desperados Summer Tour</h3><span>2024</span>
+            <img src="desperados.jpg" class="card-media">
+            <div class="item-info"><h3>Desperados Summer Tour</h3><span>2024</span></div>
         </div>
-        <div class="project-item"><h3>Placeholder 5</h3><span>Underrubrik</span></div>
-        <div class="project-item"><h3>Placeholder 6</h3><span>Underrubrik</span></div>
-        <div class="project-item"><h3>Placeholder 7</h3><span>Underrubrik</span></div>
+        <div class="project-item"><div class="item-info"><h3>5</h3><span>Underrubrik</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>6</h3><span>Underrubrik</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>7</h3><span>Underrubrik</span></div></div>
     </div>
 
     <h2>University Projects</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('uni_placeholder')">
-            <h3>Placeholder Title</h3><span>Underrubrik</span>
+            <div class="item-info"><h3>Placeholder Title</h3><span>Underrubrik</span></div>
         </div>
     </div>
 </div>
@@ -172,66 +186,34 @@
             title: "Defend the Internet.",
             video: "forsvaranatet.mp4",
             type: "video",
-            text: `The Swedish Armed Forces has an increased recruitment need within IT. A market where competition is fierce.
-
-            We developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity.
-
-            The design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.`,
-            team: `**Team BANG**
-            Filip Perjans: Project and Production Manager, Creative and Copywriter
-            Lisa Evenås: Art Director and Creative`
+            text: `The Swedish Armed Forces has an increased recruitment need within IT. A market where competition is fierce.\n\nWe developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity.\n\nThe design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.`,
+            team: `**Team BANG**\nFilip Perjans: Project and Production Manager, Creative and Copywriter\nLisa Evenås: Art Director and Creative`
         },
         'veteran': {
             title: "The Veteran's Day.",
             image: "veterandagen.jpg",
             type: "image",
-            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on the Veteran's Day — a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.
-
-            The day is marked by ceremony and solemnity, with an extensive program at Gärdet in Stockholm. The highlight is the ceremony at the Restare Veterans Monument, followed by dinner and entertainment. The day ends with the traditional flag-lowering ceremony at 9 p.m.
-
-            BANG has overall production responsibility for the Veteran's Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.
-
-            The assignment covered the entire production chain, from planning to implementation. This included full-scale infrastructure – tents, electricity, security, and medical care – as well as hospitality, VIP catering, printed materials, and ceremonial decorations.
-
-            BANG also manages the high-quality livestream and ensures smooth digital broadcasting. Given the formal nature of the state ceremony, the project requires absolute logistical precision and reliability. Every detail must be flawless.`,
-            team: `**Team BANG**
-            Stina Andersson – Project Manager
-            Fanny Holck Clausen – Project and Production Manager
-            Filip Perjans – Production Manager
-            Natalie Rosenberg – Production Manager
-            Lisa Evenås – Art Director`
+            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on the Veteran's Day — a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.\n\nBANG has overall production responsibility for the Veteran's Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.`,
+            team: `**Team BANG**\nStina Andersson – Project Manager\nFanny Holck Clausen – Project and Production Manager\nFilip Perjans – Production Manager\nNatalie Rosenberg – Production Manager\nLisa Evenås – Art Director`
         },
         'airshow': {
             title: "Airshow Day",
             image: "flygdagen3.jpg",
             type: "image",
-            text: `On August 24, 2024, the Swedish Air Force opened its gates for its largest event of the year: Airshow Day 2024. More than just an air show, this was an immersive dive into the world of total defense, designed to give the public a front-row seat to the Swedish Armed Forces' mission in a rapidly changing world.
-
-            Our mission, alongside the Blekinge Wing (F17), was to transform a visual spectacle into an interactive journey. We created a space where visitors didn't just watch from the sidelines—they engaged with defense ambassadors, tested hands-on activities, and followed a high-octane live broadcast of the flight displays in real-time.`,
-            team: `**Team BANG**
-            Jenny Green - Project Manager
-            Natalie Rosenberg - Project Manager
-            Filip Perjans - Production Manager
-            Lisa Evenås - Art Director`
+            text: `On August 24, 2024, the Swedish Air Force opened its gates for its largest event of the year: Airshow Day 2024. More than just an air show, this was an immersive dive into the world of total defense, designed to give the public a front-row seat to the Swedish Armed Forces' mission in a rapidly changing world.`,
+            team: `**Team BANG**\nJenny Green - Project Manager\nNatalie Rosenberg - Project Manager\nFilip Perjans - Production Manager\nLisa Evenås - Art Director`
         },
         'desperados': {
             title: "Desperados Summer Tour",
             image: "desperados.jpg",
             type: "image",
-            text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy.
-
-            A vibrant festival footprint featuring colorful, multi-sensory environment. By blending interactive zones with functional infrastructure and chill-out lounges, we ensured the brand stayed at the center of the festival experience.`,
-            team: `**Team BANG**
-            Amelie Lagerstedt - Project Manager
-            Filip Perjans - Production Manager
-            Lisa Evenås - Art Director and Creative`
+            text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy.`,
+            team: `**Team BANG**\nAmelie Lagerstedt - Project Manager\nFilip Perjans - Production Manager\nLisa Evenås - Art Director and Creative`
         },
         'uni_placeholder': {
-            title: "University Project Placeholder",
-            image: "placeholder.jpg",
-            type: "image",
-            text: "Det här är placeholder-text för din framtida brödtext inom University Projects. Här kan du beskriva uppdraget, processen och resultatet.",
-            team: "**Placeholder Team**\nFilip Perjans - Roll"
+            title: "University Project Title",
+            text: "Beskrivning kommer här.",
+            team: `**Team**\nFilip Perjans`
         }
     };
 
@@ -241,25 +223,13 @@
         const data = projectData[id];
         if(!data) return;
 
-        let mediaHtml = '';
-        if(data.type === 'image') {
-            mediaHtml = `<img src="${data.image}" class="modal-img">`;
-        } else if(data.type === 'video') {
-            mediaHtml = `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
-        }
+        let mediaHtml = (data.type === 'image') 
+            ? `<img src="${data.image}" class="modal-img">` 
+            : `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
 
-        // Formatera Team-info (gör **Team BANG** fetstilt)
         const formattedTeam = data.team.replace(/\*\*(.*?)\*\*/g, '<span class="team-title">$1</span>');
 
-        body.innerHTML = `
-            ${mediaHtml}
-            <h2>${data.title}</h2>
-            <p>${data.text}</p>
-            <div class="team-section">
-                <p>${formattedTeam}</p>
-            </div>
-        `;
-        
+        body.innerHTML = `${mediaHtml}<h2>${data.title}</h2><p>${data.text}</p><div class="team-section"><p>${formattedTeam}</p></div>`;
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -269,6 +239,5 @@
         document.body.style.overflow = 'auto';
     }
 </script>
-
 </body>
 </html>
