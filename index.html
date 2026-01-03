@@ -3,133 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work | Filip Perjans</title>
+    <title>Filip Perjans | Creative Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --blue: #003366; --text: #1a1a1a; --grey: #f8f9fa; }
-        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; }
-        
-        nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 100; }
-        nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-
-        .hero { padding: 4rem 2rem; text-align: center; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; color: var(--blue); margin: 0; letter-spacing: -1px; }
-        .hero p { font-size: 1.2rem; color: #64748b; margin-top: 1rem; }
-
-        /* Grid-inställningar för 4 rutor i en fyrkant */
-        .work-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* Skapar två kolumner */
-            gap: 4rem; /* Mellanrummet mellan rutorna (ca 5cm visuellt på desktop) */
-            padding: 2rem; 
-            max-width: 1000px; 
-            margin: 0 auto; /* Centrerar hela rutnätet */
+        :root {
+            --blue: #003366;
+            --text: #1a1a1a;
+            --grey: #f4f7f6;
         }
-        
-        .project-card { 
-            position: relative; 
-            overflow: hidden; 
-            border-radius: 12px; 
-            aspect-ratio: 1 / 1; /* Gör rutorna helt kvadratiska */
-            background: #f0f0f0; 
-            cursor: pointer; 
-            text-decoration: none; 
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 2rem;
+            text-align: center;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: var(--blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        header {
+            max-width: 1100px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .intro {
+            font-size: 1.5rem;
+            max-width: 800px;
+            font-weight: 300;
+            color: #555;
+        }
+
+        /* Project Grid */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto 6rem;
+            padding: 0 2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--grey);
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            text-decoration: none;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #eee;
-        }
-        
-        .project-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.5s ease; 
-            position: absolute;
-            top: 0;
-            left: 0;
+            align-items: flex-end;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eef2f1;
         }
 
-        .project-card:hover img { transform: scale(1.05); }
-        
-        /* Text-overlay */
-        .project-info { 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            right: 0; 
-            padding: 2rem; 
-            background: linear-gradient(transparent, rgba(0,0,0,0.7)); 
-            color: white; 
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 51, 102, 0.15);
+            background: #fff;
+        }
+
+        .project-card h3 {
+            font-size: 2rem;
+            color: var(--blue);
+            margin: 0;
+            font-weight: 800;
             z-index: 2;
         }
-        
-        .project-info h2 { margin: 0; font-size: 1.5rem; font-weight: 700; }
-        .project-info p { margin: 5px 0 0; opacity: 0.9; font-size: 0.9rem; }
 
-        /* För de tomma rutorna utan bild än så länge */
-        .placeholder-text {
-            color: var(--blue);
-            font-size: 2rem;
-            font-weight: 800;
-            z-index: 1;
+        .project-card p {
+            font-size: 1rem;
+            color: #666;
+            margin: 0.5rem 0 0;
+            font-weight: 400;
+            z-index: 2;
         }
 
+        .project-info {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: var(--grey);
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .work-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .hero h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.8rem; }
+            .intro { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" style="border-bottom: 2px solid var(--blue);">Work</a>
-    <a href="about.html">About Me</a>
-</nav>
+    <nav>
+        <a href="index.html">Work</a>
+        <a href="about.html">About Me</a>
+    </nav>
 
-<div class="hero">
-    <h1>Creative Production & Communication</h1>
-    <p>Selected projects and creative work.</p>
-</div>
+    <header>
+        <h1>Filip Perjans</h1>
+        <p class="intro">
+            Creative concept developer and copywriter turning ideas into experiences. 
+            Exploring the intersection of culture, football, and digital storytelling.
+        </p>
+    </header>
 
-<div class="work-grid">
-    <a href="copywriting.html" class="project-card">
-        <img src="copywriting.jpg" alt="Copywriting Projects">
-        <div class="project-info">
-            <h2>Copywriting</h2>
-            <p>Articles, Cases, Printed Media, etc.</p>
+    <div class="container">
+        <div class="project-grid">
+            
+            <a href="copywriting.html" class="project-card">
+                <div class="project-info">
+                    <h3>Copywriting</h3>
+                    <p>Adidas, Direkto & Creative Work</p>
+                </div>
+            </a>
+
+            <a href="#" class="project-card">
+                <div class="project-info">
+                    <h3>Project Y</h3>
+                    <p>Strategy & Content</p>
+                </div>
+            </a>
+
+            <a href="projects.html" class="project-card">
+                <div class="project-info">
+                    <h3>Projects</h3>
+                    <p>View all creative projects</p>
+                </div>
+            </a>
+
         </div>
-    </a>
+    </div>
 
-    <a href="#" class="project-card">
-        <span class="placeholder-text">X</span>
-        <div class="project-info">
-            <h2>Project X</h2>
-            <p>Description coming soon</p>
-        </div>
-    </a>
-
-    <a href="#" class="project-card">
-        <span class="placeholder-text">Y</span>
-        <div class="project-info">
-            <h2>Project Y</h2>
-            <p>Description coming soon</p>
-        </div>
-    </a>
-
-    <a href="#" class="project-card">
-        <span class="placeholder-text">Z</span>
-        <div class="project-info">
-            <h2>Project Z</h2>
-            <p>Description coming soon</p>
-        </div>
-    </a>
-</div>
-
-<footer style="text-align: center; padding: 4rem; color: #999;">
-    &copy; 2025 Filip Perjans
-</footer>
+    <footer>
+        <p>&copy; 2024 Filip Perjans</p>
+    </footer>
 
 </body>
 </html>
