@@ -21,7 +21,7 @@
             line-height: 1.6;
         }
 
-        /* Navigering - matchad med övriga sidor */
+        /* Navigering - Understrykning borttagen */
         nav {
             display: flex;
             justify-content: center;
@@ -36,12 +36,10 @@
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding-bottom: 5px;
+            /* Ingen padding-bottom eller border här längre */
         }
 
-        .nav-link.active { 
-            border-bottom: 2px solid var(--brand-blue); 
-        }
+        /* Vi har tagit bort .nav-link.active helt */
 
         .container { 
             max-width: 900px; 
@@ -154,7 +152,7 @@
 
 <nav>
     <a href="index.html" class="nav-link">Work</a>
-    <a href="about.html" class="nav-link active">About me</a>
+    <a href="about.html" class="nav-link">About me</a>
 </nav>
 
 <div class="container">
@@ -227,7 +225,7 @@
         <div>
             <h2>Contact</h2>
             <p>
-                Email: <a href="mailto:filip@example.com" class="contact-link">filip.perjans@gmail.com</a><br>
+                Email: <a href="mailto:filip.perjans@gmail.com" class="contact-link">filip.perjans@gmail.com</a><br>
                 LinkedIn: <a href="#" class="contact-link">Filip Perjans</a><br>
                 Location: Stockholm, Sweden
             </p>
