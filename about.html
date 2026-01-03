@@ -8,10 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
     <style>
         :root { 
             --bg-color: #E3E3E3; 
-            --text-color: #1a1a1a; /* Exakt matchning med index.html */
+            --text-color: #1a1a1a; 
             --highlight-blue: #456882;
             --timeline-grey: #C0C0C0;
         }
@@ -25,29 +26,35 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* EXAKT SAMMA NAVIGERING SOM PÅ INDEX.HTML */
         nav {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            padding: 3.5rem 0;
+            gap: 2rem; /* Justera till exakt det du har på index om det är 2 eller 3rem */
+            padding: 2rem 0; /* Standardhöjd för din header */
         }
 
         .nav-link {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: 500; /* Justerad vikt för att matcha index */
-            font-size: 1rem;
+            font-weight: 400; /* Outfit Regular för en ren look */
+            font-size: 0.9rem; /* Matchar ofta standardstorleken på index */
             text-transform: uppercase;
-            letter-spacing: 0.1rem;
+            letter-spacing: 0.15rem;
+            transition: opacity 0.3s;
         }
 
+        .nav-link:hover {
+            opacity: 0.6;
+        }
+
+        /* CONTAINER & LAYOUT */
         .container { 
             max-width: 1000px; 
             margin: 0 auto; 
-            padding: 0 2rem 5rem 2rem; 
+            padding: 2rem 2rem 5rem 2rem; 
         }
 
-        /* Profilsektion */
         .profile-header {
             text-align: center;
             margin-bottom: 5rem;
@@ -59,7 +66,6 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 2rem;
-            filter: grayscale(20%); /* Ger en mer sammanhållen look om önskat */
         }
 
         h1 { 
@@ -68,7 +74,6 @@
             margin: 0; 
             text-transform: uppercase; 
             letter-spacing: -0.02rem;
-            line-height: 1.1;
         }
         
         .summary-text { 
@@ -80,7 +85,6 @@
             text-align: center;
         }
 
-        /* Grid Layout */
         .main-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
@@ -88,7 +92,6 @@
             align-items: start;
         }
 
-        /* Rubriker och Linjer */
         .section-header {
             display: flex;
             align-items: center;
@@ -110,7 +113,6 @@
             letter-spacing: 0.05rem;
         }
 
-        /* Tidslinje Styling */
         .timeline {
             position: relative;
             padding-left: 1.5rem;
@@ -184,10 +186,8 @@
             position: absolute;
             left: 0;
             color: var(--highlight-blue);
-            font-size: 0.8rem;
         }
 
-        /* Högerkolumn */
         .right-col { text-align: right; }
         .info-block { margin-bottom: 4.5rem; }
 
