@@ -1,192 +1,141 @@
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copywriting | Filip Perjans</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
+    <title>Work Projects | Filip Perjans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root { 
             --bg-color: #E3E3E3; 
-            --text-color: #1a1a1a; 
-            --modal-overlay: rgba(26, 26, 26, 0.9);
-            --card-bg: #D9D9D9; /* En subtil nyansskillnad för rutan */
+            --brand-blue: #1B3C53; 
         }
 
         body { 
-            font-family: 'Outfit', sans-serif; 
+            font-family: 'Inter', sans-serif; 
             margin: 0; 
             background-color: var(--bg-color); 
-            color: var(--text-color); 
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            color: var(--brand-blue); 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navigering - Identisk med index/about */
+        /* Navigering */
         nav {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 3rem;
             padding: 2rem 0;
+            background-color: var(--bg-color);
         }
 
         .nav-link {
-            color: var(--text-color);
+            color: var(--brand-blue);
             text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15rem;
-            transition: opacity 0.3s;
-        }
-
-        .nav-link:hover { opacity: 0.6; }
-
-        .container { 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            padding: 2rem; 
-        }
-
-        h1 { 
-            font-size: 2.5rem; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-bottom: 4rem; 
-            text-align: center;
-        }
-
-        .section-title {
+            font-weight: 600;
             font-size: 1.1rem;
-            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
-            padding-bottom: 0.5rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        /* Projektgrid */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
 
-        /* Projektkortet (Rutan) */
-        .project-card {
-            background-color: var(--card-bg);
-            padding: 4rem 2rem;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 150px;
-        }
-
-        .project-card:hover {
-            background-color: #D1D1D1;
-            transform: translateY(-3px);
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 0;
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
+        
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 1.5rem; 
             text-transform: uppercase;
-            letter-spacing: 0.05rem;
         }
 
-        .project-year {
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin-top: 0.7rem;
-            opacity: 0; /* Dold som standard */
-            transition: opacity 0.3s ease;
+        /* Slider */
+        .project-slider { 
+            display: flex; 
+            gap: 2rem; 
+            overflow-x: auto; 
+            padding: 2rem 1rem; 
+            margin: 0 -1rem 4rem -1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-blue) transparent;
         }
 
-        .project-card:hover .project-year {
-            opacity: 0.6; /* Synlig vid hovring */
+        .project-item { 
+            flex: 0 0 300px; 
+            position: relative; 
+            aspect-ratio: 1 / 1; 
+            border-radius: 12px; 
+            overflow: hidden;
+            cursor: pointer; 
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+            background-color: #fff;
         }
 
-        /* MODAL (Pop-up) */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
+        .project-item:hover { 
+            transform: scale(1.05); 
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .card-media {
             width: 100%;
             height: 100%;
-            background-color: var(--modal-overlay);
-            overflow-y: auto;
-            justify-content: center;
-            align-items: flex-start; /* Starta från toppen vid scroll */
-            padding: 4rem 1rem;
-        }
-
-        .modal-content {
-            background-color: var(--bg-color);
-            padding: 4rem 3rem;
-            max-width: 800px;
-            width: 100%;
-            position: relative;
-            margin-bottom: 4rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            right: 2rem;
-            top: 1.5rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-color);
-            transition: opacity 0.2s;
-        }
-
-        .close-modal:hover { opacity: 0.5; }
-
-        .modal-header-text {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 2.5rem;
-            text-transform: none;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: auto;
-            margin-bottom: 2.5rem;
             object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
-        .modal-body-text {
-            font-weight: 300;
-            font-size: 1.1rem;
-            color: var(--text-color);
-            white-space: pre-line; /* Bevarar radbrytningar */
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
         }
 
-        .spacer {
-            height: 1.5rem;
+        .item-info h3 { 
+            margin: 0; 
+            font-size: 1.1rem; 
+            font-weight: 800; 
+            text-shadow: 0px 2px 8px rgba(0,0,0,0.8);
+        }
+        
+        .item-info span { 
             display: block;
+            margin-top: 5px; 
+            font-size: 0.8rem; 
+            font-weight: 400; 
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* Lås scroll på body när modal är öppen */
-        body.modal-open {
-            overflow: hidden;
-        }
+        .project-item:hover .item-info span { opacity: 1; }
+
+        /* Modal-styling */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fff; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
+        .modal-body { padding: 3rem; }
+        .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
+        .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; margin: 0;}
+        .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; margin-bottom: 1rem; }
+        
+        /* Team Section - Inget mellanrum mellan rubrik och namn */
+        .team-section { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee; }
+        .team-title { font-weight: 800; display: block; margin: 0; padding: 0; line-height: 1.2; }
+        .team-section p { margin-top: 0; padding-top: 0; line-height: 1.4; }
 
     </style>
 </head>
-<body>
+<body onkeydown="if(event.key==='Escape') closeModal()">
 
 <nav>
     <a href="index.html" class="nav-link">Work</a>
@@ -194,55 +143,108 @@
 </nav>
 
 <div class="container">
-    <h1>Copywriting</h1>
+    <h2>Work Projects</h2>
+    <div class="project-slider">
+        <div class="project-item" onclick="openModal('defend')">
+            <video src="forsvaranatet.mp4" class="card-media" muted loop playsinline autoplay></video>
+            <div class="item-info"><h3>Defend the Internet</h3><span>2025</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('veteran')">
+            <img src="veterandagen.jpg" class="card-media">
+            <div class="item-info"><h3>The Veteran's Day</h3><span>2024, 2025</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('airshow')">
+            <img src="flygdagen3.jpg" class="card-media">
+            <div class="item-info"><h3>Airshow Day</h3><span>2024</span></div>
+        </div>
+        <div class="project-item" onclick="openModal('desperados')">
+            <img src="desperados.jpg" class="card-media">
+            <div class="item-info"><h3>Desperados Summer Tour</h3><span>2024</span></div>
+        </div>
+    </div>
 
-    <h2 class="section-title">University Projects</h2>
-    
-    <div class="project-grid">
-        <div class="project-card" onclick="openModal('rekorobenModal')">
-            <h3>Rekoroben</h3>
-            <div class="project-year">2023</div>
+    <h2>University Projects</h2>
+    <div class="project-slider">
+        <div class="project-item" onclick="openModal('uni_placeholder')">
+            <div class="item-info"><h3>Placeholder Title</h3><span>Underrubrik</span></div>
         </div>
     </div>
 </div>
 
-<div id="rekorobenModal" class="modal" onclick="closeOutside(event, 'rekorobenModal')">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('rekorobenModal')">&times;</span>
-        
-        <div class="modal-header-text">Reuse like<br>there’s a tomorrow.</div>
-        
-        <img src="rekoroben.jpg" alt="Rekoroben Project" class="modal-image">
-
-        <div class="modal-body-text">
-            Rekoroben, an exclusive second-hand store in Karlstad, aimed to increase its brand awareness and reach a wider customer base. With a limited presence in the market, they needed strategies to convey their unique offering and sustainable message to a larger audience. As part of an educational assignment, our goal was to help Rekoroben fulfill their goals.
-            <div class="spacer"></div>
-            We developed a concise yet comprehensive document, outlining tailored marketing strategies, audience insights and media tactics. This informed Rekoroben on effective methods to elevate their presence and engage in their target market.
-            <div class="spacer"></div>
-            We crafted a captivating quote, “Reuse like there’s a tomorrow”, reflecting Rekoroben’s commitment to sustainability. Designed in their signature font and colors, the quote adorned tote bags, blending aesthetics with eco-awareness, serving as mobile billboard for the brand.
-            <div class="spacer"></div>
-            Last but not least we planned an engaging event centered around sustainability. Combining champagne with a sustainability quiz, the participants could learn during a pleasant experience while Rekoroben promoted their ethos.
-        </div>
+<div id="projectModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="modalBody" class="modal-body"></div>
     </div>
 </div>
 
 <script>
-    function openModal(id) {
-        document.getElementById(id).style.display = "flex";
-        document.body.classList.add('modal-open');
-    }
-
-    function closeModal(id) {
-        document.getElementById(id).style.display = "none";
-        document.body.classList.remove('modal-open');
-    }
-
-    function closeOutside(event, id) {
-        if (event.target === document.getElementById(id)) {
-            closeModal(id);
+    const projectData = {
+        'defend': {
+            title: "Defend the Internet.",
+            video: "forsvaranatet.mp4",
+            type: "video",
+            text: `The Swedish Armed Forces has an increased recruitment need within IT. A market where competition is fierce.\n\nWe developed a digital web-based game, Försvara Nätet. The player must complete three missions in a short period of time. The missions test abilities such as logic, problem solving, analysis, and creativity.\n\nThe design and game mechanics were deliberately kept simple to lower the threshold and maximize participation. Instead, we focused on the content. We wanted to create an activation that was easy to get into but difficult to put down.`,
+            team: `**Team BANG**\nFilip Perjans: Project and Production Manager, Creative and Copywriter\nLisa Evenås: Art Director and Creative`
+        },
+        'veteran': {
+            title: "The Veteran's Day.",
+            image: "veterandagen.jpg",
+            type: "image",
+            text: `Every year on May 29, Sweden's veterans abroad and their families are honored on the Veteran's Day — a state ceremony organized by the Swedish Armed Forces together with other authorities. The purpose of the day is to strengthen veterans' sense of pride, respect, and value, while showing that these values are shared by the general public and their families.\n\nBANG has overall production responsibility for the Veteran's Day, with the goal of creating a safe, dignified, and well-functioning experience for both visitors on site and digital audiences.`,
+            team: `**Team BANG**\nStina Andersson – Project Manager\nFanny Holck Clausen – Project and Production Manager\nFilip Perjans – Production Manager\nNatalie Rosenberg – Production Manager\nLisa Evenås – Art Director`
+        },
+        'airshow': {
+            title: "Airshow Day",
+            image: "flygdagen3.jpg",
+            type: "image",
+            text: `On August 24, 2024, the Swedish Air Force opened its gates for its largest event of the year: Airshow Day 2024. More than just an air show, this was an immersive dive into the world of total defense, designed to give the public a front-row seat to the Swedish Armed Forces' mission in a rapidly changing world.`,
+            team: `**Team BANG**\nJenny Green - Project Manager\nNatalie Rosenberg - Project Manager\nFilip Perjans - Production Manager\nLisa Evenås - Art Director`
+        },
+        'desperados': {
+            title: "Desperados Summer Tour",
+            image: "desperados.jpg",
+            type: "image",
+            text: `When Desperados decided to hit the Swedish festival circuit, they needed more than just a presence. From initial concept to complex on-site logistics, we created a space where playfulness met energy.`,
+            team: `**Team BANG**\nAmelie Lagerstedt - Project Manager\nFilip Perjans - Production Manager\nLisa Evenås - Art Director and Creative`
+        },
+        'uni_placeholder': {
+            title: "University Project Title",
+            text: "Beskrivning kommer här.",
+            team: `**Team**\nFilip Perjans`
         }
+    };
+
+    function openModal(id) {
+        const modal = document.getElementById('projectModal');
+        const body = document.getElementById('modalBody');
+        const data = projectData[id];
+        if(!data) return;
+
+        let mediaHtml = (data.type === 'image') 
+            ? `<img src="${data.image}" class="modal-img">` 
+            : `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
+
+        // Formaterar om Team-texten så att Team-rubriken får klassen .team-title
+        const formattedTeam = data.team.replace(/\*\*(.*?)\*\*/g, '<span class="team-title">$1</span>');
+
+        body.innerHTML = `
+            ${mediaHtml}
+            <h2>${data.title}</h2>
+            <p style="margin-bottom: 2rem;">${data.text}</p>
+            <div class="team-section">
+                <p>${formattedTeam}</p>
+            </div>
+        `;
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('projectModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 </script>
-
 </body>
 </html>
