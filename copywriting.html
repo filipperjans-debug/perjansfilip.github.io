@@ -40,6 +40,10 @@
             padding-bottom: 5px;
         }
 
+        .nav-link.active { 
+            border-bottom: 2px solid var(--brand-blue); 
+        }
+
         .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 2rem; }
         
         h2 { 
@@ -79,7 +83,6 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* Media (Både bild och video) */
         .card-media {
             width: 100%;
             height: 100%;
@@ -129,13 +132,16 @@
         .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
         .modal-body p { white-space: pre-line; color: var(--brand-blue); font-size: 1.1rem; }
         .modal-body h2 { color: var(--brand-blue); font-weight: 800; margin-top: 0; }
+        
+        /* Stil för roll-texten i modalen */
+        .role-text { font-weight: 800; display: block; margin-top: 1.5rem; }
 
     </style>
 </head>
 <body onkeydown="if(event.key==='Escape') closeModal()">
 
 <nav>
-    <a href="index.html" class="nav-link">Work</a>
+    <a href="index.html" class="nav-link active">Work</a>
     <a href="about.html" class="nav-link">About me</a>
 </nav>
 
@@ -181,31 +187,36 @@
             title: "Crafted for Goals.",
             image: "adidas.jpg",
             type: "image",
-            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.\n\nFilip Perjans - website casetext for BANG`
+            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.\n\nWe took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.\n\nTo crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.\n\nThe response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.`,
+            role: "Filip Perjans - website casetext for BANG"
         },
         'direkto': {
             title: "Think about the percentage.",
             video: "direkto.mp4",
             type: "video",
-            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.\n\nFilip Perjans - website casetext for BANG`
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.\n\nIn a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?\n\nCue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.`,
+            role: "Filip Perjans - website casetext for BANG"
         },
         'bang1': {
-            title: "Nominated. 'Agency of the Year 2024.'",
+            title: "Nominated. Agency of the Year 2024.",
             image: "bang.jpg",
             type: "image",
-            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.\n\nFilip Perjans - website article for BANG`
+            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.\n\nThe winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.`,
+            role: "Filip Perjans - website article for BANG"
         },
         'bang2': {
-            title: "'AI. Don't fear it, embrace it.'",
+            title: "AI. Don't fear it, embrace it.",
             image: "bang.jpg",
             type: "image",
-            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.\n\nFilip Perjans - website article for BANG`
+            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.\n\nIt's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.`,
+            role: "Filip Perjans - website article for BANG"
         },
         'uni1': {
             title: "University Project 1",
             text: "Text för ditt första universitetsprojekt läggs här.",
             type: "image",
-            image: "uni_placeholder.jpg"
+            image: "uni_placeholder.jpg",
+            role: "Filip Perjans"
         }
     };
 
@@ -219,7 +230,13 @@
             ? `<img src="${data.image}" class="modal-img">` 
             : `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
 
-        body.innerHTML = `${mediaHtml}<h2>${data.title}</h2><p>${data.text}</p>`;
+        body.innerHTML = `
+            ${mediaHtml}
+            <h2>${data.title}</h2>
+            <p>${data.text}</p>
+            <span class="role-text">${data.role || ''}</span>
+        `;
+        
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
