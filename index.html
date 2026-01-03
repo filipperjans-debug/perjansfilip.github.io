@@ -95,12 +95,12 @@
             font-size: 0.9rem; 
             font-weight: 300; 
         }
-
-        /* FIX FÖR ATT ANIMATIONEN SKA SYNAS */
-        .line {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-        }
+.line {
+    /* Viktigt: se till att linjerna har en färg så de syns! */
+    stroke: #1B3C53; 
+    stroke-width: 2;
+    fill: none;
+}
     </style>
 </head>
 <body>
@@ -138,22 +138,25 @@
 <footer>
     &copy; 2025 FILIP PERJANS
 </footer>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 <script>
-  window.onload = function() {
-    anime({
-      targets: '.line',
-      strokeDashoffset: [anime.setDashoffset, 0],
-      easing: 'easeInOutQuad',
-      duration: 2000,
-      delay: function(el, i) { return i * 150 },
-      loop: true,
-      direction: 'alternate'
-    });
-  };
-</script>
+  // Vi väntar till sidan är helt redo
+  document.addEventListener('DOMContentLoaded', () => {
+    const runAnimation = () => {
+      anime({
+        targets: '.line',
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutQuart',
+        duration: 2000,
+        delay: anime.stagger(100), // Ritar bokstäverna en efter en
+        direction: 'alternate',
+        loop: true
+      });
+    };
 
+    runAnimation();
+  });
+</script>
 </body>
 </html>
