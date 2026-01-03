@@ -22,11 +22,11 @@
         .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
         
         .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1.5rem; }
-        .content-label h3 { margin: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; transition: transform 0.3s ease; }
+        .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; transition: transform 0.3s ease; }
         
         .content-label span { 
             display: block; 
-            font-size: 0.9rem; 
+            font-size: 0.85rem; 
             margin-top: 5px; 
             font-weight: 400; 
             opacity: 0; 
@@ -44,8 +44,7 @@
         .close:hover { transform: scale(1.1); }
         .modal-media { width: 100%; height: auto; display: block; object-fit: cover; max-height: 450px; background: #000; }
         .modal-body { padding: 3rem; }
-        .modal-body h2 { color: var(--blue); font-size: 2rem; margin-top: 0; margin-bottom: 0.2rem; font-weight: 800; }
-        .modal-body .sub-header { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; display: block; font-weight: 400; }
+        .modal-body h2 { color: var(--blue); font-size: 2rem; margin-top: 0; margin-bottom: 1.5rem; font-weight: 800; }
         .modal-body p { font-size: 1.1rem; color: #334155; line-height: 1.7; white-space: pre-line; }
         .quote { border-left: 4px solid var(--blue); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text); }
         .signature { display: block; margin-top: 2.5rem; color: var(--blue); font-size: 1.1rem; }
@@ -89,6 +88,15 @@
                 <span>Website article</span>
             </div>
         </div>
+
+        <div class="project-item" onclick="openModal('bang_ai')">
+            <img src="bang.jpg" alt="BANG AI">
+            <div class="overlay"></div>
+            <div class="content-label">
+                <h3>BANG Agency</h3>
+                <span>Website article</span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -101,7 +109,6 @@
     const copyData = {
         'adidas': {
             title: 'Crafted for Goals.',
-            sub: '', 
             type: 'image',
             src: 'adidas.jpg',
             text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.
@@ -116,7 +123,6 @@ The response was massive — over 5,000 visitors and 286 players in the Predator
         },
         'direkto': {
             title: 'Think about the percentage.',
-            sub: '',
             type: 'video',
             src: 'direkto.mp4',
             text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed. 
@@ -129,16 +135,35 @@ Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We c
         },
         'bang': {
             title: 'Nominated. Agency of the Year 2024.',
-            sub: '',
             type: 'image',
             src: 'bang.jpg',
             text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition. Once again, proof that we’re still rocking the communication game …
 
-            The winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria, which makes us even more proud of being nominated.
+The winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria, which makes us even more proud of being nominated.
 
-            <div class="quote">“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”<br><br><strong>– Patrick Walldén, founder and CEO, BANG Agency</strong></div>
+<div class="quote">“We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”<br><br><strong>– Patrick Walldén, founder and CEO, BANG Agency</strong></div>
 
-            We at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!
+We at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!
+
+            <span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>`
+        },
+        'bang_ai': {
+            title: "AI. Don't fear it, embrace it.",
+            type: 'image',
+            src: 'bang.jpg',
+            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.
+
+It's all about keeping up with and taking advantage of the technology. Just like when Photoshop popped up, suddenly you could turn a blue car red in a minute. AI can revolutionize the way we create ads. Over the past year, platforms like Midjourney have become invaluable tools for me as a creative professional. 
+
+The platform has allowed me to immerse myself in the world of AI-generated images. Sure, they often have a specific "AI feel" to them, but that inspired me to experiment. I skipped sharpness and colour and embraced blurriness, ambiguity, and graininess. Suddenly, I discovered a whole new kind of beauty in the images. 
+
+And it didn't stop there – with Runway Gen-2, I created AI-generated videos in no time. Now, with Open AI’s newest addition Sora, I’m itching to dive in and explore even more. Quick drafts, storyboards and animatics? Check!
+
+I can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions, Max continues.
+
+At BANG Agency, we're all in on the AI revolution. We strive to be part of the race by understanding and seizing every opportunity it presents. As we gear up for another year of groundbreaking work in AI, we're fueled by the prospect of unlocking even greater creative potential. 
+
+AI may still not be able to generate innovative concepts for our clients. Still, it paves the way for creative professionals to dive deeper into what we love most – being creative and cooking up ideas like never before. Here's to another year of pushing the boundaries and reshaping the future of advertising with AI.
 
             <span class="signature"><strong>Filip Perjans - website article for BANG</strong></span>`
         }
@@ -159,7 +184,6 @@ Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We c
                 ${mediaHtml}
                 <div class="modal-body">
                     <h2>${data.title}</h2>
-                    <span class="sub-header">${data.sub}</span>
                     <p>${data.text}</p>
                 </div>
             </div>
