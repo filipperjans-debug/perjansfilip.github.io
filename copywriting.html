@@ -17,146 +17,132 @@
             background-color: var(--bg-color); 
             color: var(--brand-blue); 
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-        h1, h2, h3, p { color: var(--brand-blue); }
+        /* Navigering */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem 0;
+            background-color: var(--bg-color);
+        }
 
-        .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        
-        h2 { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            margin-bottom: 1.5rem; 
+        .nav-link {
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
         }
 
-        /* Slider och Scroll */
+        .nav-link.active { border-bottom: 2px solid var(--brand-blue); }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        
+        h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; }
+
+        /* Slider */
         .project-slider { 
             display: flex; 
             gap: 2rem; 
             overflow-x: auto; 
             padding: 2rem 1rem; 
-            margin: 0 -1rem 4rem -1rem;
+            margin-bottom: 4rem;
             scrollbar-width: thin;
             scrollbar-color: var(--brand-blue) transparent;
-            -webkit-overflow-scrolling: touch;
         }
-
-        .project-slider::-webkit-scrollbar { height: 6px; }
-        .project-slider::-webkit-scrollbar-thumb { background: var(--brand-blue); border-radius: 10px; }
 
         /* Rutorna */
         .project-item { 
             flex: 0 0 300px; 
             position: relative; 
-            background: #fff; 
             aspect-ratio: 1 / 1; 
             border-radius: 12px; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
+            overflow: hidden;
             cursor: pointer; 
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
-            border: 1px solid rgba(27, 60, 83, 0.1);
-            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: #ccc; /* Grå placeholder-färg */
+        }
+
+        .project-item:hover { transform: scale(1.05); z-index: 10; }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 20px;
-            box-sizing: border-box;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            z-index: 2;
+            text-align: center;
+            color: #fff;
         }
 
-        .project-item:hover { 
-            transform: scale(1.1); 
-            z-index: 10;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
+        .item-info h3 { margin: 0; font-size: 1.1rem; font-weight: 800; }
+        .item-info span { display: block; margin-top: 5px; font-size: 0.8rem; opacity: 0; transition: 0.3s; }
+        .project-item:hover .item-info span { opacity: 1; }
 
-        .project-item h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
-        
-        /* Underrubrik - visas endast vid hover */
-        .project-item span { 
-            margin-top: 10px; 
-            font-size: 0.9rem; 
-            font-weight: 400; 
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .project-item:hover span { opacity: 1; }
-
-        /* Modal-styling */
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.7); 
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content { 
-            background-color: #fff; 
-            margin: 5% auto; 
-            width: 90%; 
-            max-width: 800px; 
-            border-radius: 16px; 
-            position: relative; 
-            max-height: 85vh; 
-            overflow-y: auto;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .close-btn { 
-            position: absolute; 
-            right: 25px; 
-            top: 20px; 
-            font-size: 2rem; 
-            cursor: pointer; 
-            color: var(--brand-blue);
-            z-index: 10;
-        }
-
+        /* Modal styling */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background-color: #fff; margin: 5% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 25px; top: 20px; font-size: 2rem; cursor: pointer; color: var(--brand-blue); z-index: 10; }
         .modal-body { padding: 3rem; }
         .modal-img, .modal-video { width: 100%; border-radius: 8px; margin-bottom: 2rem; }
 
-        .modal-body h2 { margin-top: 0; }
-        .modal-body p { font-size: 1.1rem; line-height: 1.8; white-space: pre-line; }
-
     </style>
 </head>
-<body onkeydown="if(event.key==='Escape') closeModal()">
+<body>
+
+<nav>
+    <a href="index.html" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link">About me</a>
+</nav>
 
 <div class="container">
     <h2>Work Content</h2>
     <div class="project-slider">
         <div class="project-item" onclick="openModal('adidas')">
-            <h3>Adidas</h3><span>Website casetext</span>
+            <img src="adidas.jpg" class="card-img">
+            <div class="item-info"><h3>Adidas</h3><span>Website casetext</span></div>
         </div>
+
         <div class="project-item" onclick="openModal('direkto')">
-            <h3>Direkto</h3><span>Website casetext</span>
+            <img src="direkto_thumb.jpg" class="card-img">
+            <div class="item-info"><h3>Direkto</h3><span>Website casetext</span></div>
         </div>
+
         <div class="project-item" onclick="openModal('bang1')">
-            <h3>BANG Agency</h3><span>Website article</span>
+            <img src="bang.jpg" class="card-img">
+            <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
+
         <div class="project-item" onclick="openModal('bang2')">
-            <h3>BANG Agency</h3><span>Website article</span>
+            <img src="bang.jpg" class="card-img">
+            <div class="item-info"><h3>BANG Agency</h3><span>Website article</span></div>
         </div>
-        <div class="project-item"><h3>5</h3><span>X</span></div>
-        <div class="project-item"><h3>6</h3><span>X</span></div>
-        <div class="project-item"><h3>7</h3><span>X</span></div>
+
+        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
+        <div class="project-item"><div class="item-info"><h3>Placeholder</h3><span>X</span></div></div>
     </div>
 
     <h2>University Content</h2>
     <div class="project-slider">
-        <div class="project-item" onclick="openModal('uni1')"><h3>Content 1</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni2')"><h3>Content 2</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni3')"><h3>Content 3</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni4')"><h3>Content 4</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni5')"><h3>Content 5</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni6')"><h3>Content 6</h3><span>X</span></div>
-        <div class="project-item" onclick="openModal('uni7')"><h3>Content 7</h3><span>X</span></div>
+        <div class="project-item"><div class="item-info"><h3>University Project</h3><span>X</span></div></div>
     </div>
 </div>
 
@@ -168,88 +154,12 @@
 </div>
 
 <script>
-    const projectData = {
-        'adidas': {
-            title: "Crafted for Goals.",
-            image: "adidas.jpg",
-            type: "image",
-            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.
-
-            We took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.
-
-            To crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.
-
-            The response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.
-            Filip Perjans - website casetext for BANG`
-        },
-        'direkto': {
-            title: "Think about the percentage.",
-            video: "direkto.mp4",
-            type: "video",
-            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed.
-
-            In a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?
-
-            Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.
-            Filip Perjans - website casetext for BANG`
-        },
-        'bang1': {
-            title: 'Nominated. "Agency of the Year 2024."',
-            image: "bang.jpg",
-            type: "image",
-            text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition.
-
-            The winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria.
-            “We are so proud to be among Sweden's top-ranked agencies. After only 4 years as an agency group, we have a turnover of almost 100 million and are among the agencies that receive the absolute highest ratings from their clients!”
-
-            – Patrick Walldén, founder and CEO, BANG Agency
-            We at BANG are all in for the gala festivities, gearing up for an evening of celebration and recognition. We're pumped for the opportunity to continue delivering banging communication for our clients. And yet again, a big thanks to our great customers for your trust!
-            Filip Perjans - website article for BANG`
-        },
-        'bang2': {
-            title: '"AI. Don\'t fear it, embrace it."',
-            image: "bang.jpg",
-            type: "image",
-            text: `2024 might just be the year when creativity meets artificial intelligence and is transforming the advertising industry. But won't AI replace human jobs, some might think? Not as long as you know how to use it, says Max Rosell, our Art Director at BANG Agency.
-
-            It's all about keeping up with and taking advantage of the technology. Just like när Photoshop popped up, AI can revolutionize the way we create ads. Platforms like Midjourney have become invaluable tools.
-
-            I can now easily and quickly create drafts for my clients, which allows me to focus more on creative ideas. AI has allowed me to increase my efficiency and realize my artistic visions.
-
-            At BANG Agency, we're all in on the AI revolution. We strive to be part of the race by understanding and seizing every opportunity it presents. Here's to another year of pushing the boundaries and reshaping the future of advertising with AI.
-            Filip Perjans - website article for BANG`
-        },
-        // University Content (Endast text)
-        'uni1': { title: "Content 1", text: "Brödtext för University Content 1." },
-        'uni2': { title: "Content 2", text: "Brödtext för University Content 2." },
-        'uni3': { title: "Content 3", text: "Brödtext för University Content 3." },
-        'uni4': { title: "Content 4", text: "Brödtext för University Content 4." },
-        'uni5': { title: "Content 5", text: "Brödtext för University Content 5." },
-        'uni6': { title: "Content 6", text: "Brödtext för University Content 6." },
-        'uni7': { title: "Content 7", text: "Brödtext för University Content 7." }
-    };
-
+    // Din modal-logik och projectData här (samma som tidigare)
     function openModal(id) {
         const modal = document.getElementById('projectModal');
         const body = document.getElementById('modalBody');
-        const data = projectData[id];
-        if(!data) return;
-
-        let mediaHtml = '';
-        if(data.type === 'image') {
-            mediaHtml = `<img src="${data.image}" class="modal-img">`;
-        } else if(data.type === 'video') {
-            mediaHtml = `<video src="${data.video}" class="modal-video" autoplay loop muted playsinline></video>`;
-        }
-
-        body.innerHTML = `
-            ${mediaHtml}
-            <h2>${data.title}</h2>
-            <p>${data.text}</p>
-        `;
-        
+        // ... logik för att hämta data och visa media ...
         modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
