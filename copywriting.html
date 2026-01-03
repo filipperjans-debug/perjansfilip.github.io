@@ -8,123 +8,37 @@
     <style>
         :root { --blue: #003366; --text: #1a1a1a; --grey: #f4f7f6; }
         body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text); background: #fff; line-height: 1.6; }
-        
         nav { padding: 2rem; text-align: center; border-bottom: 1px solid #eee; }
         nav a { margin: 0 20px; text-decoration: none; color: var(--blue); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .back-link { display: inline-block; margin-bottom: 2rem; color: var(--blue); text-decoration: none; font-weight: 600; }
         h1 { font-size: 2.5rem; color: var(--blue); margin-bottom: 2rem; font-weight: 800; }
 
-        .project-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
-        }
-
-        .project-item { 
-            position: relative;
-            background: var(--grey); 
-            aspect-ratio: 1 / 1; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            cursor: pointer; 
-            transition: all 0.3s ease;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-        .project-item img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-            transition: background 0.3s ease;
-        }
-
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .project-item { position: relative; background: var(--grey); aspect-ratio: 1 / 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; border: 1px solid #e0e0e0; }
+        .project-item img, .project-item video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 2; transition: background 0.3s ease; }
         .project-item:hover .overlay { background: rgba(0, 0, 0, 0.6); }
-
-        .content-label {
-            position: relative;
-            z-index: 3;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
+        .content-label { position: relative; z-index: 3; color: white; text-align: center; padding: 1rem; }
         .content-label h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; top: 0; 
-            width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(8px);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 2% auto;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.4s ease;
-        }
-
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(8px); overflow-y: auto; }
+        .modal-content { background-color: white; margin: 2% auto; width: 90%; max-width: 800px; border-radius: 16px; position: relative; overflow: hidden; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .close {
-            position: absolute;
-            right: 20px; top: 15px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: white;
-            z-index: 1010;
-        }
-
-        .modal-image { width: 100%; height: auto; display: block; object-fit: cover; max-height: 450px; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 2.5rem; cursor: pointer; color: white; z-index: 1010; }
+        .modal-media { width: 100%; height: auto; display: block; object-fit: cover; max-height: 450px; background: #000; }
         .modal-body { padding: 3rem; }
         .modal-body h2 { color: var(--blue); font-size: 2rem; margin-top: 0; margin-bottom: 0.2rem; font-weight: 800; }
         .modal-body .sub-header { font-size: 1.2rem; color: #64748b; margin-bottom: 2rem; display: block; font-weight: 400; }
         .modal-body p { font-size: 1.1rem; color: #334155; line-height: 1.7; white-space: pre-line; }
-        
-        .quote { 
-            border-left: 4px solid var(--blue); 
-            padding-left: 1.5rem; 
-            margin: 2rem 0; 
-            font-style: italic; 
-            color: var(--text);
-        }
-
+        .quote { border-left: 4px solid var(--blue); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--text); }
         .signature { display: block; margin-top: 2.5rem; color: var(--blue); font-size: 1.1rem; }
-
-        @media (max-width: 768px) {
-            .modal-body { padding: 1.5rem; }
-        }
+        @media (max-width: 768px) { .modal-body { padding: 1.5rem; } }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html">Work</a>
-    <a href="about.html">About Me</a>
-</nav>
+<nav><a href="index.html">Work</a><a href="about.html">About Me</a></nav>
 
 <div class="container">
     <a href="index.html" class="back-link">← Back to Work</a>
@@ -138,7 +52,7 @@
         </div>
 
         <div class="project-item" onclick="openModal('direkto')">
-            <img src="direkto.jpg" alt="Direkto">
+            <video muted loop playsinline><source src="direkto.mp4" type="video/mp4"></video>
             <div class="overlay"></div>
             <div class="content-label"><h3>Direkto</h3></div>
         </div>
@@ -159,25 +73,29 @@
 <script>
     const copyData = {
         'adidas': {
-            title: 'Speed and Precision',
-            sub: 'Crafted for Goals.',
-            image: 'adidas.jpg',
-            text: `Adidas is one of the world's most iconic sports brands. This case focuses on the development of communication materials that match their high standards of performance and style.
+            title: 'Crafted for Goals.',
+            type: 'image',
+            src: 'adidas.jpg',
+            text: `To launch the new Predator football boots, adidas Football Nordic and Unisport didn’t just want attention — they wanted impact. So they called in BANG to turn hype into experience.
+We took over a padel court in Nørrebro — a district known for diversity, street culture and creative energy. The perfect match for the Predator mindset. There, we built the Predator Cage: 45 seconds, one high-tech goal, and as many goals as you could score. Top scorer of the day? Immortalized on a mural wall in central Copenhagen. Top 5? Custom boots. No pressure.
+To crank up the energy even more, we brought in heavy-hitting creators like Jasseminho, Anusha, Sarah and Drux who turned the space into a live arena with panna, freestyles, and crowd battles.
+The response was massive — over 5,000 visitors and 286 players in the Predator Cage. 198 of them came back for a second shot, and 146 couldn’t stop at two. Online, we hit 190,000+ views, led by reels and TikToks. Goals, glory and faces on walls. This was more than a launch. It was football, culture and competition. All in one strike.
 
-            <strong>Filip Perjans - Copywriting for casetext</strong>`
+            <span class="signature"><strong>Filip Perjans - Copywriting for casetext</strong></span>`
         },
         'direkto': {
-            title: 'The Smarter Choice',
-            sub: 'Think about the percentage.',
-            image: 'direkto.jpg',
-            text: `Direkto helps people save money on their loans. The communication focuses on clarity, trust, and the tangible benefit of lowering your interest rate.
+            title: 'Think about the percentage.',
+            type: 'video',
+            src: 'direkto.mp4',
+            text: `If you want to compare loans from different lenders, Direkto helps you find the best offer. As an independent actor focused on honesty and transparency, Direkto intends to offer its customers the best loan offers, services and financial guidance. It’s the financial superhero you didn’t know you needed. In a world of fierce competition, where loan offers are as common as daylight, we asked ourselves, “How do we make Direkto the rockstar of the financial game?
+Cue the drumroll for “Gubbrap” - our brainchild changing the loan game. We created the tagline “Think about the percentage” and infused music and humour into Direkto’s DNA to make it the talk of the town, the life of the financial party.
 
-            <strong>Filip Perjans - Copywriting for casetext</strong>`
+            <span class="signature"><strong>Filip Perjans - Copywriting for casetext</strong></span>`
         },
         'bang': {
-            title: 'Agency of the Year 2024',
-            sub: 'Nominated. Agency of the Year.',
-            image: 'bang.jpg',
+            title: 'Nominated. Agency of the Year 2024.',
+            type: 'image',
+            src: 'bang.jpg',
             text: `Bang the drumroll! We are thrilled to announce that we’ve been nominated for Agency of the Year 2024. The nod comes straight from Regi's annual industry and client survey, now in its 24th edition. Once again, proof that we’re still rocking the communication game …
 
             The winners will be unveiled at the Regi annual gala on February 22 at Sergel Hub in Stockholm. To make the cut of being nominated, agencies need both a hefty clientele and top-tier satisfaction across 15 criteria, which makes us even more proud of being nominated.
@@ -196,9 +114,13 @@
         const data = copyData[id];
         if (!data) return;
 
+        let mediaHtml = data.type === 'video' 
+            ? `<video controls autoplay class="modal-media"><source src="${data.src}" type="video/mp4"></video>`
+            : `<img src="${data.src}" class="modal-media">`;
+
         area.innerHTML = `
             <div class="modal-content">
-                <img src="${data.image}" class="modal-image">
+                ${mediaHtml}
                 <div class="modal-body">
                     <h2>${data.title}</h2>
                     <span class="sub-header">${data.sub}</span>
@@ -206,7 +128,6 @@
                 </div>
             </div>
         `;
-        
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
     }
@@ -220,6 +141,5 @@
         if (event.target == document.getElementById('copyModal')) closeModal();
     }
 </script>
-
 </body>
 </html>
