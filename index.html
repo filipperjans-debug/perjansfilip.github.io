@@ -121,6 +121,92 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
         }
+        <style>
+    /* CSS for the Grid - Add this to your <style> section */
+    .works-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .project-card {
+        background-color: rgba(90, 120, 99, 0.1); /* Using #5A7863 with transparency */
+        border: 1px solid rgba(144, 171, 139, 0.2); /* Soft border */
+        height: 400px;
+        text-decoration: none;
+        display: flex;
+        align-items: flex-end;
+        padding: 40px;
+        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-card:hover {
+        background-color: rgba(144, 171, 139, 0.15); /* Shift to #90AB8B on hover */
+        border-color: #90AB8B;
+        transform: translateY(-10px);
+    }
+
+    .project-info {
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-info {
+        transform: translateY(-10px);
+    }
+
+    .category {
+        color: #90AB8B;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .project-card h3 {
+        font-family: 'Playfair Display', serif;
+        color: #EBF4DD;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .project-card p {
+        color: #90AB8B;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .project-card:hover p {
+        opacity: 1;
+    }
+
+    /* Tablet adjustment */
+    @media (max-width: 900px) {
+        .project-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    /* Mobile adjustment */
+    @media (max-width: 600px) {
+        .project-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
     </style>
 </head>
 <body>
@@ -137,8 +223,35 @@
         <p class="sub-headline">Some of my works</p>
     </main>
 
-    <div class="works-section">
-        </div>
+   <div class="works-section">
+    <div class="project-grid">
+        
+        <a href="project-1.html" class="project-card">
+            <div class="project-info">
+                <span class="category">Brand Identity</span>
+                <h3>Project Title One</h3>
+                <p>View Project</p>
+            </div>
+        </a>
+
+        <a href="project-2.html" class="project-card">
+            <div class="project-info">
+                <span class="category">Copywriting</span>
+                <h3>Project Title Two</h3>
+                <p>View Project</p>
+            </div>
+        </a>
+
+        <a href="project-3.html" class="project-card">
+            <div class="project-info">
+                <span class="category">Digital Design</span>
+                <h3>Project Title Three</h3>
+                <p>View Project</p>
+            </div>
+        </a>
+
+    </div>
+</div>
 
     <script>
         // Generate random stars
