@@ -1,374 +1,171 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me | Filip Perjans</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
+    <title>ABOUT ME | FILIP PERJAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --bg-color: #E3E3E3; 
-            --text-color: #1B3C53; 
-            --highlight-blue: #456882;
-            --timeline-grey: #C0C0C0;
+        :root {
+            --bg-deep: #3B4953;
+            --text-light: #EBF4DD;
+            --accent-soft: #90AB8B;
+            --accent-muted: #5A7863;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            background-color: var(--bg-color); 
-            color: var(--brand-blue); 
-            line-height: 1.6;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Navigering */
+        /* Twinkling Stars Animation */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        /* Navigation - Identical to index.html */
         nav {
+            position: relative;
+            z-index: 10;
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            padding: 2rem 0;
-            background-color: var(--bg-color);
+            gap: 40px;
+            padding: 40px 0;
         }
 
-        .nav-link {
-            color: var(--text-color);
+        nav a {
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 5px;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-link:hover {
+            font-weight: 300;
+            transition: color 0.3s;
             opacity: 0.7;
         }
 
-        /* Understryknings-stilen finns kvar i CSS men används inte på index.html */
-        .nav-link.active { 
-            border-bottom: 2px solid var(--brand-blue); 
+        nav a:hover {
+            color: var(--accent-soft);
+            opacity: 1;
         }
 
-        /* CONTAINER & LAYOUT */
-        .container { 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            padding: 2rem 2rem 5rem 2rem; 
+        nav a.active {
+            opacity: 1;
+            border-bottom: 1px solid var(--accent-soft);
+            padding-bottom: 5px;
         }
 
-        .profile-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .profile-img {
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 2rem;
-        }
-
-        h1 { 
-            color: var(--text-color);
-            font-size: 3rem; 
-            font-weight: 700; 
-            margin: 0; 
-            text-transform: uppercase; 
-            letter-spacing: -0.02rem;
-        }
-        
-        .summary-text { 
-            color: var(--text-color);
-            max-width: 700px; 
-            margin: 2rem auto 0 auto; 
-            font-size: 1.1rem; 
-            font-weight: 300;
-            opacity: 0.85;
+        /* Content Section */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
             text-align: center;
         }
 
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(26, 26, 26, 0.15);
-            padding-bottom: 0.7rem;
-        }
-
-        .section-header.right {
-            justify-content: flex-end;
-            text-align: right;
-        }
-
-        h2 { 
-            color: var(--text-color);
-            font-size: 1.2rem; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            margin: 0;
-            letter-spacing: 0.05rem;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 4.5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            bottom: 8px;
-            width: 1px;
-            background-color: var(--timeline-grey);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.85rem;
-            top: 0.6rem;
-            width: 9px;
-            height: 9px;
-            background-color: var(--timeline-grey);
-            border-radius: 50%;
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            font-weight: 400;
-            display: block;
-            margin-bottom: 0.3rem;
-            opacity: 0.5;
-        }
-
-        .name-highlight {
-            color: var(--text-color);
-            font-weight: 600;
-            font-size: 1.2rem;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-
-        .role-title {
-            color: var(--highlight-blue);
-            font-weight: 500;
-            font-size: 1rem;
-            display: block;
-            margin-bottom: 0.8rem;
-        }
-
-        .role-desc {
-            font-size: 0.95rem;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-weight: 300;
-        }
-
-        .role-desc li { 
-            margin-bottom: 0.5rem; 
-            position: relative;
-            padding-left: 1.2rem;
-        }
-        .role-desc li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--highlight-blue);
-        }
-
-        .right-col { text-align: right; }
-        .info-block { margin-bottom: 4.5rem; }
-
-        .contact-list, .skills-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .contact-list li {
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            letter-spacing: 0.3rem;
             margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 15px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-soft);
+            margin: 20px auto;
+        }
+
+        /* Content Placeholder */
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
             font-weight: 300;
-            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-top: 40px;
+            text-align: left; /* Better for readability in biographies */
         }
 
-        .contact-list i {
-            color: var(--highlight-blue);
-            font-size: 0.9rem;
-            width: 15px;
-            text-align: center;
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
         }
-
-        .skills-list li { 
-            margin-bottom: 0.6rem; 
-            font-weight: 300;
-            font-size: 0.95rem;
-        }
-
-        .contact-link {
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        @media (max-width: 850px) {
-            .main-grid { grid-template-columns: 1fr; gap: 4rem; }
-            .section-header.right { justify-content: flex-start; text-align: left; }
-            .right-col { text-align: left; }
-            .contact-list li { justify-content: flex-start; }
-        }
-
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="nav-link">Work</a>
-    <a href="about.html" class="nav-link">About me</a>
-</nav>
+    <div class="stars-container" id="stars"></div>
 
-<div class="container">
-    <div class="profile-header">
-        <img src="din-bild.jpg" alt="Filip Perjans" class="profile-img">
-        <h1>Filip Perjans</h1>
-        <div class="summary-text">
-            Dedicated and driven Production Manager with experience leading projects and campaigns within creative production and events. I thrive on planning and coordinating resources, budgets, and creative teams to deliver high-quality results on time.
+    <nav>
+        <a href="index.html">WORK</a>
+        <a href="about.html" class="active">ABOUT ME</a>
+    </nav>
+
+    <main>
+        <h1>ABOUT ME</h1>
+        <div class="divider"></div>
+        
+        <div class="about-content">
+            <p style="text-align: center; opacity: 0.6; font-style: italic;">
+                Share your story here...
+            </p>
         </div>
-    </div>
+    </main>
 
-    <div class="main-grid">
-        <div class="left-col">
-            <div class="section-header">
-                <h2>Professional Experience</h2>
-            </div>
-            <div class="timeline">
-                    <span class="name-highlight">BANG Agency</span>
-                    <span class="role-title">Production Manager</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">Jan 2024 – Present</span>
-                    <ul class="role-desc">
-                        <li>Coordinate and manage the production process for various projects, from concept to execution, for clients such as the Swedish Armed Forces (Försvarsmakten).</li>
-                        <li>Responsible for parts of copywriting, including texts for digital channels.</li>
-                        <li>Manage planning and execution of events, gaining experience across the entire production chain.</li>
-                        <li>Oversee diverse productions ranging from large-scale career fairs for the Swedish Armed Forces to major music festivals for Desperados.</li>
-                        <li>Plan resources, budgets, and timelines for cross-functional teams, ensuring punctual project delivery.</li>
-                    </ul>
-                </div>
-                    <span class="name-highlight">DHL</span>
-                    <span class="role-title">Delivery Driver</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">June 2022 – Aug 2022</span>
-                    <ul class="role-desc">
-                        <li>Delivered and collected packages daily within Gothenburg following planned routes, ensuring on-time delivery.</li>
-                        <li>Structured and optimized personal routes for maximum time efficiency.</li>
-                        <li>Worked independently under time pressure and solved logistical problems quickly to ensure high customer satisfaction.</li>
-                    </ul>
-                </div>
-                    <span class="name-highlight">IKEA</span>
-                    <span class="role-title">Warehouse Associate</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">May 2021 – Aug 2021</span>
-                    <ul class="role-desc">
-                        <li>Managed stock replenishment and picked customer orders to ensure accurate delivery.</li>
-                        <li>Verified and dispatched orders with a focus on precision and punctuality.</li>
-                        <li>Provided high-quality customer service and supported colleagues to maintain a smooth workflow.</li>
-                    </ul>
-                </div>
-            </div>
+    <script>
+        // Star generation script - Matches index.html exactly
+        const container = document.getElementById('stars');
+        const starCount = 60;
 
-            <div class="section-header">
-                <h2>Education</h2>
-            </div>
-            <div class="timeline">
-                    <span class="name-highlight">Karlstad University</span>
-                    <span class="role-title">Bachelor’s Degree in Communication & PR</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">Aug 2021 – 2024</span>
-                </div>
-                    <span class="name-highlight">University of Borås</span>
-                    <span class="role-title">Portfolio & Graphic Design</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">June 2023 – Aug 2023</span>
-                </div>
-                    <span class="name-highlight">Blekinge Institute of Technology</span>
-                    <span class="role-title">Digital Photography</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">June 2023 – Aug 2023</span>
-                </div>
-                    <span class="name-highlight">Hulebäcksgymnasiet</span>
-                    <span class="role-title">Social Science, Behavioral Science</span>
-                <div class="timeline-item">
-                    <span class="timeline-date">Aug 2016 – May 2019</span>
-                </div>
-            </div>
-        </div>
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 2 + 1;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 3 + 2;
 
-        <div class="right-col">
-            <div class="info-block">
-                <div class="section-header right">
-                    <h2>Contact Information</h2>
-                </div>
-                <ul class="contact-list">
-                    <li>Morellvägen 19, Älta, Sweden <i class="fa-solid fa-location-dot"></i></li>
-                    <li>+46 760 27 15 81 <i class="fa-solid fa-phone"></i></li>
-                    <li><a href="mailto:perjansfilip@outlook.com" class="contact-link">perjansfilip@outlook.com</a> <i class="fa-solid fa-envelope"></i></li>
-                    <li><a href="https://www.linkedin.com/in/filip-perjans-679aa0192/?originalSubdomain=se" target="_blank" class="contact-link">Filip Perjans</a> <i class="fa-brands fa-linkedin"></i></li>
-                </ul>
-            </div>
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.animationDelay = `${delay}s`;
 
-            <div class="info-block">
-                <div class="section-header right">
-                    <h2>Core Competencies</h2>
-                </div>
-                <ul class="skills-list">
-                    <li>Project Management</li>
-                    <li>Production Management</li>
-                    <li>Budget Planning</li>
-                    <li>Resource & Timeline Planning</li>
-                    <li>Adobe Creative Suite</li>
-                    <li>Strategic Communication</li>
-                    <li>Office 365</li>
-                </ul>
-            </div>
-
-            <div class="info-block">
-                <div class="section-header right">
-                    <h2>Skills & Languages</h2>
-                </div>
-                <ul class="skills-list">
-                    <li>Swedish (Native)</li>
-                    <li>English (Fluent)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
+            container.appendChild(star);
+        }
+    </script>
 </body>
 </html>
