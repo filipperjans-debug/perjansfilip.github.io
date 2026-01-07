@@ -117,7 +117,6 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            /* Padding on left/right allows the "pile" look on scroll */
             padding: 20px 40px; 
             gap: 20px;
             scroll-behavior: smooth;
@@ -132,19 +131,18 @@
 
         /* Sleek Square Card - Sized for 4 per view */
         .project-card {
-            /* 25% minus some gap for spacing makes 4 visible at once */
             flex: 0 0 calc(25% - 20px); 
-            aspect-ratio: 1 / 1; /* Keeps it perfectly square */
+            aspect-ratio: 1 / 1; 
             background-color: rgba(90, 120, 99, 0.1);
             border: 1px solid rgba(144, 171, 139, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             scroll-snap-align: start;
             transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer;
+            text-decoration: none;
         }
 
         .project-card:hover {
@@ -156,44 +154,50 @@
         .project-heading {
             font-family: 'Playfair Display', serif;
             color: var(--text-light);
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
         }
 
         .project-body {
             font-size: 0.75rem;
             line-height: 1.4;
             font-weight: 300;
-            opacity: 0.7;
+            color: var(--accent-soft);
+            opacity: 0.9;
             margin-bottom: 15px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .view-link {
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent-soft);
+            color: var(--text-light);
+            opacity: 0.5;
             text-decoration: none;
             border-bottom: 1px solid transparent;
             align-self: center;
         }
 
         .project-card:hover .view-link {
+            opacity: 1;
             border-bottom: 1px solid var(--accent-soft);
         }
 
-        /* Mobile adjustments: Show 1.5 cards for better UX on small screens */
-        @media (max-width: 1024px) {
-            .project-card { flex: 0 0 calc(50% - 20px); }
+        /* Tablet/Mobile adjustments */
+        @media (max-width: 1100px) {
+            .project-card { flex: 0 0 calc(33.33% - 20px); }
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .project-card { flex: 0 0 75%; }
+        @media (max-width: 768px) {
+            .project-card { flex: 0 0 calc(50% - 20px); }
+            h1 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .project-card { flex: 0 0 85%; }
             .works-container { padding: 0 20px; }
         }
     </style>
@@ -215,53 +219,53 @@
     <div class="works-wrapper">
         <div class="works-container">
             
-            <div class="project-card">
-                <h3 class="project-heading">Project One</h3>
-                <p class="project-body">Production management for creative campaigns.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Event Production</h3>
+                <p class="project-body">Veteran´s Day</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Two</h3>
-                <p class="project-body">Strategy and coordination for digital events.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Website Casetext</h3>
+                <p class="project-body">BANG Agency</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Three</h3>
-                <p class="project-body">Resource planning and creative team lead.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Brand Development & Copywriting</h3>
+                <p class="project-body">Rekoroben</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Four</h3>
-                <p class="project-body">Managing large-scale festival productions.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Event Production & Copywriting</h3>
+                <p class="project-body">Försvara Nätet</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Five</h3>
-                <p class="project-body">Integrated marketing for luxury brands.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Website Article</h3>
+                <p class="project-body">BANG Agency</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Six</h3>
-                <p class="project-body">Editorial design and high-end copywriting.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Event Production</h3>
+                <p class="project-body">Desperados Summer Tour</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Seven</h3>
-                <p class="project-body">Art direction and photographic imaging.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Copywriting Cases</h3>
+                <p class="project-body">Fictional</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Eight</h3>
-                <p class="project-body">Project coordination for military trade fairs.</p>
+            <a href="#" class="project-card">
+                <h3 class="project-heading">Website Article</h3>
+                <p class="project-body">BANG Agency</p>
                 <span class="view-link">Explore</span>
-            </div>
+            </a>
 
         </div>
     </div>
