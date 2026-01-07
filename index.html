@@ -97,6 +97,16 @@
         .modal-h { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; line-height: 1.2; }
         .modal-text { font-size: 1rem; line-height: 1.8; font-weight: 300; opacity: 0.9; margin-bottom: 30px; }
         
+        /* Modal Image Styling */
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            margin-bottom: 40px;
+            border: 1px solid rgba(144, 171, 139, 0.2);
+        }
+
         .image-placeholder {
             width: 100%; height: 450px;
             background: rgba(144, 171, 139, 0.1);
@@ -162,27 +172,90 @@
         </div>
     </div>
 
-    <div id="m1" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m1')">&times;</span><span class="modal-sub">Veteran´s Day</span><h2 class="modal-h">Event Production</h2><img src="veterandagen.jpg"></div><div class="modal-text">Details about the production of Veteran's Day event.</div></div></div>
+    <div id="m1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m1')">&times;</span>
+            <span class="modal-sub">Veteran´s Day</span>
+            <h2 class="modal-h">Event Production</h2>
+            <img src="vetarandagen.jpg" alt="Veterans Day Production">
+            <div class="modal-text">Details about the production of Veteran's Day event.</div>
+        </div>
+    </div>
     
-    <div id="m2" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m2')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Casetext</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Crafting professional casetext for BANG Agency's digital presence.</div></div></div>
+    <div id="m2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m2')">&times;</span>
+            <span class="modal-sub">BANG Agency</span>
+            <h2 class="modal-h">Website Casetext</h2>
+            <div class="image-placeholder">Visual Content Placeholder</div>
+            <div class="modal-text">Crafting professional casetext for BANG Agency's digital presence.</div>
+        </div>
+    </div>
     
-    <div id="m3" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m3')">&times;</span><span class="modal-sub">Rekoroben</span><h2 class="modal-h">Brand Development & Copywriting</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Comprehensive brand identity and copy for a sustainable second-hand concept.</div></div></div>
+    <div id="m3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m3')">&times;</span>
+            <span class="modal-sub">Rekoroben</span>
+            <h2 class="modal-h">Brand Development & Copywriting</h2>
+            <img src="rekoroben.jpg" alt="Rekoroben Branding">
+            <div class="modal-text">Comprehensive brand identity and copy for a sustainable second-hand concept.</div>
+        </div>
+    </div>
     
-    <div id="m4" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m4')">&times;</span><span class="modal-sub">Försvara Nätet</span><h2 class="modal-h">Event Production & Copywriting</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Strategic event production combined with targeted copywriting.</div></div></div>
+    <div id="m4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m4')">&times;</span>
+            <span class="modal-sub">Försvara Nätet</span>
+            <h2 class="modal-h">Event Production & Copywriting</h2>
+            <div class="image-placeholder">Visual Content Placeholder</div>
+            <div class="modal-text">Strategic event production combined with targeted copywriting.</div>
+        </div>
+    </div>
     
-    <div id="m5" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m5')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Article</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Content production and storytelling for BANG Agency.</div></div></div>
+    <div id="m5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m5')">&times;</span>
+            <span class="modal-sub">BANG Agency</span>
+            <h2 class="modal-h">Website Article</h2>
+            <div class="image-placeholder">Visual Content Placeholder</div>
+            <div class="modal-text">Content production and storytelling for BANG Agency.</div>
+        </div>
+    </div>
     
-    <div id="m6" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m6')">&times;</span><span class="modal-sub">Desperados Summer Tour</span><h2 class="modal-h">Event Production</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">High-energy production and logistical management for the Desperados summer tour.</div></div></div>
+    <div id="m6" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m6')">&times;</span>
+            <span class="modal-sub">Desperados Summer Tour</span>
+            <h2 class="modal-h">Event Production</h2>
+            <img src="desperados.jpg" alt="Desperados Summer Tour">
+            <div class="modal-text">High-energy production and logistical management for the Desperados summer tour.</div>
+        </div>
+    </div>
     
-    <div id="m7" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m7')">&times;</span><span class="modal-sub">Fictional</span><h2 class="modal-h">Copywriting Cases</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">A collection of creative copywriting exercises and fictional brand cases.</div></div></div>
+    <div id="m7" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m7')">&times;</span>
+            <span class="modal-sub">Fictional</span>
+            <h2 class="modal-h">Copywriting Cases</h2>
+            <div class="image-placeholder">Visual Content Placeholder</div>
+            <div class="modal-text">A collection of creative copywriting exercises and fictional brand cases.</div>
+        </div>
+    </div>
     
-    <div id="m8" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m8')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Article</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Editorial content and project documentation for BANG Agency.</div></div></div>
+    <div id="m8" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('m8')">&times;</span>
+            <span class="modal-sub">BANG Agency</span>
+            <h2 class="modal-h">Website Article</h2>
+            <div class="image-placeholder">Visual Content Placeholder</div>
+            <div class="modal-text">Editorial content and project documentation for BANG Agency.</div>
+        </div>
+    </div>
 
     <script>
         function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
         function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
         
-        // Star logic
         const container = document.getElementById('stars');
         for (let i = 0; i < 65; i++) {
             const star = document.createElement('div');
