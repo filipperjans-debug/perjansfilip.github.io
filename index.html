@@ -122,46 +122,57 @@
             h1 { font-size: 2.5rem; }
         }
         <style>
-    /* CSS for the Grid - Add this to your <style> section */
-    .works-section {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 60px 20px;
-        position: relative;
-        z-index: 10;
+    /* Layout Adjustments */
+    .sub-headline {
+        margin-bottom: 40px; /* Reduced space to bring cards higher */
     }
 
-    .project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Horizontal Scroll Logic */
+    .works-wrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+        padding-bottom: 50px;
+    }
+
+    .works-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 15%; /* This creates the "visible piles" on the sides */
         gap: 30px;
     }
 
+    /* Hide the scrollbar but keep functionality */
+    .works-container::-webkit-scrollbar {
+        display: none;
+    }
+    .works-container {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
     .project-card {
-        background-color: rgba(90, 120, 99, 0.1); /* Using #5A7863 with transparency */
-        border: 1px solid rgba(144, 171, 139, 0.2); /* Soft border */
-        height: 400px;
-        text-decoration: none;
+        flex: 0 0 70%; /* Shows the center card largely while peaking at others */
+        height: 450px;
+        background-color: rgba(90, 120, 99, 0.15);
+        border: 1px solid rgba(144, 171, 139, 0.2);
         display: flex;
         align-items: flex-end;
         padding: 40px;
-        transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: all 0.4s ease;
+        scroll-snap-align: center; /* The card will lock to the center */
+        text-decoration: none;
         position: relative;
-        overflow: hidden;
     }
 
     .project-card:hover {
-        background-color: rgba(144, 171, 139, 0.15); /* Shift to #90AB8B on hover */
+        background-color: rgba(144, 171, 139, 0.2);
         border-color: #90AB8B;
-        transform: translateY(-10px);
-    }
-
-    .project-info {
-        transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-info {
-        transform: translateY(-10px);
+        transform: scale(1.02); /* Subtle pop effect */
     }
 
     .category {
@@ -176,8 +187,8 @@
     .project-card h3 {
         font-family: 'Playfair Display', serif;
         color: #EBF4DD;
-        font-size: 1.8rem;
-        margin-bottom: 15px;
+        font-size: 2rem;
+        margin-bottom: 10px;
     }
 
     .project-card p {
@@ -185,29 +196,31 @@
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        opacity: 0;
-        transition: opacity 0.5s ease;
+        opacity: 0.6;
     }
 
-    .project-card:hover p {
-        opacity: 1;
-    }
-
-    /* Tablet adjustment */
-    @media (max-width: 900px) {
-        .project-grid {
-            grid-template-columns: 1fr 1fr;
+    /* Desktop View adjustments for card size */
+    @media (min-width: 1024px) {
+        .project-card {
+            flex: 0 0 500px; /* Fixed width for a very elegant look on large screens */
+        }
+        .works-container {
+            padding: 0 25%; /* Shows more of the "piles" on desktop */
         }
     }
 
-    /* Mobile adjustment */
+    /* Mobile View */
     @media (max-width: 600px) {
-        .project-grid {
-            grid-template-columns: 1fr;
+        .project-card {
+            flex: 0 0 85%;
+            height: 350px;
         }
+        .works-container {
+            padding: 0 7.5%;
+        }
+        h1 { font-size: 2rem; }
     }
 </style>
-    </style>
 </head>
 <body>
 
@@ -218,37 +231,77 @@
         <a href="about.html">ABOUT ME</a>
     </nav>
 
-    <main>
-        <h1>FILIP PERJANS</h1>
-        <p class="sub-headline">Some of my works</p>
-    </main>
+   <main style="height: auto; padding-top: 40px;">
+    <h1>FILIP PERJANS</h1>
+    <p class="sub-headline">Some of my works</p>
+</main>
 
-   <div class="works-section">
-    <div class="project-grid">
+<div class="works-wrapper">
+    <div class="works-container">
         
-        <a href="project-1.html" class="project-card">
+        <div class="project-card">
             <div class="project-info">
                 <span class="category">Brand Identity</span>
                 <h3>Project Title One</h3>
                 <p>View Project</p>
             </div>
-        </a>
+        </div>
 
-        <a href="project-2.html" class="project-card">
+        <div class="project-card">
             <div class="project-info">
                 <span class="category">Copywriting</span>
                 <h3>Project Title Two</h3>
                 <p>View Project</p>
             </div>
-        </a>
+        </div>
 
-        <a href="project-3.html" class="project-card">
+        <div class="project-card">
             <div class="project-info">
-                <span class="category">Digital Design</span>
+                <span class="category">Digital Strategy</span>
                 <h3>Project Title Three</h3>
                 <p>View Project</p>
             </div>
-        </a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-info">
+                <span class="category">Production</span>
+                <h3>Project Title Four</h3>
+                <p>View Project</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-info">
+                <span class="category">Creative Lead</span>
+                <h3>Project Title Five</h3>
+                <p>View Project</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-info">
+                <span class="category">Event Management</span>
+                <h3>Project Title Six</h3>
+                <p>View Project</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-info">
+                <span class="category">Social Media</span>
+                <h3>Project Title Seven</h3>
+                <p>View Project</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-info">
+                <span class="category">Web Design</span>
+                <h3>Project Title Eight</h3>
+                <p>View Project</p>
+            </div>
+        </div>
 
     </div>
 </div>
