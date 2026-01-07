@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABOUT ME | FILIP PERJAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <title>ABOUT ME | FILIP PERJANS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #3B4953;
@@ -23,8 +23,8 @@
             background-color: var(--bg-deep);
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         /* Twinkling Stars Animation */
@@ -51,75 +51,170 @@
             50% { opacity: 0.7; transform: scale(1.2); }
         }
 
-        /* Navigation - Identical to index.html */
+        /* Navigation */
         nav {
             position: relative;
             z-index: 10;
             display: flex;
             justify-content: center;
             gap: 40px;
-            padding: 40px 0;
+            padding: 30px 0;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 300;
-            transition: color 0.3s;
-            opacity: 0.7;
+            opacity: 0.6;
+            transition: 0.3s;
         }
 
-        nav a:hover {
+        nav a.active, nav a:hover {
+            opacity: 1;
             color: var(--accent-soft);
-            opacity: 1;
         }
 
-        nav a.active {
-            opacity: 1;
-            border-bottom: 1px solid var(--accent-soft);
-            padding-bottom: 5px;
-        }
-
-        /* Content Section */
-        main {
+        /* Layout */
+        .container {
             position: relative;
             z-index: 10;
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 40px 100px 40px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
         }
 
-        h1 {
+        /* Left Column: Contact & Skills */
+        .sidebar h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            letter-spacing: 0.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-soft);
+        }
+
+        .contact-group, .skills-group {
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .contact-item span {
+            display: block;
+            color: var(--accent-soft);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(144, 171, 139, 0.3);
+        }
+
+        .skill-tag {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+
+        /* Right Column: Experience & Education */
+        .main-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 5px;
+        }
+
+        .title-sub {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-soft);
+            margin-bottom: 30px;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(144, 171, 139, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 35px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .exp-role {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .exp-company {
+            color: var(--accent-soft);
+            font-style: italic;
+        }
+
+        .exp-date {
+            font-size: 0.8rem;
+            opacity: 0.6;
             text-transform: uppercase;
         }
 
-        .divider {
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent-soft);
-            margin: 20px auto;
+        .exp-list {
+            list-style: none;
+            padding-left: 0;
         }
 
-        /* Content Placeholder */
-        .about-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .exp-list li {
+            font-size: 0.95rem;
             font-weight: 300;
-            color: var(--text-light);
-            margin-top: 40px;
-            text-align: left; /* Better for readability in biographies */
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+            opacity: 0.8;
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
+        .exp-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent-soft);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 20px;
+            }
+            .main-content h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -132,22 +227,96 @@
         <a href="about.html" class="active">ABOUT ME</a>
     </nav>
 
-    <main>
-        <h1>ABOUT ME</h1>
-        <div class="divider"></div>
-        
-        <div class="about-content">
-            <p style="text-align: center; opacity: 0.6; font-style: italic;">
-                Share your story here...
+    <div class="container">
+        <aside class="sidebar">
+            <div class="contact-group">
+                <h2>Contact</h2>
+                <div class="contact-item"><span>Address</span>Morellvägen 19, Älta</div>
+                <div class="contact-item"><span>Phone</span>0760 27 15 81</div>
+                <div class="contact-item"><span>Email</span><a href="mailto:perjansfilip@outlook.com">perjansfilip@outlook.com</a></div>
+                <div class="contact-item"><span>LinkedIn</span><a href="https://linkedin.com/in/filip-perjans-679aa0192" target="_blank">Filip Perjans</a></div>
+            </div>
+
+            <div class="skills-group">
+                <h2>Skills</h2>
+                <span class="skill-tag">Project Management</span>
+                <span class="skill-tag">Production Management</span>
+                <span class="skill-tag">Budget Planning</span>
+                <span class="skill-tag">Adobe Creative Suite</span>
+                <span class="skill-tag">English (Good knowledge)</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1>Filip Perjans</h1>
+            <p class="title-sub">Production Manager</p>
+            
+            <p class="summary">
+                Committed and driven production manager with experience leading projects and campaigns in creative productions and events. Enjoys planning and coordinating resources, budgets, and creative teams to deliver high-quality results on time. Works well independently and under pressure.
             </p>
-        </div>
-    </main>
+
+            <h2 class="section-header">Professional Experience</h2>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <div>
+                        <span class="exp-role">Production Manager</span> | 
+                        <span class="exp-company">BANG Agency</span>
+                    </div>
+                    <span class="exp-date">Jan 2024 - Present</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Manages production for clients such as the Swedish Armed Forces and music festivals for Desperados.</li>
+                    <li>Responsible for copy-related material and texts for digital channels.</li>
+                    <li>Planned resources, budgets, and timelines ensuring on-time delivery.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <div>
+                        <span class="exp-role">Delivery Driver</span> | 
+                        <span class="exp-company">DHL</span>
+                    </div>
+                    <span class="exp-date">Jun 2022 – Aug 2022</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Optimized routes for time and efficiency under pressure.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <div>
+                        <span class="exp-role">Warehouse worker</span> | 
+                        <span class="exp-company">IKEA</span>
+                    </div>
+                    <span class="exp-date">May 2021 – Aug 2021</span>
+                </div>
+            </div>
+
+            <h2 class="section-header">Education</h2>
+            <div class="education-item">
+                <div class="exp-header">
+                    <span class="exp-role">Communication & PR</span>
+                    <span class="exp-date">2021 – 2024</span>
+                </div>
+                <p class="exp-company">Karlstad University</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="exp-header">
+                    <span class="exp-role">Graphic Design & Portfolio</span>
+                    <span class="exp-date">2023</span>
+                </div>
+                <p class="exp-company">University of Borås / Blekinge Institute</p>
+            </div>
+        </main>
+    </div>
 
     <script>
-        // Star generation script - Matches index.html exactly
         const container = document.getElementById('stars');
         const starCount = 60;
-
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
@@ -156,14 +325,12 @@
             const size = Math.random() * 2 + 1;
             const delay = Math.random() * 5;
             const duration = Math.random() * 3 + 2;
-
             star.style.left = `${x}%`;
             star.style.top = `${y}%`;
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.setProperty('--duration', `${duration}s`);
             star.style.animationDelay = `${delay}s`;
-
             container.appendChild(star);
         }
     </script>
