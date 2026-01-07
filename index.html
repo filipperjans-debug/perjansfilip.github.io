@@ -4,20 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FILIP PERJANS | Work</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-deep: #3B4953;
             --text-light: #EBF4DD;
             --accent-soft: #90AB8B;
-            --accent-muted: #5A7863;
+            --overlay: rgba(59, 73, 83, 0.98);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-deep);
@@ -30,110 +26,29 @@
         }
 
         /* Twinkling Stars Animation */
-        .stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 0.7; transform: scale(1.2); } }
 
         /* Navigation */
-        nav {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 30px 0;
-        }
+        nav { position: relative; z-index: 10; display: flex; justify-content: center; gap: 40px; padding: 30px 0; }
+        nav a { text-decoration: none; color: var(--text-light); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 300; opacity: 0.6; transition: 0.3s; }
+        nav a.active, nav a:hover { opacity: 1; color: var(--accent-soft); }
 
-        nav a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 300;
-            opacity: 0.6;
-            transition: 0.3s;
-        }
+        header { position: relative; z-index: 10; text-align: center; padding-top: 20px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; letter-spacing: 0.4rem; margin-bottom: 10px; }
+        .sub-headline { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-soft); font-weight: 300; margin-bottom: 20px; }
 
-        nav a.active, nav a:hover {
-            opacity: 1;
-            color: var(--accent-soft);
-        }
+        /* Horizontal Gallery */
+        .works-wrapper { position: relative; z-index: 10; width: 100%; flex-grow: 1; display: flex; align-items: center; }
+        .works-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 20px 40px; gap: 20px; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; width: 100%; }
+        .works-container::-webkit-scrollbar { display: none; }
 
-        /* Header Section */
-        header {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding-top: 20px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            letter-spacing: 0.4rem;
-            margin-bottom: 10px;
-        }
-
-        .sub-headline {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-soft);
-            font-weight: 300;
-            margin-bottom: 20px; 
-        }
-
-        /* Horizontal Gallery Wrapper */
-        .works-wrapper {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-        }
-
-        .works-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 20px 40px; 
-            gap: 20px;
-            scroll-behavior: smooth;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            width: 100%;
-        }
-
-        .works-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Sleek Square Card - Sized for 4 per view */
+        /* Sleek Square Card */
         .project-card {
             flex: 0 0 calc(25% - 20px); 
             aspect-ratio: 1 / 1; 
-            background-color: rgba(90, 120, 99, 0.1);
+            background-color: rgba(144, 171, 139, 0.05);
             border: 1px solid rgba(144, 171, 139, 0.15);
             display: flex;
             flex-direction: column;
@@ -142,64 +57,58 @@
             text-align: center;
             scroll-snap-align: start;
             transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-            text-decoration: none;
+            cursor: pointer;
+        }
+        .project-card:hover { border-color: var(--accent-soft); background: rgba(144, 171, 139, 0.1); transform: translateY(-5px); }
+
+        .project-heading { font-family: 'Playfair Display', serif; color: var(--text-light); font-size: 1.1rem; margin-bottom: 10px; line-height: 1.3; }
+        .project-body { font-size: 0.7rem; line-height: 1.4; color: var(--accent-soft); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* MODAL STYLING */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--overlay);
+            overflow-y: auto;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
-        .project-card:hover {
-            background-color: rgba(144, 171, 139, 0.1);
-            border-color: var(--accent-soft);
-            transform: scale(1.03);
+        .modal-content {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 60px 40px;
+            position: relative;
+            background: rgba(235, 244, 221, 0.02);
+            border: 1px solid rgba(144, 171, 139, 0.1);
         }
 
-        .project-heading {
-            font-family: 'Playfair Display', serif;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            line-height: 1.3;
+        .close-btn {
+            position: absolute; top: 20px; right: 40px;
+            font-size: 2.5rem; color: var(--accent-soft);
+            cursor: pointer; font-weight: 200;
+            transition: 0.3s;
+        }
+        .close-btn:hover { transform: rotate(90deg); color: var(--text-light); }
+
+        .modal-sub { color: var(--accent-soft); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 15px; display: block; }
+        .modal-h { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; line-height: 1.2; }
+        .modal-text { font-size: 1rem; line-height: 1.8; font-weight: 300; opacity: 0.9; margin-bottom: 30px; }
+        
+        .image-placeholder {
+            width: 100%; height: 450px;
+            background: rgba(144, 171, 139, 0.1);
+            margin-bottom: 40px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent-soft); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
         }
 
-        .project-body {
-            font-size: 0.75rem;
-            line-height: 1.4;
-            font-weight: 300;
-            color: var(--accent-soft);
-            opacity: 0.9;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .view-link {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-light);
-            opacity: 0.5;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            align-self: center;
-        }
-
-        .project-card:hover .view-link {
-            opacity: 1;
-            border-bottom: 1px solid var(--accent-soft);
-        }
-
-        /* Tablet/Mobile adjustments */
-        @media (max-width: 1100px) {
-            .project-card { flex: 0 0 calc(33.33% - 20px); }
-        }
-
-        @media (max-width: 768px) {
-            .project-card { flex: 0 0 calc(50% - 20px); }
-            h1 { font-size: 2.2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .project-card { flex: 0 0 85%; }
-            .works-container { padding: 0 20px; }
-        }
+        /* Responsive */
+        @media (max-width: 1100px) { .project-card { flex: 0 0 calc(33.33% - 20px); } }
+        @media (max-width: 768px) { .project-card { flex: 0 0 calc(50% - 20px); } h1 { font-size: 2.2rem; } }
+        @media (max-width: 480px) { .project-card { flex: 0 0 85%; } .works-container { padding: 0 20px; } .modal-content { margin: 20px; padding: 40px 20px; } }
     </style>
 </head>
 <body>
@@ -218,75 +127,72 @@
 
     <div class="works-wrapper">
         <div class="works-container">
-            
-            <a href="#" class="project-card">
+            <div class="project-card" onclick="openModal('m1')">
                 <h3 class="project-heading">Event Production</h3>
                 <p class="project-body">Veteran´s Day</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m2')">
                 <h3 class="project-heading">Website Casetext</h3>
                 <p class="project-body">BANG Agency</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m3')">
                 <h3 class="project-heading">Brand Development & Copywriting</h3>
                 <p class="project-body">Rekoroben</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m4')">
                 <h3 class="project-heading">Event Production & Copywriting</h3>
                 <p class="project-body">Försvara Nätet</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m5')">
                 <h3 class="project-heading">Website Article</h3>
-                <p class="project-body">BANG Agency</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+                <p class="project-body">BANG Agency (1)</p>
+            </div>
+            <div class="project-card" onclick="openModal('m6')">
                 <h3 class="project-heading">Event Production</h3>
                 <p class="project-body">Desperados Summer Tour</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m7')">
                 <h3 class="project-heading">Copywriting Cases</h3>
                 <p class="project-body">Fictional</p>
-                <span class="view-link">Explore</span>
-            </a>
-
-            <a href="#" class="project-card">
+            </div>
+            <div class="project-card" onclick="openModal('m8')">
                 <h3 class="project-heading">Website Article</h3>
-                <p class="project-body">BANG Agency</p>
-                <span class="view-link">Explore</span>
-            </a>
-
+                <p class="project-body">BANG Agency (2)</p>
+            </div>
         </div>
     </div>
 
+    <div id="m1" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m1')">&times;</span><span class="modal-sub">Veteran´s Day</span><h2 class="modal-h">Event Production</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Details about the production of Veteran's Day event.</div></div></div>
+    
+    <div id="m2" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m2')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Casetext</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Crafting professional casetext for BANG Agency's digital presence.</div></div></div>
+    
+    <div id="m3" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m3')">&times;</span><span class="modal-sub">Rekoroben</span><h2 class="modal-h">Brand Development & Copywriting</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Comprehensive brand identity and copy for a sustainable second-hand concept.</div></div></div>
+    
+    <div id="m4" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m4')">&times;</span><span class="modal-sub">Försvara Nätet</span><h2 class="modal-h">Event Production & Copywriting</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Strategic event production combined with targeted copywriting.</div></div></div>
+    
+    <div id="m5" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m5')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Article</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Content production and storytelling for BANG Agency.</div></div></div>
+    
+    <div id="m6" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m6')">&times;</span><span class="modal-sub">Desperados Summer Tour</span><h2 class="modal-h">Event Production</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">High-energy production and logistical management for the Desperados summer tour.</div></div></div>
+    
+    <div id="m7" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m7')">&times;</span><span class="modal-sub">Fictional</span><h2 class="modal-h">Copywriting Cases</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">A collection of creative copywriting exercises and fictional brand cases.</div></div></div>
+    
+    <div id="m8" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal('m8')">&times;</span><span class="modal-sub">BANG Agency</span><h2 class="modal-h">Website Article</h2><div class="image-placeholder">Visual Content Placeholder</div><div class="modal-text">Editorial content and project documentation for BANG Agency.</div></div></div>
+
     <script>
+        function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
+        
+        // Star logic
         const container = document.getElementById('stars');
-        const starCount = 65;
-        for (let i = 0; i < starCount; i++) {
+        for (let i = 0; i < 65; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
             const size = Math.random() * 2 + 1;
-            const delay = Math.random() * 5;
-            const duration = Math.random() * 3 + 2;
-            star.style.left = `${x}%`;
-            star.style.top = `${y}%`;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.setProperty('--duration', `${duration}s`);
-            star.style.animationDelay = `${delay}s`;
+            star.style.width = `${size}px`; star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            star.style.animationDelay = `${Math.random() * 5}s`;
             container.appendChild(star);
         }
     </script>
