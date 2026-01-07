@@ -1,162 +1,174 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filip Perjans | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>FILIP PERJANS | Work</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --bg-color: #E3E3E3; 
-            --brand-blue: #1B3C53; 
+        :root {
+            --bg-deep: #3B4953;
+            --text-light: #EBF4DD;
+            --accent-soft: #90AB8B;
+            --accent-muted: #5A7863;
         }
 
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            background-color: var(--bg-color); 
-            color: var(--brand-blue); 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Twinkling Stars Animation */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        /* Navigation */
         nav {
+            position: relative;
+            z-index: 10;
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            padding: 2rem 0;
-            background-color: var(--bg-color);
+            gap: 40px;
+            padding: 40px 0;
         }
 
-        .nav-link {
-            color: var(--brand-blue);
+        nav a {
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-soft);
+        }
+
+        nav a.active {
+            border-bottom: 1px solid var(--accent-soft);
             padding-bottom: 5px;
-            transition: opacity 0.3s ease;
         }
 
-        .nav-link:hover { opacity: 0.7; }
-
-        main { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            padding: 2rem;
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(80vh - 100px);
+            text-align: center;
         }
 
-        .svg-container {
-            width: 100%;
-            max-width: 300px;
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            letter-spacing: 0.5rem;
             margin-bottom: 2rem;
+            font-weight: 700;
         }
 
-        h1 { 
-            font-size: clamp(3rem, 10vw, 6rem); 
-            font-weight: 800; 
-            margin: 0; 
-            line-height: 0.9; 
+        .sub-headline {
+            font-size: 1.2rem;
             text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-soft);
+            margin-top: 1rem;
+            font-weight: 300;
         }
 
-        .hero-links { 
-            margin-top: 2rem; 
-            display: flex; 
-            gap: 2rem; 
+        /* Placeholder for Portfolio Items */
+        .works-section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
-        .hero-links a { 
-            font-size: 1.2rem; 
-            font-weight: 400; 
-            color: var(--brand-blue); 
-            text-decoration: none; 
-            border: 1px solid var(--brand-blue); 
-            padding: 0.8rem 2rem; 
-            border-radius: 50px; 
-            transition: all 0.3s ease; 
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
         }
-
-        .hero-links a:hover { 
-            background-color: var(--brand-blue); 
-            color: #fff; 
-        }
-
-        footer { 
-            padding: 2rem; 
-            text-align: center; 
-            font-size: 0.9rem; 
-            font-weight: 300; 
-        }
-.line {
-    /* Viktigt: se till att linjerna har en färg så de syns! */
-    stroke: #1B3C53; 
-    stroke-width: 2;
-    fill: none;
-}
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="nav-link">Work</a>
-    <a href="about.html" class="nav-link">About me</a>
-</nav>
+    <div class="stars-container" id="stars"></div>
 
-<main>
-    <div class="svg-container">
-        <svg viewBox="0 0 304 112">
-            <g stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path class="line" d="M59 90V56.136C58.66 46.48 51.225 39 42 39c-9.389 0-17 7.611-17 17s7.611 17 17 17h8.5v17H42C23.222 90 8 74.778 8 56s15.222-34 34-34c18.61 0 33.433 14.994 34 33.875V90H59z"/>
-                <polyline class="line" points="59 22.035 59 90 76 90 76 22 59 22"/>
-                <path class="line" d="M59 90V55.74C59.567 36.993 74.39 22 93 22c18.778 0 34 15.222 34 34v34h-17V56c0-9.389-7.611-17-17-17-9.225 0-16.66 7.48-17 17.136V90H59z"/>
-                <polyline class="line" points="127 22.055 127 90 144 90 144 22 127 22"/>
-                <path class="line" d="M127 90V55.74C127.567 36.993 142.39 22 161 22c18.778 0 34 15.222 34 34v34h-17V56c0-9.389-7.611-17-17-17-9.225 0-16.66 7.48-17 17.136V90h-17z"/>
-                <path class="line" d="M118.5 22a8.5 8.5 0 1 1-8.477 9.067v-1.134c.283-4.42 3.966-7.933 8.477-7.933z"/>
-                <path class="line" d="M144 73c-9.389 0-17-7.611-17-17v-8.5h-17V56c0 18.778 15.222 34 34 34V73z"/>
-                <path class="line" d="M178 90V55.74C178.567 36.993 193.39 22 212 22c18.778 0 34 15.222 34 34v34h-17V56c0-9.389-7.611-17-17-17-9.225 0-16.66 7.48-17 17.136V90h-17z"/>
-                <path class="line" d="M263 73c-9.389 0-17-7.611-17-17s7.611-17 17-17c9.18 0 16.58 7.4 17 17h-17v17h34V55.875C296.433 36.994 281.61 22 263 22c-18.778 0-34 15.222-34 34s15.222 34 34 34V73z"/>
-                <path class="line" d="M288.477 73A8.5 8.5 0 1 1 280 82.067v-1.134c.295-4.42 3.967-7.933 8.477-7.933z"/>
-            </g>
-        </svg>
-    </div>
+    <nav>
+        <a href="index.html" class="active">WORK</a>
+        <a href="about.html">ABOUT ME</a>
+    </nav>
 
-    <h1>FILIP<br>PERJANS</h1>
-    <div class="hero-links">
-        <a href="projects.html">Projects</a>
-        <a href="copywriting.html">Copywriting</a>
-    </div>
-</main>
+    <main>
+        <h1>FILIP PERJANS</h1>
+        <p class="sub-headline">Some of my works</p>
+    </main>
 
-<footer>
-    &copy; 2025 FILIP PERJANS
-</footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <div class="works-section">
+        </div>
 
-<script>
-  // Vi väntar till sidan är helt redo
-  document.addEventListener('DOMContentLoaded', () => {
-    const runAnimation = () => {
-      anime({
-        targets: '.line',
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'easeInOutQuart',
-        duration: 2000,
-        delay: anime.stagger(100), // Ritar bokstäverna en efter en
-        direction: 'alternate',
-        loop: true
-      });
-    };
+    <script>
+        // Generate random stars
+        const container = document.getElementById('stars');
+        const starCount = 60; // Adjust for more/less stars
 
-    runAnimation();
-  });
-</script>
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Randomize position
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            // Randomize size
+            const size = Math.random() * 3 + 1;
+            
+            // Randomize animation delay and duration
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 3 + 2;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            star.style.animationDelay = `${delay}s`;
+
+            container.appendChild(star);
+        }
+    </script>
 </body>
 </html>
