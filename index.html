@@ -117,9 +117,9 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            /* Adjusted padding: Reduced from 35% to 10% to move cards left */
-            padding: 20px 10%; 
-            gap: 30px;
+            /* Padding on left/right allows the "pile" look on scroll */
+            padding: 20px 40px; 
+            gap: 20px;
             scroll-behavior: smooth;
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -130,18 +130,19 @@
             display: none;
         }
 
-        /* Sleek Square Card */
+        /* Sleek Square Card - Sized for 4 per view */
         .project-card {
-            flex: 0 0 320px;
-            height: 320px;
+            /* 25% minus some gap for spacing makes 4 visible at once */
+            flex: 0 0 calc(25% - 20px); 
+            aspect-ratio: 1 / 1; /* Keeps it perfectly square */
             background-color: rgba(90, 120, 99, 0.1);
             border: 1px solid rgba(144, 171, 139, 0.15);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 35px;
+            padding: 20px;
             text-align: center;
-            scroll-snap-align: center;
+            scroll-snap-align: start;
             transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             cursor: pointer;
         }
@@ -155,24 +156,24 @@
         .project-heading {
             font-family: 'Playfair Display', serif;
             color: var(--text-light);
-            font-size: 1.6rem;
-            margin-bottom: 12px;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
         }
 
         .project-body {
-            font-size: 0.85rem;
-            line-height: 1.5;
+            font-size: 0.75rem;
+            line-height: 1.4;
             font-weight: 300;
             opacity: 0.7;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
         .view-link {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-soft);
@@ -185,10 +186,15 @@
             border-bottom: 1px solid var(--accent-soft);
         }
 
-        @media (max-width: 768px) {
+        /* Mobile adjustments: Show 1.5 cards for better UX on small screens */
+        @media (max-width: 1024px) {
+            .project-card { flex: 0 0 calc(50% - 20px); }
+        }
+
+        @media (max-width: 600px) {
             h1 { font-size: 2rem; }
-            .works-container { padding: 0 5%; }
-            .project-card { flex: 0 0 280px; height: 280px; }
+            .project-card { flex: 0 0 75%; }
+            .works-container { padding: 0 20px; }
         }
     </style>
 </head>
@@ -211,23 +217,53 @@
             
             <div class="project-card">
                 <h3 class="project-heading">Project One</h3>
-                <p class="project-body">Description of your first project.</p>
+                <p class="project-body">Production management for creative campaigns.</p>
                 <span class="view-link">Explore</span>
             </div>
 
             <div class="project-card">
                 <h3 class="project-heading">Project Two</h3>
-                <p class="project-body">Description of your second project.</p>
+                <p class="project-body">Strategy and coordination for digital events.</p>
                 <span class="view-link">Explore</span>
             </div>
 
             <div class="project-card">
                 <h3 class="project-heading">Project Three</h3>
-                <p class="project-body">Description of your third project.</p>
+                <p class="project-body">Resource planning and creative team lead.</p>
                 <span class="view-link">Explore</span>
             </div>
 
+            <div class="project-card">
+                <h3 class="project-heading">Project Four</h3>
+                <p class="project-body">Managing large-scale festival productions.</p>
+                <span class="view-link">Explore</span>
             </div>
+
+            <div class="project-card">
+                <h3 class="project-heading">Project Five</h3>
+                <p class="project-body">Integrated marketing for luxury brands.</p>
+                <span class="view-link">Explore</span>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-heading">Project Six</h3>
+                <p class="project-body">Editorial design and high-end copywriting.</p>
+                <span class="view-link">Explore</span>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-heading">Project Seven</h3>
+                <p class="project-body">Art direction and photographic imaging.</p>
+                <span class="view-link">Explore</span>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-heading">Project Eight</h3>
+                <p class="project-body">Project coordination for military trade fairs.</p>
+                <span class="view-link">Explore</span>
+            </div>
+
+        </div>
     </div>
 
     <script>
