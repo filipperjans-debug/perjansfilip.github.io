@@ -23,7 +23,7 @@
             background-color: var(--bg-deep);
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Keeps the celestial atmosphere contained */
+            overflow-x: hidden; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -100,7 +100,7 @@
             letter-spacing: 3px;
             color: var(--accent-soft);
             font-weight: 300;
-            margin-bottom: 7px; /* This creates the approx 5pt gap */
+            margin-bottom: 20px; 
         }
 
         /* Horizontal Gallery Wrapper */
@@ -110,18 +110,20 @@
             width: 100%;
             flex-grow: 1;
             display: flex;
-            align-items: center; /* Centers the gallery vertically in remaining space */
+            align-items: center;
         }
 
         .works-container {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 0 35%; /* Side padding for the "pile" effect */
-            gap: 25px;
+            /* Adjusted padding: Reduced from 35% to 10% to move cards left */
+            padding: 20px 10%; 
+            gap: 30px;
             scroll-behavior: smooth;
             -ms-overflow-style: none;
             scrollbar-width: none;
+            width: 100%;
         }
 
         .works-container::-webkit-scrollbar {
@@ -185,7 +187,7 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
-            .works-container { padding: 0 10%; }
+            .works-container { padding: 0 5%; }
             .project-card { flex: 0 0 280px; height: 280px; }
         }
     </style>
@@ -209,60 +211,28 @@
             
             <div class="project-card">
                 <h3 class="project-heading">Project One</h3>
-                <p class="project-body">A detailed look at brand development and creative strategy for a modern architectural firm.</p>
+                <p class="project-body">Description of your first project.</p>
                 <span class="view-link">Explore</span>
             </div>
 
             <div class="project-card">
                 <h3 class="project-heading">Project Two</h3>
-                <p class="project-body">Redefining digital presence through minimalist UI design and high-end typography.</p>
+                <p class="project-body">Description of your second project.</p>
                 <span class="view-link">Explore</span>
             </div>
 
             <div class="project-card">
                 <h3 class="project-heading">Project Three</h3>
-                <p class="project-body">Developing an integrated marketing campaign for a sustainable luxury brand.</p>
+                <p class="project-body">Description of your third project.</p>
                 <span class="view-link">Explore</span>
             </div>
 
-            <div class="project-card">
-                <h3 class="project-heading">Project Four</h3>
-                <p class="project-body">Motion graphics and visual storytelling focused on celestial movements.</p>
-                <span class="view-link">Explore</span>
             </div>
-
-            <div class="project-card">
-                <h3 class="project-heading">Project Five</h3>
-                <p class="project-body">Copywriting and editorial design for a niche lifestyle magazine.</p>
-                <span class="view-link">Explore</span>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-heading">Project Six</h3>
-                <p class="project-body">Interactive web experience focusing on scroll-based narrative techniques.</p>
-                <span class="view-link">Explore</span>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-heading">Project Seven</h3>
-                <p class="project-body">Photography and art direction for a high-fashion digital lookbook.</p>
-                <span class="view-link">Explore</span>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-heading">Project Eight</h3>
-                <p class="project-body">Strategic consultancy and production management for a global tech event.</p>
-                <span class="view-link">Explore</span>
-            </div>
-
-        </div>
     </div>
 
     <script>
-        // Generate Star Animation
         const container = document.getElementById('stars');
         const starCount = 65;
-
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
@@ -271,14 +241,12 @@
             const size = Math.random() * 2 + 1;
             const delay = Math.random() * 5;
             const duration = Math.random() * 3 + 2;
-
             star.style.left = `${x}%`;
             star.style.top = `${y}%`;
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.setProperty('--duration', `${duration}s`);
             star.style.animationDelay = `${delay}s`;
-
             container.appendChild(star);
         }
     </script>
